@@ -1,0 +1,613 @@
+/* =========================================================
+   Jerco Digital Solusi Website
+   File: css/responsive.css
+   Purpose: Responsive adjustment for mobile, tablet, laptop,
+            desktop, and wide screen layouts
+   Note: Global style stays in css/style.css
+         Component style stays in css/components.css
+   ========================================================= */
+
+/* ---------- Large Desktop / Wide Screen ---------- */
+@media (min-width: 1536px) {
+    .container-custom {
+        max-width: 1360px;
+    }
+
+    .section-padding {
+        padding-block: 112px;
+    }
+
+    .section-padding-lg {
+        padding-block: 144px;
+    }
+}
+
+/* ---------- Desktop / Laptop ---------- */
+@media (max-width: 1280px) {
+    .container-custom {
+        max-width: 1120px;
+    }
+
+    .hero-title {
+        font-size: clamp(3.4rem, 5vw, 5.25rem);
+        line-height: 1.02;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+}
+
+/* ---------- Tablet Landscape ---------- */
+@media (max-width: 1024px) {
+    .container-custom {
+        max-width: 920px;
+        padding-inline: 22px;
+    }
+
+    .section-padding {
+        padding-block: 78px;
+    }
+
+    .section-padding-sm {
+        padding-block: 54px;
+    }
+
+    .section-padding-lg {
+        padding-block: 104px;
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 7vw, 4.5rem);
+        line-height: 1.04;
+    }
+
+    .section-description {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+
+    .navbar-inner {
+        min-height: 68px;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: inline-flex;
+    }
+
+    .brand-logo,
+    .brand-mark {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card {
+        padding: 24px;
+    }
+
+    .service-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+        font-size: 1.8rem;
+    }
+
+    .contact-item {
+        width: 100%;
+    }
+}
+
+/* ---------- Tablet Portrait / Mobile Large ---------- */
+@media (max-width: 768px) {
+    .container-custom {
+        padding-inline: 20px;
+    }
+
+    .section-padding {
+        padding-block: 62px;
+    }
+
+    .section-padding-sm {
+        padding-block: 46px;
+    }
+
+    .section-padding-lg {
+        padding-block: 82px;
+    }
+
+    .section-eyebrow {
+        margin-bottom: 12px;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+    }
+
+    .section-title {
+        font-size: clamp(1.85rem, 7vw, 2.45rem);
+        line-height: 1.12;
+        letter-spacing: -0.04em;
+    }
+
+    .section-description {
+        margin-top: 14px;
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .hero-title {
+        font-size: clamp(2.45rem, 10vw, 3.7rem);
+        line-height: 1.06;
+        letter-spacing: -0.055em;
+    }
+
+    .navbar-inner {
+        min-height: 64px;
+    }
+
+    .brand-link {
+        gap: 10px;
+        max-width: 72%;
+    }
+
+    .brand-link span,
+    .brand-link strong,
+    .brand-link p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .icon-button,
+    .theme-toggle,
+    .language-toggle,
+    .mobile-menu-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 13px;
+    }
+
+    .mobile-menu {
+        padding-block: 10px;
+    }
+
+    .mobile-menu .nav-link {
+        min-height: 44px;
+        padding: 11px 14px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline,
+    .btn-ghost {
+        min-height: 46px;
+        padding: 12px 18px;
+        font-size: 0.92rem;
+    }
+
+    .card {
+        border-radius: 22px;
+        padding: 22px;
+    }
+
+    .card:hover,
+    .contact-item:hover {
+        transform: none;
+    }
+
+    .service-card h3 {
+        margin-top: 16px;
+        font-size: 1.08rem;
+    }
+
+    .service-card p,
+    #process .card p {
+        line-height: 1.65;
+    }
+
+    .process-number {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 16px;
+        border-radius: 14px;
+    }
+
+    .contact-item {
+        gap: 12px;
+        padding: 13px 14px;
+        border-radius: 16px;
+        font-size: 0.92rem;
+    }
+
+    .contact-item i {
+        width: 36px;
+        height: 36px;
+        border-radius: 13px;
+    }
+
+    .form-input {
+        min-height: 46px;
+        border-radius: 14px;
+        padding: 12px 14px;
+    }
+
+    textarea.form-input {
+        min-height: 130px;
+    }
+
+    .ai-chat-box {
+        min-height: 360px;
+    }
+
+    .ai-chat-form {
+        flex-direction: column;
+    }
+
+    .ai-chat-form .btn-primary,
+    .ai-chat-form button {
+        width: 100%;
+    }
+
+    .ai-message {
+        max-width: 94%;
+    }
+
+    .table-wrapper {
+        border-radius: 14px;
+    }
+
+    table {
+        min-width: 720px;
+    }
+
+    th,
+    td {
+        padding: 12px 14px;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+    .container-custom {
+        padding-inline: 18px;
+    }
+
+    .section-padding {
+        padding-block: 54px;
+    }
+
+    .section-padding-sm {
+        padding-block: 40px;
+    }
+
+    .section-padding-lg {
+        padding-block: 70px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.1rem, 11vw, 3.1rem);
+    }
+
+    .section-title {
+        font-size: clamp(1.75rem, 8vw, 2.2rem);
+    }
+
+    .section-description {
+        font-size: 0.95rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .btn-ghost {
+        white-space: normal;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .badge,
+    .badge-soft,
+    .badge-outline {
+        font-size: 0.7rem;
+        line-height: 1.25;
+    }
+
+    .brand-logo,
+    .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+    }
+
+    .nav-actions .btn-primary,
+    .nav-actions .btn-secondary,
+    .nav-actions .btn-outline {
+        width: auto;
+    }
+
+    .service-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 17px;
+        font-size: 1.7rem;
+    }
+
+    #portfolio .card img {
+        height: 210px;
+    }
+
+    #ai-assistant-root {
+        min-height: 190px;
+    }
+
+    .contact-item {
+        align-items: flex-start;
+        word-break: break-word;
+    }
+}
+
+/* ---------- Small Mobile ---------- */
+@media (max-width: 480px) {
+    .container-custom {
+        padding-inline: 16px;
+    }
+
+    .section-padding {
+        padding-block: 48px;
+    }
+
+    .section-title {
+        font-size: clamp(1.6rem, 9vw, 2rem);
+    }
+
+    .hero-title {
+        font-size: clamp(1.95rem, 12vw, 2.6rem);
+        letter-spacing: -0.045em;
+    }
+
+    .section-eyebrow {
+        font-size: 0.68rem;
+        gap: 6px;
+    }
+
+    .section-description {
+        font-size: 0.93rem;
+        line-height: 1.65;
+    }
+
+    .navbar-inner {
+        min-height: 60px;
+    }
+
+    .brand-link {
+        max-width: 62%;
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .icon-button,
+    .theme-toggle,
+    .language-toggle,
+    .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+    }
+
+    .icon-button i,
+    .theme-toggle i,
+    .language-toggle i,
+    .mobile-menu-button i {
+        font-size: 1.15rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline,
+    .btn-ghost {
+        min-height: 44px;
+        padding: 11px 16px;
+        border-radius: 16px;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        border-radius: 999px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .service-card h3,
+    #process .card h3 {
+        font-size: 1.02rem;
+    }
+
+    .service-card p,
+    #process .card p {
+        font-size: 0.92rem;
+    }
+
+    .process-number {
+        width: 42px;
+        height: 42px;
+        font-size: 0.85rem;
+    }
+
+    .form-label {
+        font-size: 0.84rem;
+    }
+
+    .form-input {
+        font-size: 0.93rem;
+    }
+
+    #portfolio .card img {
+        height: 190px;
+    }
+
+    .ai-chat-box {
+        min-height: 330px;
+        border-radius: 18px;
+    }
+
+    .ai-chat-messages {
+        padding: 14px;
+    }
+
+    .ai-message {
+        max-width: 96%;
+        border-radius: 16px;
+        padding: 11px 13px;
+        font-size: 0.92rem;
+    }
+
+    .ai-chat-form {
+        padding: 12px;
+    }
+
+    .footer-link,
+    .footer-meta {
+        font-size: 0.92rem;
+    }
+
+    th,
+    td {
+        padding: 11px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ---------- Extra Small Mobile ---------- */
+@media (max-width: 360px) {
+    .container-custom {
+        padding-inline: 14px;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .brand-link {
+        max-width: 58%;
+    }
+
+    .brand-logo,
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .icon-button,
+    .theme-toggle,
+    .language-toggle,
+    .mobile-menu-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .contact-item {
+        padding: 12px;
+        font-size: 0.88rem;
+    }
+
+    .contact-item i {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+    }
+}
+
+/* ---------- Touch Devices ---------- */
+@media (hover: none) and (pointer: coarse) {
+    .card:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-outline:hover,
+    .btn-ghost:hover,
+    .contact-item:hover,
+    .footer-link:hover {
+        transform: none;
+    }
+
+    #portfolio .card:hover img {
+        transform: none;
+    }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ---------- Print ---------- */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .navbar,
+    .mobile-menu,
+    .nav-actions,
+    #ai-assistant,
+    .site-footer,
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline,
+    .btn-ghost {
+        display: none !important;
+    }
+
+    .section-padding,
+    .section-padding-sm,
+    .section-padding-lg {
+        padding-block: 24px !important;
+    }
+
+    .card {
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    a {
+        color: #000000 !important;
+        text-decoration: underline;
+    }
+}

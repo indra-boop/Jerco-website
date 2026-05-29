@@ -1,0 +1,357 @@
+{
+    "meta": {
+        "lang": "id",
+        "siteTitle": "CV Jerco Digital Solusi",
+        "siteDescription": "Company profile Jerco Digital Solusi untuk layanan IT consulting, network infrastructure, fiber optic, CCTV, cloud, data analytics, technical documentation, BOQ/RAB, KMZ/KML route analysis, permit support, dan project coordination.",
+        "keywords": "Jerco Digital Solusi, IT Consultant, Fiber Optic, OSP, Network Infrastructure, CCTV, Cloud, VPS, DevOps, Data Analytics, BOQ, RAB, KMZ, KML, Permit Support"
+    },
+    "nav": {
+        "brand": "Jerco Digital Solusi",
+        "items": [
+            {
+                "label": "Beranda",
+                "target": "#hero"
+            },
+            {
+                "label": "Tentang",
+                "target": "#about"
+            },
+            {
+                "label": "Layanan",
+                "target": "#services"
+            },
+            {
+                "label": "Portfolio",
+                "target": "#portfolio"
+            },
+            {
+                "label": "Workflow",
+                "target": "#process"
+            },
+            {
+                "label": "Kontak",
+                "target": "#contact"
+            }
+        ],
+        "cta": "WhatsApp"
+    },
+    "hero": {
+        "badge": "IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER",
+        "title": "Solusi IT, Network, Fiber Optic, dan Dokumentasi Teknis",
+        "highlight": "untuk kebutuhan bisnis Anda",
+        "subtitle": "Jerco Digital Solusi membantu perusahaan, hotel, kantor, ISP, kontraktor, dan project owner dalam perencanaan, instalasi, dokumentasi, BOQ/RAB, serta koordinasi project infrastruktur IT dan telekomunikasi.",
+        "ctaPrimary": "Request Survey",
+        "ctaSecondary": "Contact via WhatsApp",
+        "trustText": "Reliable partner for technical execution, documentation, and project coordination.",
+        "stats": [
+            {
+                "value": "IT",
+                "label": "Consulting"
+            },
+            {
+                "value": "FO",
+                "label": "OSP & Fiber Optic"
+            },
+            {
+                "value": "BOQ",
+                "label": "RAB Preparation"
+            },
+            {
+                "value": "KMZ",
+                "label": "Route Analysis"
+            }
+        ]
+    },
+    "about": {
+        "badge": "Tentang Jerco",
+        "title": "Partner Teknis untuk Infrastruktur Digital dan Telekomunikasi",
+        "description": "CV Jerco Digital Solusi bergerak di bidang IT consulting, network infrastructure, fiber optic/OSP, CCTV, cloud/VPS, dashboard system, data analytics, technical documentation, BOQ/RAB, KMZ/KML route analysis, permit support, dan project coordination.",
+        "points": [
+            "Membantu client dari tahap survey, perencanaan, eksekusi, sampai dokumentasi teknis.",
+            "Fokus pada akurasi teknis, koordinasi cepat, dan output yang siap dipakai untuk project.",
+            "Cocok untuk kebutuhan B2B, hotel, office, ISP, contractor, dan government-related project."
+        ],
+        "values": [
+            {
+                "title": "Technical Accuracy",
+                "description": "Data, drawing, BOQ, dan dokumentasi dibuat rapi agar mudah direview dan dieksekusi."
+            },
+            {
+                "title": "Fast Coordination",
+                "description": "Komunikasi project dibuat jelas, ringkas, dan action-oriented."
+            },
+            {
+                "title": "Reliable Execution",
+                "description": "Pendekatan kerja mengutamakan kualitas instalasi, mitigasi risiko, dan kontrol progress."
+            }
+        ]
+    },
+    "services": {
+        "badge": "Layanan",
+        "title": "Layanan Utama Jerco Digital Solusi",
+        "subtitle": "Solusi modular untuk kebutuhan IT, network, fiber optic, dokumentasi teknis, dan koordinasi project.",
+        "items": [
+            {
+                "icon": "ph-network",
+                "title": "IT Consulting & Network Infrastructure",
+                "description": "Perencanaan dan implementasi jaringan kantor, hotel, project site, LAN, WiFi, router, switch, rack, dan perangkat aktif.",
+                "features": [
+                    "Network design",
+                    "LAN/WiFi setup",
+                    "Router & switch configuration",
+                    "Rack & device coordination"
+                ]
+            },
+            {
+                "icon": "ph-tree-structure",
+                "title": "Fiber Optic / OSP Deployment",
+                "description": "Dukungan survey, route planning, aerial/underground FO, koordinasi lapangan, dan dokumentasi as-plan/as-built.",
+                "features": [
+                    "OSP survey",
+                    "FO route planning",
+                    "Aerial & underground route",
+                    "As-plan / as-built support"
+                ]
+            },
+            {
+                "icon": "ph-video-camera",
+                "title": "CCTV & Security System",
+                "description": "Perencanaan dan instalasi CCTV, IP camera, NVR, storage, jaringan kamera, serta kebutuhan monitoring.",
+                "features": [
+                    "IP CCTV planning",
+                    "NVR setup",
+                    "Camera point mapping",
+                    "Monitoring support"
+                ]
+            },
+            {
+                "icon": "ph-cloud",
+                "title": "Cloud, VPS & DevOps",
+                "description": "Setup server, VPS, domain, SSL, deployment website, basic security, backup, dan monitoring.",
+                "features": [
+                    "VPS setup",
+                    "Web deployment",
+                    "SSL & domain",
+                    "Backup & monitoring"
+                ]
+            },
+            {
+                "icon": "ph-chart-line-up",
+                "title": "Dashboard & Data Analytics",
+                "description": "Pembuatan dashboard operasional, reporting, data tracking, finance tracker, dan workflow monitoring.",
+                "features": [
+                    "Business dashboard",
+                    "Finance tracker",
+                    "Operational reporting",
+                    "Data workflow"
+                ]
+            },
+            {
+                "icon": "ph-file-text",
+                "title": "Technical Documentation",
+                "description": "Pembuatan dokumen teknis, gambar rencana, laporan survey, method statement, checklist QC, dan dokumen project.",
+                "features": [
+                    "Technical report",
+                    "Drawing support",
+                    "QC checklist",
+                    "Project documentation"
+                ]
+            },
+            {
+                "icon": "ph-calculator",
+                "title": "BOQ / RAB Preparation",
+                "description": "Penyusunan BOQ/RAB berdasarkan kebutuhan project, quantity, item pekerjaan, material, jasa, dan asumsi teknis.",
+                "features": [
+                    "BOQ calculation",
+                    "RAB preparation",
+                    "Material list",
+                    "Work item breakdown"
+                ]
+            },
+            {
+                "icon": "ph-map-trifold",
+                "title": "KMZ / KML Route Analysis",
+                "description": "Analisa jalur project berbasis KMZ/KML untuk kebutuhan fiber optic, route planning, permit, dan koordinasi lapangan.",
+                "features": [
+                    "Route analysis",
+                    "KMZ/KML review",
+                    "Segment mapping",
+                    "Distance estimation"
+                ]
+            },
+            {
+                "icon": "ph-handshake",
+                "title": "Permit Support & Project Coordination",
+                "description": "Dukungan administrasi teknis, koordinasi vendor/client, follow-up dokumen, dan support proses perizinan.",
+                "features": [
+                    "Permit document support",
+                    "Vendor coordination",
+                    "Client follow-up",
+                    "Progress tracking"
+                ]
+            }
+        ]
+    },
+    "portfolio": {
+        "badge": "Portfolio",
+        "title": "Contoh Scope Project",
+        "subtitle": "Beberapa kategori pekerjaan yang dapat didukung oleh Jerco Digital Solusi.",
+        "items": [
+            {
+                "title": "Fiber Optic Route & OSP Documentation",
+                "category": "Fiber Optic / OSP",
+                "description": "Survey jalur, route analysis, BOQ, drawing support, dan dokumentasi teknis untuk kebutuhan jaringan fiber optic.",
+                "image": "assets/images/projects/project-isp.jpg",
+                "tags": [
+                    "Fiber Optic",
+                    "OSP",
+                    "KMZ/KML",
+                    "BOQ"
+                ]
+            },
+            {
+                "title": "Network Infrastructure for Office & Hospitality",
+                "category": "Network Infrastructure",
+                "description": "Perencanaan jaringan LAN, WiFi, router, switch, rack, dan integrasi perangkat untuk kantor, hotel, dan area project.",
+                "image": "assets/images/projects/project-network.jpg",
+                "tags": [
+                    "LAN",
+                    "WiFi",
+                    "Switching",
+                    "Rack"
+                ]
+            },
+            {
+                "title": "Cloud VPS & Website Deployment",
+                "category": "Cloud / DevOps",
+                "description": "Setup VPS, domain, SSL, deployment website, backup, dan basic monitoring untuk kebutuhan bisnis.",
+                "image": "assets/images/projects/project-cloud.jpg",
+                "tags": [
+                    "VPS",
+                    "SSL",
+                    "Deployment",
+                    "Backup"
+                ]
+            },
+            {
+                "title": "Operational Dashboard & Tracking System",
+                "category": "Dashboard / Data",
+                "description": "Dashboard untuk monitoring progress, finance tracking, task list, invoice, dan data operasional.",
+                "image": "assets/images/projects/project-dashboard.jpg",
+                "tags": [
+                    "Dashboard",
+                    "Data",
+                    "Finance",
+                    "Tracking"
+                ]
+            }
+        ]
+    },
+    "process": {
+        "badge": "Workflow",
+        "title": "Alur Kerja Project",
+        "subtitle": "Dari kebutuhan awal sampai output siap digunakan.",
+        "steps": [
+            {
+                "number": "01",
+                "title": "Brief & Requirement",
+                "description": "Mengumpulkan kebutuhan client, lokasi, scope, target, dan batasan project."
+            },
+            {
+                "number": "02",
+                "title": "Survey & Data Collection",
+                "description": "Mengumpulkan data lapangan, foto, koordinat, route, existing condition, dan kebutuhan teknis."
+            },
+            {
+                "number": "03",
+                "title": "Planning & BOQ",
+                "description": "Menyusun konsep teknis, quantity, BOQ/RAB, dan dokumen pendukung."
+            },
+            {
+                "number": "04",
+                "title": "Execution & Coordination",
+                "description": "Koordinasi vendor/client, monitoring progress, dan mitigasi kendala lapangan."
+            },
+            {
+                "number": "05",
+                "title": "Documentation & Handover",
+                "description": "Menyusun laporan, drawing, checklist, dan dokumen final untuk serah terima."
+            }
+        ]
+    },
+    "aiAssistant": {
+        "badge": "AI Assistant",
+        "title": "AI Assistant untuk Project & Business Workflow",
+        "subtitle": "Placeholder awal untuk fitur asisten digital Jerco. Backend/API dapat dikembangkan pada tahap berikutnya.",
+        "description": "Fitur ini disiapkan untuk membantu summary task, draft WhatsApp/email, tracking pending, analisa BOQ, dan dokumentasi project. API key tidak boleh disimpan di frontend.",
+        "inputPlaceholder": "Tulis kebutuhan Anda, contoh: buat summary pending project hari ini...",
+        "buttonText": "Kirim Pertanyaan",
+        "disclaimer": "AI Assistant masih tahap placeholder. Untuk production, gunakan backend/API endpoint yang aman.",
+        "quickPrompts": [
+            "Buat summary pending project hari ini",
+            "Buat draft WhatsApp follow-up vendor",
+            "Analisa kebutuhan BOQ fiber optic",
+            "Buat checklist QC dokumentasi teknis"
+        ]
+    },
+    "contact": {
+        "badge": "Kontak",
+        "title": "Diskusikan Kebutuhan Project Anda",
+        "subtitle": "Hubungi Jerco Digital Solusi untuk survey, konsultasi, penawaran, atau koordinasi project.",
+        "info": [
+            {
+                "label": "Email",
+                "value": "indra@jerconetwork.com",
+                "href": "mailto:indra@jerconetwork.com",
+                "icon": "ph-envelope-simple"
+            },
+            {
+                "label": "WhatsApp",
+                "value": "+62 822-3765-0909",
+                "href": "https://wa.me/6282237650909",
+                "icon": "ph-whatsapp-logo"
+            },
+            {
+                "label": "Website",
+                "value": "www.jerconetwork.com",
+                "href": "https://www.jerconetwork.com",
+                "icon": "ph-globe"
+            }
+        ],
+        "form": {
+            "name": "Nama",
+            "email": "Email",
+            "phone": "No. WhatsApp",
+            "service": "Kebutuhan Layanan",
+            "message": "Pesan / Kebutuhan Project",
+            "submit": "Kirim Pesan",
+            "serviceOptions": [
+                "IT Consulting",
+                "Network Infrastructure",
+                "Fiber Optic / OSP",
+                "CCTV & Security System",
+                "Cloud / VPS / DevOps",
+                "Dashboard / Data Analytics",
+                "Technical Documentation",
+                "BOQ / RAB Preparation",
+                "KMZ / KML Route Analysis",
+                "Permit Support",
+                "Project Coordination"
+            ]
+        }
+    },
+    "footer": {
+        "description": "CV Jerco Digital Solusi adalah partner untuk kebutuhan IT consulting, network infrastructure, fiber optic, CCTV, cloud, data analytics, dokumentasi teknis, BOQ/RAB, KMZ/KML route analysis, permit support, dan project coordination.",
+        "quickLinksTitle": "Menu",
+        "servicesTitle": "Layanan",
+        "contactTitle": "Kontak",
+        "copyright": "© 2026 CV Jerco Digital Solusi. All rights reserved."
+    },
+    "common": {
+        "readMore": "Selengkapnya",
+        "viewDetails": "Lihat Detail",
+        "backToTop": "Kembali ke Atas",
+        "loading": "Memuat konten...",
+        "error": "Konten belum tersedia. Silakan refresh halaman."
+    }
+}

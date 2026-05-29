@@ -1,0 +1,575 @@
+/* =========================================================
+   Jerco Digital Solusi Website
+   File: css/components.css
+   Purpose: Buttons, cards, badges, forms, navigation, footer,
+            service blocks, contact items, and reusable UI components
+   ========================================================= */
+
+/* ---------- Buttons ---------- */
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        background-color var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base);
+}
+
+.btn-primary i,
+.btn-secondary i,
+.btn-outline i,
+.btn-ghost i {
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--jerco-blue), #2563eb 55%, var(--jerco-cyan));
+    color: #ffffff;
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.22);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 42px rgba(37, 99, 235, 0.28);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.btn-outline:active,
+.btn-ghost:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary:hover {
+    border-color: rgba(27, 160, 215, 0.45);
+    color: var(--jerco-blue);
+    transform: translateY(-2px);
+}
+
+.dark .btn-secondary:hover {
+    color: var(--jerco-cyan);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+.btn-outline:hover {
+    background: rgba(27, 160, 215, 0.08);
+    border-color: rgba(27, 160, 215, 0.5);
+    color: var(--jerco-cyan);
+}
+
+.btn-ghost {
+    min-height: 42px;
+    padding: 10px 14px;
+    background: transparent;
+    color: var(--color-muted);
+    border-radius: 14px;
+}
+
+.btn-ghost:hover {
+    background: rgba(15, 60, 92, 0.07);
+    color: var(--color-text);
+}
+
+.dark .btn-ghost:hover {
+    background: rgba(148, 163, 184, 0.1);
+}
+
+/* ---------- Cards ---------- */
+.card {
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.92);
+    padding: 28px;
+    box-shadow: var(--shadow-soft);
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(27, 160, 215, 0.35);
+    box-shadow: var(--shadow-medium);
+}
+
+.dark .card {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.card-flat {
+    box-shadow: none;
+}
+
+.card-flat:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.card-muted {
+    background: rgba(248, 250, 252, 0.85);
+}
+
+.dark .card-muted {
+    background: rgba(2, 6, 23, 0.55);
+}
+
+/* ---------- Badges ---------- */
+.badge,
+.badge-soft,
+.badge-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.badge {
+    background: var(--jerco-blue);
+    color: #ffffff;
+}
+
+.badge-soft {
+    background: rgba(27, 160, 215, 0.11);
+    color: var(--jerco-cyan);
+}
+
+.badge-outline {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+}
+
+/* ---------- Navigation ---------- */
+.navbar {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.dark .navbar {
+    border-bottom-color: rgba(30, 41, 59, 0.9);
+    background: rgba(2, 6, 23, 0.78);
+}
+
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 74px;
+}
+
+.brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--jerco-blue), var(--jerco-cyan));
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    font-weight: 800;
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(27, 160, 215, 0.1);
+    color: var(--jerco-blue);
+}
+
+.dark .nav-link:hover,
+.dark .nav-link.active {
+    color: var(--jerco-cyan);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-button,
+.theme-toggle,
+.language-toggle,
+.mobile-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition:
+        background-color var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base),
+        transform var(--transition-base);
+}
+
+.icon-button:hover,
+.theme-toggle:hover,
+.language-toggle:hover,
+.mobile-menu-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(27, 160, 215, 0.45);
+    color: var(--jerco-cyan);
+}
+
+.icon-button i,
+.theme-toggle i,
+.language-toggle i,
+.mobile-menu-button i {
+    font-size: 1.25rem;
+}
+
+.mobile-menu {
+    display: none;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.dark .mobile-menu {
+    background: #020617;
+}
+
+.mobile-menu.open {
+    display: block;
+}
+
+.mobile-menu .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: 12px;
+}
+
+/* ---------- Service Cards ---------- */
+.service-card {
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--jerco-blue), var(--jerco-cyan), var(--jerco-orange));
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card h3 {
+    margin-top: 18px;
+    color: var(--color-text);
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+}
+
+.service-card p {
+    margin-top: 10px;
+    color: var(--color-muted);
+    line-height: 1.75;
+}
+
+.service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 20px;
+    background: rgba(27, 160, 215, 0.12);
+    color: var(--jerco-cyan);
+    font-size: 2rem;
+}
+
+.dark .service-icon {
+    background: rgba(27, 160, 215, 0.18);
+}
+
+/* ---------- Process Cards ---------- */
+#process .card h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+#process .card p {
+    margin-top: 10px;
+    color: var(--color-muted);
+    line-height: 1.7;
+}
+
+/* ---------- Forms ---------- */
+.form-label {
+    display: inline-flex;
+    margin-bottom: 8px;
+    color: var(--color-text);
+    font-size: 0.88rem;
+    font-weight: 800;
+}
+
+.form-input {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    padding: 13px 15px;
+    outline: none;
+    transition:
+        border-color var(--transition-base),
+        box-shadow var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.form-input::placeholder {
+    color: rgba(100, 116, 139, 0.78);
+}
+
+.form-input:focus {
+    border-color: rgba(27, 160, 215, 0.72);
+    box-shadow: 0 0 0 4px rgba(27, 160, 215, 0.14);
+}
+
+textarea.form-input {
+    min-height: 140px;
+    line-height: 1.7;
+}
+
+select.form-input {
+    cursor: pointer;
+}
+
+.dark .form-input::placeholder {
+    color: rgba(203, 213, 225, 0.56);
+}
+
+/* ---------- Contact Items ---------- */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: fit-content;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-surface);
+    padding: 14px 16px;
+    color: var(--color-text);
+    font-weight: 800;
+    box-shadow: var(--shadow-soft);
+    transition:
+        transform var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base),
+        box-shadow var(--transition-base);
+}
+
+.contact-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(27, 160, 215, 0.5);
+    color: var(--jerco-cyan);
+    box-shadow: var(--shadow-medium);
+}
+
+.contact-item i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    background: rgba(27, 160, 215, 0.12);
+    color: var(--jerco-cyan);
+    font-size: 1.25rem;
+}
+
+/* ---------- Portfolio ---------- */
+#portfolio .card img {
+    transition: transform 700ms ease;
+}
+
+#portfolio .card:hover img {
+    transform: scale(1.045);
+}
+
+#portfolio .card h3 {
+    color: var(--color-text);
+}
+
+/* ---------- AI Assistant Placeholder ---------- */
+#ai-assistant-root {
+    min-height: 220px;
+}
+
+.ai-chat-box {
+    display: flex;
+    min-height: 420px;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+}
+
+.ai-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+}
+
+.ai-message {
+    max-width: 88%;
+    border-radius: 18px;
+    padding: 12px 14px;
+    line-height: 1.65;
+}
+
+.ai-message.user {
+    margin-left: auto;
+    background: var(--jerco-blue);
+    color: #ffffff;
+}
+
+.ai-message.assistant {
+    margin-right: auto;
+    background: rgba(100, 116, 139, 0.12);
+    color: var(--color-text);
+}
+
+.ai-chat-form {
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid var(--color-border);
+    padding: 14px;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    border-top: 1px solid var(--color-border);
+    background: #061626;
+    color: #e2e8f0;
+}
+
+.footer-link {
+    display: inline-flex;
+    width: fit-content;
+    color: #cbd5e1;
+    font-weight: 700;
+    transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.footer-link:hover {
+    color: var(--jerco-cyan);
+    transform: translateX(2px);
+}
+
+.footer-meta {
+    color: #94a3b8;
+    line-height: 1.75;
+}
+
+/* ---------- Status / Utility Components ---------- */
+.status-dot {
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--jerco-cyan);
+    box-shadow: 0 0 0 5px rgba(27, 160, 215, 0.12);
+}
+
+.divider-soft {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.glass-panel {
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    background: rgba(255, 255, 255, 0.68);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.dark .glass-panel {
+    border-color: rgba(30, 41, 59, 0.9);
+    background: rgba(15, 23, 42, 0.58);
+}

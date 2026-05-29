@@ -1,0 +1,357 @@
+{
+    "meta": {
+        "lang": "en",
+        "siteTitle": "CV Jerco Digital Solusi",
+        "siteDescription": "Jerco Digital Solusi company profile for IT consulting, network infrastructure, fiber optic, CCTV, cloud, data analytics, technical documentation, BOQ/RAB preparation, KMZ/KML route analysis, permit support, and project coordination services.",
+        "keywords": "Jerco Digital Solusi, IT Consultant, Fiber Optic, OSP, Network Infrastructure, CCTV, Cloud, VPS, DevOps, Data Analytics, BOQ, RAB, KMZ, KML, Permit Support"
+    },
+    "nav": {
+        "brand": "Jerco Digital Solusi",
+        "items": [
+            {
+                "label": "Home",
+                "target": "#hero"
+            },
+            {
+                "label": "About",
+                "target": "#about"
+            },
+            {
+                "label": "Services",
+                "target": "#services"
+            },
+            {
+                "label": "Portfolio",
+                "target": "#portfolio"
+            },
+            {
+                "label": "Workflow",
+                "target": "#process"
+            },
+            {
+                "label": "Contact",
+                "target": "#contact"
+            }
+        ],
+        "cta": "WhatsApp"
+    },
+    "hero": {
+        "badge": "IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER",
+        "title": "IT, Network, Fiber Optic, and Technical Documentation Solutions",
+        "highlight": "for your business needs",
+        "subtitle": "Jerco Digital Solusi helps companies, hotels, offices, ISPs, contractors, and project owners with planning, installation, documentation, BOQ/RAB preparation, and infrastructure project coordination.",
+        "ctaPrimary": "Request Survey",
+        "ctaSecondary": "Contact via WhatsApp",
+        "trustText": "Reliable partner for technical execution, documentation, and project coordination.",
+        "stats": [
+            {
+                "value": "IT",
+                "label": "Consulting"
+            },
+            {
+                "value": "FO",
+                "label": "OSP & Fiber Optic"
+            },
+            {
+                "value": "BOQ",
+                "label": "RAB Preparation"
+            },
+            {
+                "value": "KMZ",
+                "label": "Route Analysis"
+            }
+        ]
+    },
+    "about": {
+        "badge": "About Jerco",
+        "title": "Technical Partner for Digital and Telecommunication Infrastructure",
+        "description": "CV Jerco Digital Solusi provides IT consulting, network infrastructure, fiber optic/OSP, CCTV, cloud/VPS, dashboard system, data analytics, technical documentation, BOQ/RAB preparation, KMZ/KML route analysis, permit support, and project coordination services.",
+        "points": [
+            "Supporting clients from survey, planning, execution, to technical documentation.",
+            "Focused on technical accuracy, fast coordination, and project-ready deliverables.",
+            "Suitable for B2B clients, hotels, offices, ISPs, contractors, and government-related projects."
+        ],
+        "values": [
+            {
+                "title": "Technical Accuracy",
+                "description": "Data, drawings, BOQ, and documentation are structured clearly for review and execution."
+            },
+            {
+                "title": "Fast Coordination",
+                "description": "Project communication is kept clear, concise, and action-oriented."
+            },
+            {
+                "title": "Reliable Execution",
+                "description": "The workflow prioritizes installation quality, risk mitigation, and progress control."
+            }
+        ]
+    },
+    "services": {
+        "badge": "Services",
+        "title": "Jerco Digital Solusi Core Services",
+        "subtitle": "Modular solutions for IT, network, fiber optic, technical documentation, and project coordination needs.",
+        "items": [
+            {
+                "icon": "ph-network",
+                "title": "IT Consulting & Network Infrastructure",
+                "description": "Planning and implementation for office networks, hotels, project sites, LAN, WiFi, routers, switches, racks, and active devices.",
+                "features": [
+                    "Network design",
+                    "LAN/WiFi setup",
+                    "Router & switch configuration",
+                    "Rack & device coordination"
+                ]
+            },
+            {
+                "icon": "ph-tree-structure",
+                "title": "Fiber Optic / OSP Deployment",
+                "description": "Support for surveys, route planning, aerial/underground fiber optic works, field coordination, and as-plan/as-built documentation.",
+                "features": [
+                    "OSP survey",
+                    "FO route planning",
+                    "Aerial & underground route",
+                    "As-plan / as-built support"
+                ]
+            },
+            {
+                "icon": "ph-video-camera",
+                "title": "CCTV & Security System",
+                "description": "Planning and installation for CCTV, IP cameras, NVR, storage, camera networks, and monitoring requirements.",
+                "features": [
+                    "IP CCTV planning",
+                    "NVR setup",
+                    "Camera point mapping",
+                    "Monitoring support"
+                ]
+            },
+            {
+                "icon": "ph-cloud",
+                "title": "Cloud, VPS & DevOps",
+                "description": "Server setup, VPS, domain, SSL, website deployment, basic security, backup, and monitoring.",
+                "features": [
+                    "VPS setup",
+                    "Web deployment",
+                    "SSL & domain",
+                    "Backup & monitoring"
+                ]
+            },
+            {
+                "icon": "ph-chart-line-up",
+                "title": "Dashboard & Data Analytics",
+                "description": "Operational dashboards, reporting, data tracking, finance trackers, and workflow monitoring.",
+                "features": [
+                    "Business dashboard",
+                    "Finance tracker",
+                    "Operational reporting",
+                    "Data workflow"
+                ]
+            },
+            {
+                "icon": "ph-file-text",
+                "title": "Technical Documentation",
+                "description": "Technical documents, planning drawings, survey reports, method statements, QC checklists, and project documentation.",
+                "features": [
+                    "Technical report",
+                    "Drawing support",
+                    "QC checklist",
+                    "Project documentation"
+                ]
+            },
+            {
+                "icon": "ph-calculator",
+                "title": "BOQ / RAB Preparation",
+                "description": "BOQ/RAB preparation based on project scope, quantities, work items, materials, services, and technical assumptions.",
+                "features": [
+                    "BOQ calculation",
+                    "RAB preparation",
+                    "Material list",
+                    "Work item breakdown"
+                ]
+            },
+            {
+                "icon": "ph-map-trifold",
+                "title": "KMZ / KML Route Analysis",
+                "description": "KMZ/KML-based route analysis for fiber optic, route planning, permit support, and field coordination.",
+                "features": [
+                    "Route analysis",
+                    "KMZ/KML review",
+                    "Segment mapping",
+                    "Distance estimation"
+                ]
+            },
+            {
+                "icon": "ph-handshake",
+                "title": "Permit Support & Project Coordination",
+                "description": "Technical administration support, vendor/client coordination, document follow-up, and permit process support.",
+                "features": [
+                    "Permit document support",
+                    "Vendor coordination",
+                    "Client follow-up",
+                    "Progress tracking"
+                ]
+            }
+        ]
+    },
+    "portfolio": {
+        "badge": "Portfolio",
+        "title": "Sample Project Scope",
+        "subtitle": "Several work categories supported by Jerco Digital Solusi.",
+        "items": [
+            {
+                "title": "Fiber Optic Route & OSP Documentation",
+                "category": "Fiber Optic / OSP",
+                "description": "Route survey, route analysis, BOQ, drawing support, and technical documentation for fiber optic network projects.",
+                "image": "assets/images/projects/project-isp.jpg",
+                "tags": [
+                    "Fiber Optic",
+                    "OSP",
+                    "KMZ/KML",
+                    "BOQ"
+                ]
+            },
+            {
+                "title": "Network Infrastructure for Office & Hospitality",
+                "category": "Network Infrastructure",
+                "description": "LAN, WiFi, router, switch, rack, and device integration planning for offices, hotels, and project areas.",
+                "image": "assets/images/projects/project-network.jpg",
+                "tags": [
+                    "LAN",
+                    "WiFi",
+                    "Switching",
+                    "Rack"
+                ]
+            },
+            {
+                "title": "Cloud VPS & Website Deployment",
+                "category": "Cloud / DevOps",
+                "description": "VPS setup, domain, SSL, website deployment, backup, and basic monitoring for business needs.",
+                "image": "assets/images/projects/project-cloud.jpg",
+                "tags": [
+                    "VPS",
+                    "SSL",
+                    "Deployment",
+                    "Backup"
+                ]
+            },
+            {
+                "title": "Operational Dashboard & Tracking System",
+                "category": "Dashboard / Data",
+                "description": "Dashboards for progress monitoring, finance tracking, task lists, invoices, and operational data.",
+                "image": "assets/images/projects/project-dashboard.jpg",
+                "tags": [
+                    "Dashboard",
+                    "Data",
+                    "Finance",
+                    "Tracking"
+                ]
+            }
+        ]
+    },
+    "process": {
+        "badge": "Workflow",
+        "title": "Project Workflow",
+        "subtitle": "From initial requirement to project-ready deliverables.",
+        "steps": [
+            {
+                "number": "01",
+                "title": "Brief & Requirement",
+                "description": "Collecting client needs, locations, scope, target, and project constraints."
+            },
+            {
+                "number": "02",
+                "title": "Survey & Data Collection",
+                "description": "Collecting field data, photos, coordinates, routes, existing conditions, and technical requirements."
+            },
+            {
+                "number": "03",
+                "title": "Planning & BOQ",
+                "description": "Preparing technical concepts, quantities, BOQ/RAB, and supporting documents."
+            },
+            {
+                "number": "04",
+                "title": "Execution & Coordination",
+                "description": "Coordinating vendors/clients, monitoring progress, and mitigating field issues."
+            },
+            {
+                "number": "05",
+                "title": "Documentation & Handover",
+                "description": "Preparing reports, drawings, checklists, and final handover documents."
+            }
+        ]
+    },
+    "aiAssistant": {
+        "badge": "AI Assistant",
+        "title": "AI Assistant for Project & Business Workflow",
+        "subtitle": "Initial placeholder for Jerco’s digital assistant feature. Backend/API can be developed in the next phase.",
+        "description": "This feature is prepared to support task summaries, WhatsApp/email drafts, pending tracking, BOQ analysis, and project documentation. API keys must not be stored in the frontend.",
+        "inputPlaceholder": "Type your request, example: summarize today’s project pending list...",
+        "buttonText": "Send Question",
+        "disclaimer": "AI Assistant is still a placeholder. For production, use a secure backend/API endpoint.",
+        "quickPrompts": [
+            "Summarize today’s project pending list",
+            "Create a WhatsApp follow-up draft for vendor",
+            "Analyze fiber optic BOQ requirements",
+            "Create a technical documentation QC checklist"
+        ]
+    },
+    "contact": {
+        "badge": "Contact",
+        "title": "Discuss Your Project Needs",
+        "subtitle": "Contact Jerco Digital Solusi for surveys, consultation, quotations, or project coordination.",
+        "info": [
+            {
+                "label": "Email",
+                "value": "indra@jerconetwork.com",
+                "href": "mailto:indra@jerconetwork.com",
+                "icon": "ph-envelope-simple"
+            },
+            {
+                "label": "WhatsApp",
+                "value": "+62 822-3765-0909",
+                "href": "https://wa.me/6282237650909",
+                "icon": "ph-whatsapp-logo"
+            },
+            {
+                "label": "Website",
+                "value": "www.jerconetwork.com",
+                "href": "https://www.jerconetwork.com",
+                "icon": "ph-globe"
+            }
+        ],
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "phone": "WhatsApp Number",
+            "service": "Service Needed",
+            "message": "Message / Project Requirement",
+            "submit": "Send Message",
+            "serviceOptions": [
+                "IT Consulting",
+                "Network Infrastructure",
+                "Fiber Optic / OSP",
+                "CCTV & Security System",
+                "Cloud / VPS / DevOps",
+                "Dashboard / Data Analytics",
+                "Technical Documentation",
+                "BOQ / RAB Preparation",
+                "KMZ / KML Route Analysis",
+                "Permit Support",
+                "Project Coordination"
+            ]
+        }
+    },
+    "footer": {
+        "description": "CV Jerco Digital Solusi is a partner for IT consulting, network infrastructure, fiber optic, CCTV, cloud, data analytics, technical documentation, BOQ/RAB preparation, KMZ/KML route analysis, permit support, and project coordination.",
+        "quickLinksTitle": "Menu",
+        "servicesTitle": "Services",
+        "contactTitle": "Contact",
+        "copyright": "© 2026 CV Jerco Digital Solusi. All rights reserved."
+    },
+    "common": {
+        "readMore": "Read More",
+        "viewDetails": "View Details",
+        "backToTop": "Back to Top",
+        "loading": "Loading content...",
+        "error": "Content is not available yet. Please refresh the page."
+    }
+}
