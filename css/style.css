@@ -149,6 +149,10 @@ button {
     padding-block: 128px;
 }
 
+#hero.section-padding {
+    padding-top: 62px;
+}
+
 /* ---------- Section Typography ---------- */
 .section-eyebrow {
     display: inline-flex;
@@ -194,7 +198,10 @@ html.dark .section-title {
 }
 
 .hero-title {
-    letter-spacing: -0.065em;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1.24;
 }
 
 /* ---------- Text Utilities ---------- */
@@ -315,7 +322,7 @@ tr:last-child td {
 html.dark #site-header,
 html.dark header {
     background: rgba(7, 17, 31, 0.78) !important;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.14) !important;
+    border-bottom: 0 !important;
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
@@ -364,10 +371,18 @@ html.dark .hero-console,
 html.dark .project-console,
 html.dark .console-card {
     background: linear-gradient(180deg, rgba(16, 28, 47, 0.96), rgba(8, 18, 33, 0.96)) !important;
-    border: 1px solid rgba(148, 163, 184, 0.16) !important;
+    border: 1px solid rgba(56, 189, 248, 0.34) !important;
     box-shadow:
-        0 28px 90px rgba(0, 0, 0, 0.40),
-        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+        0 0 0 1px rgba(14, 165, 233, 0.08),
+        0 0 42px rgba(34, 211, 238, 0.16),
+        0 30px 90px rgba(0, 0, 0, 0.46),
+        inset 0 1px 0 rgba(255, 255, 255, 0.055) !important;
+}
+
+.hero-console .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 500;
+    letter-spacing: 0;
 }
 
 html.dark input,
@@ -418,4 +433,108 @@ html.dark .jerco-logo {
         drop-shadow(0 0 1px rgba(255, 255, 255, 0.70))
         drop-shadow(0 1px 3px rgba(255, 255, 255, 0.20))
         drop-shadow(0 6px 14px rgba(0, 0, 0, 0.22));
+}
+
+.logo-sweep {
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.logo-sweep-glint {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    filter:
+        brightness(0)
+        invert(1)
+        drop-shadow(0 0 6px rgba(255, 255, 255, 0.95))
+        drop-shadow(0 0 14px rgba(125, 211, 252, 0.78));
+    mix-blend-mode: plus-lighter;
+    opacity: 0;
+    -webkit-mask-image: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 30%,
+        rgba(0, 0, 0, 0.18) 39%,
+        #000 48%,
+        #000 56%,
+        rgba(0, 0, 0, 0.22) 64%,
+        transparent 74%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 30%,
+        rgba(0, 0, 0, 0.18) 39%,
+        #000 48%,
+        #000 56%,
+        rgba(0, 0, 0, 0.22) 64%,
+        transparent 74%,
+        transparent 100%
+    );
+    -webkit-mask-size: 320% 100%;
+    mask-size: 320% 100%;
+    -webkit-mask-position: 185% 0;
+    mask-position: 185% 0;
+    animation: logo-light-sweep 2.8s ease-in-out 0.35s infinite;
+}
+
+@keyframes logo-light-sweep {
+    0% {
+        -webkit-mask-position: 185% 0;
+        mask-position: 185% 0;
+        opacity: 0;
+    }
+
+    10%,
+    40% {
+        opacity: 1;
+    }
+
+    50% {
+        -webkit-mask-position: -90% 0;
+        mask-position: -90% 0;
+        opacity: 0.08;
+    }
+
+    60%,
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-mask-position: 185% 0;
+        mask-position: 185% 0;
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-sweep-glint {
+        animation: none !important;
+    }
+}
+
+/* Header separator sits below the oversized logo artwork. */
+.site-header {
+    position: sticky;
+    border-bottom: 0 !important;
+}
+
+.site-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    background: rgba(226, 232, 240, 0.58);
+}
+
+html.dark .site-header::after {
+    background: rgba(30, 41, 59, 0.86);
 }

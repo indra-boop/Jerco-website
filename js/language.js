@@ -58,9 +58,9 @@
                 contact: 'Kontak'
             },
             hero: {
-                badge: 'JERCO DIGITAL SOLUSI',
-                title: 'Partner Infrastruktur IT & Telekomunikasi',
-                subtitle: 'Fiber Optic, Network Infrastructure, CCTV, Technical Documentation, dan Permit Support untuk bisnis, hotel, kantor, ISP, kontraktor, dan koordinasi project terkait pemerintahan.',
+                badge: 'IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER',
+                title: 'Solusi End-to-End Infrastruktur IT & Telekomunikasi',
+                subtitle: 'Jerco Digital Solusi adalah mitra terpercaya bagi perusahaan, ISP, dan project owner dalam mewujudkan infrastruktur jaringan yang andal. Kami menghadirkan layanan menyeluruh\u2014mulai dari perizinan & akuisisi lahan (SITAC), perencanaan teknis, instalasi fisik, sistem integrasi, hingga managed service untuk performa jangka panjang.',
                 ctaPrimary: 'Request Survey',
                 ctaSecondary: 'Contact via WhatsApp'
             },
@@ -147,8 +147,8 @@
                 contact: 'Contact'
             },
             hero: {
-                badge: 'JERCO DIGITAL SOLUSI',
-                title: 'IT & Telecommunication Infrastructure Partner',
+                badge: 'IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER',
+                title: 'IT, Network, Fiber Optic, and Technical Documentation Solutions',
                 subtitle: 'Fiber Optic, Network Infrastructure, CCTV, Technical Documentation, and Permit Support Services for business, hotel, office, ISP, contractor, and government-related project coordination.',
                 ctaPrimary: 'Request Survey',
                 ctaSecondary: 'Contact via WhatsApp'

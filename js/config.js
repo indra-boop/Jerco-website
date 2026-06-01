@@ -70,6 +70,7 @@
             tagline: 'IT & Telecommunication Infrastructure Partner',
             description: 'IT Consulting, Network Infrastructure, Fiber Optic / OSP, CCTV, Cloud, DevOps, Technical Documentation, BOQ/RAB, KMZ/KML Route Analysis, Permit Support, and Project Coordination.',
             logo: 'assets/images/logo-jerco.png',
+            logoDark: 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
             favicon: 'assets/icons/favicon.png'
         },
 
@@ -102,11 +103,12 @@
         assets: {
             images: {
                 logo: 'assets/images/logo-jerco.png',
+                logoDark: 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
                 hero: 'assets/images/hero-bg.png',
                 profile: 'assets/images/profile.jpg',
-                projectIsp: 'assets/images/projects/project-isp.jpg',
-                projectCloud: 'assets/images/projects/project-cloud.jpg',
-                projectDashboard: 'assets/images/projects/project-dashboard.jpg'
+                projectIsp: 'assets/images/projects/project-isp.png',
+                projectCloud: 'assets/images/projects/project-cloud.png',
+                projectDashboard: 'assets/images/projects/project-dashboard.png'
             },
             documents: {
                 companyProfile: 'assets/documents/company-profile.pdf',

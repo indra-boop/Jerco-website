@@ -104,43 +104,49 @@
         if (!header) return;
 
         const logo = BRAND.logo || 'assets/images/logo-jerco.png';
-        const logoDark = BRAND.logoDark || 'assets/images/logo-jerco-dark-outline-soft-shadow.svg';
+        const logoDark = BRAND.logoDark || 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
         const brandName = BRAND.shortName || BRAND.legalName || 'Jerco Digital Solusi';
-        const tagline = BRAND.tagline || 'IT & Telecommunication Infrastructure Partner';
-        const whatsappUrl = CONTACT.whatsappUrl || '#contact';
 
-        header.className = 'sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl transition-all dark:border-slate-800/80 dark:bg-slate-950/85';
+        header.className = 'site-header sticky top-0 z-50 bg-white/85 backdrop-blur-xl transition-all dark:bg-slate-950/85';
 
         header.innerHTML = `
             <div class="container-custom">
-                <div class="flex h-20 items-center justify-between gap-4">
+                <div class="flex h-32 items-center justify-between gap-4">
                     <a href="#hero" class="flex min-w-0 items-center gap-3" aria-label="${escapeHtml(brandName)} home">
                         <div class="flex h-12 shrink-0 items-center justify-center">
-                            <img
-                                src="${escapeHtml(logo)}"
-                                alt="${escapeHtml(brandName)} logo"
-                                class="jerco-logo block h-48 w-auto max-w-[540px] object-contain dark:hidden"
-                                onerror="this.style.display='none';"
-                            >
-                            <img
-                                src="${escapeHtml(logoDark)}"
-                                alt="${escapeHtml(brandName)} logo"
-                                class="jerco-logo hidden h-48 w-auto max-w-[540px] object-contain dark:block"
-                                onerror="this.style.display='none';"
-                            >
+                            <span class="logo-sweep block dark:hidden">
+                                <img
+                                    src="${escapeHtml(logo)}"
+                                    alt="${escapeHtml(brandName)} logo"
+                                    class="jerco-logo h-48 w-auto max-w-[540px] object-contain"
+                                    onerror="this.style.display='none';"
+                                >
+                                <img
+                                    src="${escapeHtml(logo)}"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="logo-sweep-glint h-48 w-auto max-w-[540px] object-contain"
+                                >
+                            </span>
+                            <span class="logo-sweep hidden dark:block">
+                                <img
+                                    src="${escapeHtml(logoDark)}"
+                                    alt="${escapeHtml(brandName)} logo"
+                                    class="jerco-logo h-48 w-auto max-w-[540px] object-contain"
+                                    onerror="this.style.display='none';"
+                                >
+                                <img
+                                    src="${escapeHtml(logoDark)}"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="logo-sweep-glint h-48 w-auto max-w-[540px] object-contain"
+                                >
+                            </span>
                             <span class="hidden h-10 w-10 items-center justify-center rounded-xl bg-cyan-600 text-sm font-black text-white">J</span>
-                        </div>
-                        <div class="min-w-0">
-                            <p class="truncate text-sm font-black tracking-tight text-slate-950 dark:text-white sm:text-base">
-                                ${escapeHtml(brandName)}
-                            </p>
-                            <p class="hidden truncate text-xs text-slate-500 dark:text-slate-400 sm:block">
-                                ${escapeHtml(tagline)}
-                            </p>
                         </div>
                     </a>
 
-                    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+                    <nav class="hidden items-center gap-3 lg:flex" aria-label="Main navigation">
                         ${buildDesktopNav()}
                     </nav>
 
@@ -166,10 +172,6 @@
                             <i class="ph ph-circle-half text-lg theme-toggle-fallback"></i>
                         </button>
 
-                        <a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener" class="btn-primary whitespace-nowrap">
-                            <i class="ph ph-whatsapp-logo"></i>
-                            <span>WhatsApp</span>
-                        </a>
                     </div>
 
                     <button
@@ -200,22 +202,34 @@
                     <div class="flex items-center justify-between gap-4">
                         <div class="flex min-w-0 items-center gap-3">
                             <div class="flex h-12 shrink-0 items-center justify-center">
-                                <img
-                                    src="${escapeHtml(logo)}"
-                                    alt="${escapeHtml(brandName)} logo"
-                                    class="jerco-logo block h-[7.5rem] w-auto max-w-[360px] object-contain dark:hidden"
-                                    onerror="this.style.display='none';"
-                                >
-                                <img
-                                    src="${escapeHtml(logoDark)}"
-                                    alt="${escapeHtml(brandName)} logo"
-                                    class="jerco-logo hidden h-[7.5rem] w-auto max-w-[360px] object-contain dark:block"
-                                    onerror="this.style.display='none';"
-                                >
-                            </div>
-                            <div class="min-w-0">
-                                <p class="truncate text-sm font-black text-slate-950 dark:text-white">${escapeHtml(brandName)}</p>
-                                <p class="truncate text-xs text-slate-500 dark:text-slate-400">${escapeHtml(tagline)}</p>
+                                <span class="logo-sweep block dark:hidden">
+                                    <img
+                                        src="${escapeHtml(logo)}"
+                                        alt="${escapeHtml(brandName)} logo"
+                                        class="jerco-logo h-[7.5rem] w-auto max-w-[360px] object-contain"
+                                        onerror="this.style.display='none';"
+                                    >
+                                    <img
+                                        src="${escapeHtml(logo)}"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="logo-sweep-glint h-[7.5rem] w-auto max-w-[360px] object-contain"
+                                    >
+                                </span>
+                                <span class="logo-sweep hidden dark:block">
+                                    <img
+                                        src="${escapeHtml(logoDark)}"
+                                        alt="${escapeHtml(brandName)} logo"
+                                        class="jerco-logo h-[7.5rem] w-auto max-w-[360px] object-contain"
+                                        onerror="this.style.display='none';"
+                                    >
+                                    <img
+                                        src="${escapeHtml(logoDark)}"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="logo-sweep-glint h-[7.5rem] w-auto max-w-[360px] object-contain"
+                                    >
+                                </span>
                             </div>
                         </div>
 
@@ -251,15 +265,31 @@
                                 <span>Theme</span>
                             </button>
                         </div>
-
-                        <a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener" class="btn-primary w-full">
-                            <i class="ph ph-whatsapp-logo"></i>
-                            <span>Contact via WhatsApp</span>
-                        </a>
                     </div>
                 </aside>
             </div>
         `;
+    }
+
+    function renderFloatingWhatsapp() {
+        const existing = document.querySelector('#floating-whatsapp');
+        if (existing) existing.remove();
+
+        const whatsappUrl = CONTACT.whatsappUrl || '#contact';
+
+        document.body.insertAdjacentHTML('beforeend', `
+            <a
+                id="floating-whatsapp"
+                href="${escapeHtml(whatsappUrl)}"
+                target="_blank"
+                rel="noopener"
+                class="floating-whatsapp"
+                aria-label="Contact Jerco via WhatsApp"
+            >
+                <i class="ph ph-whatsapp-logo"></i>
+                <span>WhatsApp</span>
+            </a>
+        `);
     }
 
     function renderFooter() {
@@ -267,10 +297,8 @@
         if (!footer) return;
 
         const brandName = BRAND.legalName || BRAND.shortName || 'CV Jerco Digital Solusi';
-        const shortName = BRAND.shortName || 'Jerco Digital Solusi';
-        const tagline = BRAND.tagline || 'IT & Telecommunication Infrastructure Partner';
         const logo = BRAND.logo || 'assets/images/logo-jerco.png';
-        const logoDark = BRAND.logoDark || 'assets/images/logo-jerco-dark-outline-soft-shadow.svg';
+        const logoDark = BRAND.logoDark || 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
         const email = CONTACT.email || '';
         const phone = CONTACT.phone || '';
         const whatsappUrl = CONTACT.whatsappUrl || '#contact';
@@ -284,19 +312,21 @@
             <div class="container-custom py-12">
                 <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
                     <div>
-                        <div class="flex items-center gap-3">
-                            <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-white">
+                        <div class="flex items-center">
+                            <span class="logo-sweep">
                                 <img
                                     src="${escapeHtml(logoDark)}"
                                     alt="${escapeHtml(brandName)} logo"
-                                    class="jerco-logo h-[7.5rem] w-auto object-contain"
+                                    class="jerco-logo h-[7.5rem] w-auto max-w-[360px] object-contain"
                                     onerror="this.src='${escapeHtml(logo)}';"
                                 >
-                            </div>
-                            <div>
-                                <h2 class="text-lg font-black text-white">${escapeHtml(shortName)}</h2>
-                                <p class="text-sm text-slate-400">${escapeHtml(tagline)}</p>
-                            </div>
+                                <img
+                                    src="${escapeHtml(logoDark)}"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="logo-sweep-glint h-[7.5rem] w-auto max-w-[360px] object-contain"
+                                >
+                            </span>
                         </div>
 
                         <p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">
@@ -487,6 +517,7 @@
             syncLanguageButtonLabels();
             renderHeader();
             renderFooter();
+            renderFloatingWhatsapp();
             bindEventsAfterRender();
         });
     }
@@ -525,6 +556,7 @@
     function initNavigation() {
         renderHeader();
         renderFooter();
+        renderFloatingWhatsapp();
         bindEventsAfterRender();
         bindLanguageEvents();
 
@@ -540,6 +572,7 @@
     window.JercoNavigation = {
         renderHeader,
         renderFooter,
+        renderFloatingWhatsapp,
         openMobileMenu,
         closeMobileMenu,
         setActiveNavLink

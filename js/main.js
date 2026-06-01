@@ -25,7 +25,6 @@
 
     const state = {
         initialized: false,
-        scrollTopButton: null,
         observers: []
     };
 
@@ -267,57 +266,6 @@
         });
     }
 
-    function createScrollTopButton() {
-        const button = document.createElement('button');
-
-        button.type = 'button';
-        button.id = 'scroll-top-button';
-        button.setAttribute('aria-label', 'Back to top');
-        button.className = [
-            'fixed',
-            'bottom-5',
-            'right-5',
-            'z-40',
-            'hidden',
-            'h-11',
-            'w-11',
-            'items-center',
-            'justify-center',
-            'rounded-full',
-            'bg-slate-950',
-            'text-white',
-            'shadow-lg',
-            'transition',
-            'hover:-translate-y-0.5',
-            'hover:bg-cyan-600',
-            'dark:bg-white',
-            'dark:text-slate-950',
-            'dark:hover:bg-cyan-300'
-        ].join(' ');
-        button.innerHTML = '<i class="ph ph-arrow-up text-xl" aria-hidden="true"></i>';
-
-        button.addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        document.body.appendChild(button);
-        return button;
-    }
-
-    function initScrollTopButton() {
-        const button = safeQuery('#scroll-top-button') || createScrollTopButton();
-        state.scrollTopButton = button;
-
-        const updateVisibility = throttle(function () {
-            const shouldShow = window.scrollY > 550;
-            button.classList.toggle('hidden', !shouldShow);
-            button.classList.toggle('flex', shouldShow);
-        }, 120);
-
-        updateVisibility();
-        window.addEventListener('scroll', updateVisibility, { passive: true });
-    }
-
     function initRevealObserver() {
         if (!('IntersectionObserver' in window)) return;
 
@@ -410,7 +358,6 @@
 
         checkDependencies();
         refresh();
-        initScrollTopButton();
         observeDynamicEnhancements();
         dispatchReadyEvent();
 
@@ -426,11 +373,6 @@
 
         state.observers = [];
         state.initialized = false;
-
-        if (state.scrollTopButton) {
-            state.scrollTopButton.remove();
-            state.scrollTopButton = null;
-        }
     }
 
     if (document.readyState === 'loading') {

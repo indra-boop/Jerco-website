@@ -37,9 +37,9 @@
     },
     "hero": {
         "badge": "IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER",
-        "title": "Solusi IT, Network, Fiber Optic, dan Dokumentasi Teknis",
+        "title": "Solusi End-to-End Infrastruktur IT & Telekomunikasi",
         "highlight": "untuk kebutuhan bisnis Anda",
-        "subtitle": "Jerco Digital Solusi membantu perusahaan, hotel, kantor, ISP, kontraktor, dan project owner dalam perencanaan, instalasi, dokumentasi, BOQ/RAB, serta koordinasi project infrastruktur IT dan telekomunikasi.",
+        "subtitle": "Jerco Digital Solusi adalah mitra terpercaya bagi perusahaan, ISP, dan project owner dalam mewujudkan infrastruktur jaringan yang andal. Kami menghadirkan layanan menyeluruh\u2014mulai dari perizinan & akuisisi lahan (SITAC), perencanaan teknis, instalasi fisik, sistem integrasi, hingga managed service untuk performa jangka panjang.",
         "ctaPrimary": "Request Survey",
         "ctaSecondary": "Contact via WhatsApp",
         "trustText": "Reliable partner for technical execution, documentation, and project coordination.",
@@ -201,7 +201,7 @@
                 "title": "Fiber Optic Route & OSP Documentation",
                 "category": "Fiber Optic / OSP",
                 "description": "Survey jalur, route analysis, BOQ, drawing support, dan dokumentasi teknis untuk kebutuhan jaringan fiber optic.",
-                "image": "assets/images/projects/project-isp.jpg",
+                "image": "assets/images/projects/project-isp.png",
                 "tags": [
                     "Fiber Optic",
                     "OSP",
@@ -225,7 +225,7 @@
                 "title": "Cloud VPS & Website Deployment",
                 "category": "Cloud / DevOps",
                 "description": "Setup VPS, domain, SSL, deployment website, backup, dan basic monitoring untuk kebutuhan bisnis.",
-                "image": "assets/images/projects/project-cloud.jpg",
+                "image": "assets/images/projects/project-cloud.png",
                 "tags": [
                     "VPS",
                     "SSL",
@@ -237,7 +237,7 @@
                 "title": "Operational Dashboard & Tracking System",
                 "category": "Dashboard / Data",
                 "description": "Dashboard untuk monitoring progress, finance tracking, task list, invoice, dan data operasional.",
-                "image": "assets/images/projects/project-dashboard.jpg",
+                "image": "assets/images/projects/project-dashboard.png",
                 "tags": [
                     "Dashboard",
                     "Data",

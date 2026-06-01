@@ -143,6 +143,127 @@
     background: rgba(2, 6, 23, 0.55);
 }
 
+.hero-layout {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+}
+
+.hero-service-strip {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(34, 211, 238, 0.45) transparent;
+}
+
+.hero-service-card {
+    position: relative;
+    overflow: hidden;
+    min-width: 172px;
+    flex: 0 0 172px;
+    border: 1px solid rgba(103, 232, 249, 0.28);
+    background: rgba(2, 6, 23, 0.62);
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.34),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 0 30px rgba(34, 211, 238, 0.1);
+    backdrop-filter: blur(14px);
+    animation: hero-card-rise 0.7s ease both;
+    transition:
+        transform var(--transition-base),
+        border-color var(--transition-base),
+        box-shadow var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.hero-service-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 42%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+}
+
+.hero-service-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.hero-service-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+.hero-service-card:nth-child(4) {
+    animation-delay: 0.24s;
+}
+
+.hero-service-card:nth-child(5) {
+    animation-delay: 0.32s;
+}
+
+.hero-service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(103, 232, 249, 0.56);
+    background: rgba(2, 6, 23, 0.74);
+    box-shadow:
+        0 26px 64px rgba(0, 0, 0, 0.46),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+        0 0 42px rgba(34, 211, 238, 0.18);
+}
+
+.hero-service-card:hover::before {
+    opacity: 1;
+}
+
+.hero-service-card p:last-child {
+    line-height: 1.35;
+}
+
+@keyframes hero-card-rise {
+    from {
+        opacity: 0;
+        translate: 0 14px;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-service-card {
+        animation: none;
+    }
+
+    .hero-service-card,
+    .hero-service-card::before {
+        transition: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-service-strip {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+
+    .hero-service-card {
+        min-width: 0;
+        flex-basis: auto;
+    }
+}
+
 /* ---------- Badges ---------- */
 .badge,
 .badge-soft,
@@ -231,10 +352,10 @@
     display: inline-flex;
     align-items: center;
     min-height: 42px;
-    padding: 10px 14px;
+    padding: 10px 16px;
     border-radius: 14px;
     color: var(--color-muted);
-    font-size: 0.92rem;
+    font-size: 1rem;
     font-weight: 800;
     transition: background-color var(--transition-base), color var(--transition-base);
 }
@@ -254,6 +375,52 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.floating-whatsapp {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 80;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 188px;
+    min-height: 78px;
+    border-radius: 999px;
+    border: 3px solid rgba(103, 232, 249, 0.92);
+    background: rgba(7, 17, 31, 0.72);
+    color: #67e8f9;
+    padding: 0 24px;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow:
+        0 0 0 7px rgba(103, 232, 249, 0.10),
+        0 0 24px rgba(34, 211, 238, 0.52),
+        0 18px 42px rgba(0, 0, 0, 0.34),
+        inset 0 0 18px rgba(34, 211, 238, 0.10);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+}
+
+.floating-whatsapp i {
+    font-size: 2.7rem;
+    filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.76));
+}
+
+.floating-whatsapp:hover {
+    transform: translateY(-2px);
+    border-color: #a5f3fc;
+    color: #a5f3fc;
+    box-shadow:
+        0 0 0 9px rgba(103, 232, 249, 0.14),
+        0 0 34px rgba(34, 211, 238, 0.72),
+        0 22px 52px rgba(0, 0, 0, 0.42),
+        inset 0 0 22px rgba(34, 211, 238, 0.14);
 }
 
 .icon-button,

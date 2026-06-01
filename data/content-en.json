@@ -37,9 +37,9 @@
     },
     "hero": {
         "badge": "IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER",
-        "title": "IT, Network, Fiber Optic, and Technical Documentation Solutions",
+        "title": "End-to-End IT & Telecommunication Infrastructure Solutions",
         "highlight": "for your business needs",
-        "subtitle": "Jerco Digital Solusi helps companies, hotels, offices, ISPs, contractors, and project owners with planning, installation, documentation, BOQ/RAB preparation, and infrastructure project coordination.",
+        "subtitle": "Jerco Digital Solusi is a trusted partner for companies, ISPs, and project owners in building reliable network infrastructure. We provide comprehensive services, from permitting and site acquisition (SITAC), technical planning, physical installation, system integration, to managed services for long-term performance.",
         "ctaPrimary": "Request Survey",
         "ctaSecondary": "Contact via WhatsApp",
         "trustText": "Reliable partner for technical execution, documentation, and project coordination.",
@@ -201,7 +201,7 @@
                 "title": "Fiber Optic Route & OSP Documentation",
                 "category": "Fiber Optic / OSP",
                 "description": "Route survey, route analysis, BOQ, drawing support, and technical documentation for fiber optic network projects.",
-                "image": "assets/images/projects/project-isp.jpg",
+                "image": "assets/images/projects/project-isp.png",
                 "tags": [
                     "Fiber Optic",
                     "OSP",
@@ -225,7 +225,7 @@
                 "title": "Cloud VPS & Website Deployment",
                 "category": "Cloud / DevOps",
                 "description": "VPS setup, domain, SSL, website deployment, backup, and basic monitoring for business needs.",
-                "image": "assets/images/projects/project-cloud.jpg",
+                "image": "assets/images/projects/project-cloud.png",
                 "tags": [
                     "VPS",
                     "SSL",
@@ -237,7 +237,7 @@
                 "title": "Operational Dashboard & Tracking System",
                 "category": "Dashboard / Data",
                 "description": "Dashboards for progress monitoring, finance tracking, task lists, invoices, and operational data.",
-                "image": "assets/images/projects/project-dashboard.jpg",
+                "image": "assets/images/projects/project-dashboard.png",
                 "tags": [
                     "Dashboard",
                     "Data",
