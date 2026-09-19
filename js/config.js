@@ -191,6 +191,13 @@
                 icon: 'ph-map-trifold',
                 titleId: 'KMZ/KML Route Analysis',
                 titleEn: 'KMZ/KML Route Analysis'
+            },
+            {
+                id: 'sports-schedule',
+                icon: 'ph-calendar-check',
+                titleId: 'Sports Schedule',
+                titleEn: 'Sports Schedule',
+                href: 'https://schedule.jerconetwork.com'
             }
         ],
 
