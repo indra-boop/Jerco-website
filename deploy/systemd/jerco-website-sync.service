@@ -1,0 +1,12 @@
+[Unit]
+Description=Deploy www.jerconetwork.com from GitHub main (indra-boop/Jerco-website)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/jerco-website-sync sync
+Nice=10
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectHome=read-only
