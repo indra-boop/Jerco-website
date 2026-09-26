@@ -148,6 +148,13 @@
                         labelEn: 'Permits & Licensing',
                         href: '/services/permits-licensing/',
                         icon: 'ph-stamp'
+                    },
+                    {
+                        id: 'roles-si-var-aggregator-msp',
+                        labelId: 'Peran SI, VAR, Aggregator & MSP',
+                        labelEn: 'SI, VAR, Aggregator & MSP Roles',
+                        href: '/layanan/peran-si-var-aggregator-msp/',
+                        icon: 'ph-tree-structure'
                     }
                 ]
             },

@@ -1244,3 +1244,255 @@ body.overflow-hidden .floating-whatsapp {
 #sports-public-viewing {
     scroll-margin-top: 140px;
 }
+
+/* ---------- Roles page (SI / VAR / Aggregator / MSP) ---------- */
+.hero-service-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.hero-service-card-link:focus-visible {
+    outline: 2px solid rgba(34, 211, 238, 0.85);
+    outline-offset: 3px;
+}
+
+.hero-service-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #67e8f9;
+}
+
+.hero-service-card-cta i {
+    transition: transform var(--transition-base);
+}
+
+.hero-service-card-link:hover .hero-service-card-cta i,
+.hero-service-card-link:focus-visible .hero-service-card-cta i {
+    transform: translateX(3px);
+}
+
+.roles-cta-helper {
+    max-width: 36rem;
+}
+
+.roles-reuse {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: rgba(15, 60, 92, 0.04);
+    list-style: none;
+}
+
+.dark .roles-reuse {
+    background: rgba(56, 189, 248, 0.06);
+}
+
+.roles-reuse li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--color-text);
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.roles-reuse li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--jerco-blue, #1BA0D7);
+}
+
+.roles-table-wrap {
+    -webkit-overflow-scrolling: touch;
+}
+
+.roles-table {
+    min-width: 720px;
+}
+
+.roles-table th[scope="row"] {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    background: rgba(15, 60, 92, 0.04);
+}
+
+.dark .roles-table th[scope="row"] {
+    background: rgba(56, 189, 248, 0.06);
+}
+
+.roles-table td {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+}
+
+.roles-buyer-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.roles-buyer-if {
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.roles-buyer-then {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-accent-text);
+}
+
+.roles-sequence {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .roles-sequence {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .roles-sequence {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+.roles-seq-step h3 {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.roles-seq-step p {
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+}
+
+.roles-contract-card h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.roles-contract-card p {
+    margin-top: 0.65rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+}
+
+.roles-jerco-card h3 {
+    margin-top: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.roles-jerco-card p {
+    margin-top: 0.55rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+}
+
+.roles-caveats {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.roles-caveats li {
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: rgba(15, 60, 92, 0.04);
+    font-weight: 700;
+}
+
+.dark .roles-caveats li {
+    background: rgba(56, 189, 248, 0.06);
+}
+
+.roles-faq {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.roles-faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface, #fff);
+    padding: 0;
+    overflow: hidden;
+}
+
+.dark .roles-faq-item {
+    background: rgba(14, 27, 47, 0.72);
+}
+
+.roles-faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1rem 1.25rem;
+    font-weight: 750;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.roles-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.roles-faq-item summary::after {
+    content: "+";
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent-text);
+    flex-shrink: 0;
+}
+
+.roles-faq-item[open] summary::after {
+    content: "−";
+}
+
+.roles-faq-item p {
+    padding: 0 1.25rem 1.15rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+}
+
+#roles-hero,
+#roles-definitions,
+#roles-comparison,
+#roles-buyer-test,
+#roles-sequence,
+#roles-examples,
+#roles-contract,
+#roles-jerco,
+#roles-caveats,
+#roles-faq,
+#roles-contact {
+    scroll-margin-top: 140px;
+}
