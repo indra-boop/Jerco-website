@@ -59,6 +59,25 @@
         return item.labelId || item.labelEn || item.id;
     }
 
+    function getNavigationTitle(item) {
+        if (state.currentLanguage === 'en') {
+            return item.titleEn || item.titleId || '';
+        }
+
+        return item.titleId || item.titleEn || '';
+    }
+
+    function isExternal(item) {
+        return item.external === true || /^https?:\/\//i.test(item.href || '');
+    }
+
+    // Extra attributes for external links: new tab + safe rel + tooltip
+    function buildLinkAttrs(item) {
+        if (!isExternal(item)) return '';
+        const title = getNavigationTitle(item);
+        return ` target="_blank" rel="noopener noreferrer"${title ? ` title="${escapeHtml(title)}"` : ''}`;
+    }
+
     function escapeHtml(value) {
         return String(value || '')
             .replace(/&/g, '&amp;')
@@ -73,11 +92,11 @@
             return `
                 <a
                     href="${escapeHtml(item.href)}"
-                    class="nav-link"
+                    class="nav-link${isExternal(item) ? ' nav-link-external' : ''}"
                     data-nav-link
-                    data-section="${escapeHtml(item.id)}"
+                    data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}
                 >
-                    ${escapeHtml(getNavigationLabel(item))}
+                    <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>${isExternal(item) ? `<i class="ph ${escapeHtml(item.icon || 'ph-arrow-up-right')} nav-link-icon" aria-hidden="true"></i>` : ''}
                 </a>
             `;
         }).join('');
@@ -90,10 +109,10 @@
                     href="${escapeHtml(item.href)}"
                     class="mobile-nav-link"
                     data-mobile-nav-link
-                    data-section="${escapeHtml(item.id)}"
+                    data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}
                 >
-                    <span>${escapeHtml(getNavigationLabel(item))}</span>
-                    <i class="ph ph-arrow-right"></i>
+                    <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>
+                    <i class="ph ${isExternal(item) ? 'ph-arrow-square-out' : 'ph-arrow-right'}" aria-hidden="true"></i>
                 </a>
             `;
         }).join('');
@@ -146,11 +165,11 @@
                         </div>
                     </a>
 
-                    <nav class="hidden items-center gap-3 lg:flex" aria-label="Main navigation">
+                    <nav class="hidden items-center gap-3 xl:flex" aria-label="Main navigation">
                         ${buildDesktopNav()}
                     </nav>
 
-                    <div class="hidden items-center gap-2 lg:flex">
+                    <div class="hidden items-center gap-2 xl:flex">
                         <button
                             type="button"
                             id="language-toggle"
@@ -177,7 +196,7 @@
                     <button
                         type="button"
                         id="mobile-menu-button"
-                        class="icon-button lg:hidden"
+                        class="icon-button xl:hidden"
                         aria-label="Open menu"
                         aria-controls="mobile-menu"
                         aria-expanded="false"
@@ -187,7 +206,7 @@
                 </div>
             </div>
 
-            <div id="mobile-menu" class="fixed inset-0 z-[60] hidden lg:hidden" aria-hidden="true">
+            <div id="mobile-menu" class="fixed inset-0 z-[60] hidden xl:hidden" aria-hidden="true">
                 <button
                     type="button"
                     id="mobile-menu-overlay"
@@ -269,6 +288,22 @@
                 </aside>
             </div>
         `;
+
+        hoistMobileMenu(header);
+    }
+
+    // The header uses backdrop-filter, which makes it the containing block for
+    // position:fixed descendants. Left inside, the full-screen drawer is clipped
+    // to the header height (128px). Move it to <body> so inset-0 = viewport.
+    function hoistMobileMenu(header) {
+        const menu = header.querySelector(SELECTORS.mobileMenu);
+        if (!menu) return;
+
+        document.querySelectorAll(`body > ${SELECTORS.mobileMenu}`).forEach(function (stale) {
+            stale.remove();
+        });
+
+        document.body.appendChild(menu);
     }
 
     function renderFloatingWhatsapp() {
@@ -338,7 +373,7 @@
                         <h3 class="text-sm font-bold uppercase tracking-wider text-white">Navigation</h3>
                         <div class="mt-4 grid gap-2 text-sm">
                             ${NAVIGATION.map(function (item) {
-                                return `<a href="${escapeHtml(item.href)}" class="footer-link">${escapeHtml(getNavigationLabel(item))}</a>`;
+                                return `<a href="${escapeHtml(item.href)}" class="footer-link" data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}><span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span></a>`;
                             }).join('')}
                         </div>
                     </div>
@@ -447,6 +482,19 @@
         });
     }
 
+    function updateNavigationLabels() {
+        NAVIGATION.forEach(function (item) {
+            const label = getNavigationLabel(item);
+            const title = isExternal(item) ? getNavigationTitle(item) : '';
+
+            document.querySelectorAll(`[data-section="${item.id}"]`).forEach(function (link) {
+                const labelEl = link.querySelector('[data-nav-label]');
+                if (labelEl) labelEl.textContent = label;
+                if (title) link.setAttribute('title', title);
+            });
+        });
+    }
+
     function setActiveNavLink(sectionId) {
         if (!sectionId) return;
 
@@ -513,12 +561,13 @@
     }
 
     function bindLanguageEvents() {
-        document.addEventListener('jerco:language-changed', function () {
+        // language.js dispatches on window (not document). Update labels in place:
+        // re-rendering the header would drop the click handlers that language.js
+        // and theme.js bind directly on the toggle buttons.
+        window.addEventListener('jerco:language-changed', function () {
             syncLanguageButtonLabels();
-            renderHeader();
-            renderFooter();
+            updateNavigationLabels();
             renderFloatingWhatsapp();
-            bindEventsAfterRender();
         });
     }
 

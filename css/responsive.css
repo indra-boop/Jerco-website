@@ -662,3 +662,16 @@
         text-decoration: underline;
     }
 }
+
+/* Compact desktop nav (1280–1439px) so 7 items fit beside the oversized logo.
+   Below 1280px the header switches to the mobile menu (xl breakpoint in navigation.js). */
+@media (min-width: 1280px) and (max-width: 1439px) {
+    .site-header nav[aria-label="Main navigation"] {
+        gap: 2px;
+    }
+
+    .site-header .nav-link {
+        padding: 8px 10px;
+        font-size: 0.95rem;
+    }
+}

@@ -148,6 +148,16 @@
                 href: '#process'
             },
             {
+                id: 'schedule',
+                labelId: 'Jadwal',
+                labelEn: 'Schedule',
+                titleId: 'Jadwal siaran olahraga (buka di tab baru)',
+                titleEn: 'Sports broadcast schedule (opens in new tab)',
+                href: 'https://schedule.jerconetwork.com',
+                external: true,
+                icon: 'ph-arrow-up-right'
+            },
+            {
                 id: 'contact',
                 labelId: 'Kontak',
                 labelEn: 'Contact',

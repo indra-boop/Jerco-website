@@ -371,6 +371,22 @@
     color: var(--jerco-cyan);
 }
 
+/* External nav link (e.g. schedule.jerconetwork.com) */
+.nav-link-external {
+    gap: 4px;
+}
+
+.nav-link-icon {
+    font-size: 0.85em;
+    opacity: 0.7;
+    transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.nav-link-external:hover .nav-link-icon {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
 .nav-actions {
     display: flex;
     align-items: center;
@@ -739,4 +755,12 @@ select.form-input {
 .dark .glass-panel {
     border-color: rgba(30, 41, 59, 0.9);
     background: rgba(15, 23, 42, 0.58);
+}
+
+/* Hide floating WhatsApp while the mobile drawer is open (it covered the
+   language/theme buttons). body.overflow-hidden is set by openMobileMenu(). */
+body.overflow-hidden .floating-whatsapp {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
