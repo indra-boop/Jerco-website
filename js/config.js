@@ -69,9 +69,9 @@
             shortName: 'Jerco Digital Solusi',
             tagline: 'IT & Telecommunication Infrastructure Partner',
             description: 'IT Consulting, Network Infrastructure, Fiber Optic / OSP, CCTV, Cloud, DevOps, Technical Documentation, BOQ/RAB, KMZ/KML Route Analysis, Permit Support, and Project Coordination.',
-            logo: 'assets/images/logo-jerco.png',
-            logoDark: 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
-            favicon: 'assets/icons/favicon.png'
+            logo: '/assets/images/logo-jerco.png',
+            logoDark: '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
+            favicon: '/assets/icons/favicon.png'
         },
 
         contact: {
@@ -95,15 +95,15 @@
             storageKey: 'jerco-language',
             supported: ['id', 'en'],
             contentPath: {
-                id: 'data/content-id.json',
-                en: 'data/content-en.json'
+                id: '/data/content-id.json',
+                en: '/data/content-en.json'
             }
         },
 
         assets: {
             images: {
-                logo: 'assets/images/logo-jerco.png',
-                logoDark: 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
+                logo: '/assets/images/logo-jerco.png',
+                logoDark: '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
                 hero: 'assets/images/hero-bg.png',
                 profile: 'assets/images/profile.jpg',
                 projectIsp: 'assets/images/projects/project-isp.png',
@@ -133,7 +133,23 @@
                 id: 'services',
                 labelId: 'Layanan',
                 labelEn: 'Services',
-                href: '#services'
+                href: '#services',
+                children: [
+                    {
+                        id: 'services-overview',
+                        labelId: 'Semua Layanan',
+                        labelEn: 'All Services',
+                        href: '#services',
+                        icon: 'ph-squares-four'
+                    },
+                    {
+                        id: 'permits-licensing',
+                        labelId: 'Perizinan & Lisensi',
+                        labelEn: 'Permits & Licensing',
+                        href: '/services/permits-licensing',
+                        icon: 'ph-stamp'
+                    }
+                ]
             },
             {
                 id: 'portfolio',
