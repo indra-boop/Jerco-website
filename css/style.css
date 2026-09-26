@@ -11,6 +11,10 @@
     --jerco-blue-dark: #082032;
     --jerco-cyan: #1BA0D7;
     --jerco-orange: #F97316;
+    /* Small accent text (eyebrow, step numbers). Jerco brand azure-700 =
+       --jerco-link, Color System v1.2 PROVISIONAL. >=5.4:1 on white, slate-50
+       and cyan-tinted chips; #1BA0D7 was 2.5-3.0:1 (fails WCAG AA). */
+    --color-accent-text: #0F62A0;
 
     --color-bg: #f8fafc;
     --color-surface: #ffffff;
@@ -36,6 +40,7 @@
     --jerco-blue-dark: #07111f;
     --jerco-cyan: #38bdf8;
     --jerco-orange: #f59e0b;
+    --color-accent-text: #67e8f9;
 
     --color-bg: #07111f;
     --color-surface: #0e1b2f;
@@ -159,7 +164,7 @@ button {
     align-items: center;
     gap: 8px;
     margin-bottom: 14px;
-    color: var(--jerco-cyan);
+    color: var(--color-accent-text);
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -263,7 +268,7 @@ html.dark .bg-radial-jerco {
     margin-bottom: 18px;
     border-radius: 16px;
     background: rgba(27, 160, 215, 0.12);
-    color: var(--jerco-cyan);
+    color: var(--color-accent-text);
     font-size: 0.95rem;
     font-weight: 900;
 }

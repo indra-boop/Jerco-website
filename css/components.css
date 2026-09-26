@@ -907,7 +907,7 @@ body.overflow-hidden .floating-whatsapp {
 }
 
 .mobile-nav-group-label.is-active {
-    color: var(--jerco-cyan);
+    color: var(--color-accent-text);
 }
 
 .mobile-nav-sublink {

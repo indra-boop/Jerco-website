@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Jerco Digital Solusi - sitemap.
+  URLs must match each page's <link rel="canonical">.
+  If the server redirects /services/permits-licensing to a trailing-slash URL
+  (or the reverse), update this file and the page canonical together.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://www.jerconetwork.com/</loc>
+        <lastmod>2026-09-27</lastmod>
+    </url>
+    <url>
+        <loc>https://www.jerconetwork.com/services/permits-licensing</loc>
+        <lastmod>2026-09-27</lastmod>
+    </url>
+</urlset>
