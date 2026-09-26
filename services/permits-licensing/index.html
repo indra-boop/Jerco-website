@@ -134,7 +134,15 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Commercial Licensing",
-              "description": "Assistance and coordination for commercial content licensing and related usage permissions."
+              "description": "Assistance and coordination for commercial content licensing and related usage permissions, including sports public viewing for venues."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sports Public Viewing License Assistance",
+              "description": "Assistance for venues seeking commercial public viewing licenses for live sports from rights holders or their authorized distributors, plus technical setup of receivers, IPTV, and TV distribution."
             }
           }
         ]
@@ -300,10 +308,14 @@
                     <article class="card service-card permit-card">
                         <i class="ph ph-certificate service-icon" aria-hidden="true"></i>
                         <h3 data-i18n="permitsPage.card8Title">Commercial Licensing</h3>
-                        <p data-i18n="permitsPage.card8">Assistance and coordination for commercial content licensing and related usage permissions.</p>
+                        <p data-i18n="permitsPage.card8">Assistance and coordination for commercial content licensing and related usage permissions, including sports public viewing for venues.</p>
                         <a href="https://wa.me/6282237650909?text=Halo%20Jerco%2C%20saya%20ingin%20konsultasi%20Permit%20%26%20Licensing%20Assistance%3A%20Commercial%20Licensing." target="_blank" rel="noopener noreferrer" class="permit-card-link">
                             <span data-i18n="permitsPage.cardCta">Request consultation</span><span class="sr-only">: </span><span class="sr-only" data-i18n="permitsPage.card8Title">Commercial Licensing</span>
                             <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a href="#sports-public-viewing" class="permit-card-more">
+                            <span data-i18n="permitsPage.card8More">Sports public viewing details</span>
+                            <i class="ph ph-arrow-down" aria-hidden="true"></i>
                         </a>
                     </article>
                 </div>
@@ -312,14 +324,76 @@
                     <i class="ph ph-info" aria-hidden="true"></i>
                     <div>
                         <h2 id="permit-notice-title" class="permit-notice-title" data-i18n="permitsPage.noticeTitle">Assistance, not issuance</h2>
-                        <p data-i18n="permitsPage.noticeText">Jerco provides permit assistance and regulatory coordination. Permits and licenses are issued only by the competent authorities. Approval, requirements, fees, and processing times are determined by each authority and may vary by location and project.</p>
+                        <p data-i18n="permitsPage.noticeText">Jerco provides permit assistance and regulatory coordination. Permits and licenses are issued only by the competent authorities or, for commercial content, by the rights holders. Approval, requirements, fees, and processing times are determined by each issuer and may vary by location and project.</p>
                     </div>
                 </aside>
             </div>
         </section>
 
+        <!-- Sports public viewing (commercial licensing detail) -->
+        <section id="sports-public-viewing" class="section-padding bg-slate-50 dark:bg-slate-900" aria-labelledby="sports-public-viewing-title">
+            <div class="container-custom">
+                <div class="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
+                    <div>
+                        <p class="section-eyebrow" data-i18n="permitsPage.pvEyebrow">Commercial Licensing</p>
+                        <h2 id="sports-public-viewing-title" class="section-title" data-i18n="permitsPage.pvTitle">Sports public viewing licenses</h2>
+                        <p class="section-description" data-i18n="permitsPage.pvIntro">Showing live sports such as the Premier League, AFL, or NRL to guests in a bar, restaurant, hotel, villa, or beach club is a commercial public viewing. It generally requires a commercial license from the rights holder or its authorized distributor, separate from a home or personal subscription.</p>
+
+                        <p class="pv-chips-label" id="pv-chips-label" data-i18n="permitsPage.pvChipsLabel">Example competitions</p>
+                        <ul class="pv-chips" aria-labelledby="pv-chips-label">
+                            <li>Premier League</li>
+                            <li>AFL</li>
+                            <li>NRL</li>
+                            <li class="pv-chip-more" data-i18n="permitsPage.pvChipMore">and other competitions</li>
+                        </ul>
+                        <p class="pv-availability" data-i18n="permitsPage.pvAvailability">Commercial rights, terms, and fees differ by competition, season, and territory, and are set by the rights holder.</p>
+
+                        <a href="https://wa.me/6282237650909?text=Halo%20Jerco%2C%20saya%20ingin%20konsultasi%20lisensi%20public%20viewing%20olahraga%20%28mis.%20Premier%20League%20/%20AFL%20/%20NRL%29%20untuk%20venue%20saya." target="_blank" rel="noopener noreferrer" class="btn-primary mt-8">
+                            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+                            <span data-i18n="permitsPage.pvCta">Ask about public viewing licenses</span>
+                        </a>
+                    </div>
+
+                    <div class="card pv-help">
+                        <h3 data-i18n="permitsPage.pvHelpTitle">How we help your venue</h3>
+                        <ol class="pv-steps">
+                            <li class="pv-step">
+                                <i class="ph ph-list-magnifying-glass" aria-hidden="true"></i>
+                                <div>
+                                    <h4 data-i18n="permitsPage.pv1Title">Scope your screening needs</h4>
+                                    <p data-i18n="permitsPage.pv1Text">List the competitions you want to show, venue type, capacity, and number of screens.</p>
+                                </div>
+                            </li>
+                            <li class="pv-step">
+                                <i class="ph ph-address-book" aria-hidden="true"></i>
+                                <div>
+                                    <h4 data-i18n="permitsPage.pv2Title">Identify the right licensor</h4>
+                                    <p data-i18n="permitsPage.pv2Text">Find the rights holder or authorized distributor for commercial viewing of each competition in Indonesia.</p>
+                                </div>
+                            </li>
+                            <li class="pv-step">
+                                <i class="ph ph-file-text" aria-hidden="true"></i>
+                                <div>
+                                    <h4 data-i18n="permitsPage.pv3Title">Application support</h4>
+                                    <p data-i18n="permitsPage.pv3Text">Prepare venue data and supporting documents, and follow up the application with the licensor.</p>
+                                </div>
+                            </li>
+                            <li class="pv-step">
+                                <i class="ph ph-monitor-play" aria-hidden="true"></i>
+                                <div>
+                                    <h4 data-i18n="permitsPage.pv4Title">Technical setup</h4>
+                                    <p data-i18n="permitsPage.pv4Text">Set up receivers, IPTV, and TV distribution so licensed content reaches every screen in the venue.</p>
+                                </div>
+                            </li>
+                        </ol>
+                        <p class="pv-disclaimer" data-i18n="permitsPage.pvDisclaimer">Jerco is not a broadcaster, rights holder, or official distributor, and is not affiliated with the leagues, organizers, or broadcasters mentioned. Competition names are trademarks of their respective owners.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- How We Assist -->
-        <section id="how-we-assist" class="section-padding bg-slate-50 dark:bg-slate-900" aria-labelledby="how-we-assist-title">
+        <section id="how-we-assist" class="section-padding bg-white dark:bg-slate-950" aria-labelledby="how-we-assist-title">
             <div class="container-custom">
                 <div class="mx-auto max-w-3xl text-center">
                     <p class="section-eyebrow" data-i18n="permitsPage.processEyebrow">How We Assist</p>
@@ -373,7 +447,7 @@
         </section>
 
         <!-- CTA: Contact Our Team -->
-        <section id="permits-contact" class="section-padding bg-white dark:bg-slate-950" aria-labelledby="permits-contact-title">
+        <section id="permits-contact" class="section-padding bg-slate-50 dark:bg-slate-900" aria-labelledby="permits-contact-title">
             <div class="container-custom">
                 <div class="card permit-cta">
                     <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">

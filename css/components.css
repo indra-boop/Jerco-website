@@ -1092,3 +1092,125 @@ body.overflow-hidden .floating-whatsapp {
 #permits-contact {
     scroll-margin-top: 140px;
 }
+
+/* Permits page: sports public viewing section */
+.permit-card-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    width: fit-content;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.permit-card-more:hover,
+.permit-card-more:focus-visible {
+    color: var(--jerco-blue);
+}
+
+.dark .permit-card-more:hover,
+.dark .permit-card-more:focus-visible {
+    color: var(--jerco-cyan);
+}
+
+.pv-chips-label {
+    margin-top: 28px;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.pv-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.pv-chips li {
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.pv-chips .pv-chip-more {
+    border-style: dashed;
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.pv-availability {
+    margin-top: 14px;
+    color: var(--color-muted);
+    font-size: 0.925rem;
+    line-height: 1.7;
+}
+
+.pv-help h3 {
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.pv-help:hover {
+    transform: none;
+}
+
+.pv-steps {
+    display: grid;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.pv-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.pv-step > i {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(27, 160, 215, 0.12);
+    color: var(--color-accent-text);
+    font-size: 1.3rem;
+}
+
+.pv-step h4 {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.pv-step p {
+    margin-top: 4px;
+    color: var(--color-muted);
+    line-height: 1.65;
+}
+
+.pv-disclaimer {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    line-height: 1.65;
+}
+
+#sports-public-viewing {
+    scroll-margin-top: 140px;
+}
