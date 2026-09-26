@@ -31,6 +31,7 @@
         mobileMenuOverlay: '#mobile-menu-overlay',
         mobileMenuClose: '#mobile-menu-close',
         navLink: '[data-nav-link]',
+        dropdown: '[data-nav-dropdown]',
         mobileNavLink: '[data-mobile-nav-link]'
     };
 
@@ -59,6 +60,55 @@
         return item.labelId || item.labelEn || item.id;
     }
 
+    function getNavigationTitle(item) {
+        if (state.currentLanguage === 'en') {
+            return item.titleEn || item.titleId || '';
+        }
+
+        return item.titleId || item.titleEn || '';
+    }
+
+    function isExternal(item) {
+        return item.external === true || /^https?:\/\//i.test(item.href || '');
+    }
+
+    function getChildren(item) {
+        return Array.isArray(item.children) ? item.children : [];
+    }
+
+    // All nav items incl. children, flattened (for label updates).
+    function getAllNavItems() {
+        return NAVIGATION.reduce(function (all, item) {
+            return all.concat([item], getChildren(item));
+        }, []);
+    }
+
+    // Sub-pages declare their menu position on <body>:
+    // <body data-nav-active="permits-licensing" data-nav-parent="services">
+    function getPageNavContext() {
+        const body = document.body || { dataset: {} };
+        return {
+            active: body.dataset.navActive || '',
+            parent: body.dataset.navParent || ''
+        };
+    }
+
+    // On sub-pages, homepage anchors (#services) must point back to "/#services".
+    function resolveHref(href) {
+        const value = String(href || '');
+        if (value.charAt(0) === '#' && getPageNavContext().active) {
+            return '/' + value;
+        }
+        return value;
+    }
+
+    // Extra attributes for external links: new tab + safe rel + tooltip
+    function buildLinkAttrs(item) {
+        if (!isExternal(item)) return '';
+        const title = getNavigationTitle(item);
+        return ` target="_blank" rel="noopener noreferrer"${title ? ` title="${escapeHtml(title)}"` : ''}`;
+    }
+
     function escapeHtml(value) {
         return String(value || '')
             .replace(/&/g, '&amp;')
@@ -68,33 +118,91 @@
             .replace(/'/g, '&#039;');
     }
 
-    function buildDesktopNav() {
-        return NAVIGATION.map(function (item) {
-            return `
+    function buildDesktopLink(item) {
+        return `
                 <a
-                    href="${escapeHtml(item.href)}"
-                    class="nav-link"
+                    href="${escapeHtml(resolveHref(item.href))}"
+                    class="nav-link${isExternal(item) ? ' nav-link-external' : ''}"
                     data-nav-link
-                    data-section="${escapeHtml(item.id)}"
+                    data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}
                 >
-                    ${escapeHtml(getNavigationLabel(item))}
+                    <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>${isExternal(item) ? `<i class="ph ${escapeHtml(item.icon || 'ph-arrow-up-right')} nav-link-icon" aria-hidden="true"></i>` : ''}
                 </a>
             `;
+    }
+
+    // Disclosure dropdown (button + list of links), not an ARIA menu.
+    function buildDesktopDropdown(item) {
+        const menuId = `nav-submenu-${escapeHtml(item.id)}`;
+        const children = getChildren(item).map(function (child) {
+            return `
+                        <a
+                            href="${escapeHtml(resolveHref(child.href))}"
+                            class="nav-dropdown-link"
+                            data-nav-link
+                            data-section="${escapeHtml(child.id)}"${buildLinkAttrs(child)}
+                        >
+                            ${child.icon ? `<i class="ph ${escapeHtml(child.icon)}" aria-hidden="true"></i>` : ''}
+                            <span data-nav-label>${escapeHtml(getNavigationLabel(child))}</span>
+                        </a>`;
+        }).join('');
+
+        return `
+                <div class="nav-dropdown" data-nav-dropdown>
+                    <button
+                        type="button"
+                        class="nav-link nav-dropdown-toggle"
+                        data-nav-link
+                        data-section="${escapeHtml(item.id)}"
+                        aria-expanded="false"
+                        aria-controls="${menuId}"
+                    >
+                        <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>
+                        <i class="ph ph-caret-down nav-dropdown-caret" aria-hidden="true"></i>
+                    </button>
+                    <div id="${menuId}" class="nav-dropdown-menu">${children}
+                    </div>
+                </div>
+            `;
+    }
+
+    function buildDesktopNav() {
+        return NAVIGATION.map(function (item) {
+            return getChildren(item).length ? buildDesktopDropdown(item) : buildDesktopLink(item);
         }).join('');
     }
 
+    function buildMobileLink(item, isChild) {
+        return `
+                <a
+                    href="${escapeHtml(resolveHref(item.href))}"
+                    class="mobile-nav-link${isChild ? ' mobile-nav-sublink' : ''}"
+                    data-mobile-nav-link
+                    data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}
+                >
+                    ${isChild && item.icon ? `<i class="ph ${escapeHtml(item.icon)}" aria-hidden="true"></i>` : ''}
+                    <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>
+                    <i class="ph ${isExternal(item) ? 'ph-arrow-square-out' : 'ph-arrow-right'}" aria-hidden="true"></i>
+                </a>
+            `;
+    }
+
+    // Mobile: parent heading + children always expanded (no hidden taps).
     function buildMobileNav() {
         return NAVIGATION.map(function (item) {
+            const children = getChildren(item);
+            if (!children.length) return buildMobileLink(item, false);
+
             return `
-                <a
-                    href="${escapeHtml(item.href)}"
-                    class="mobile-nav-link"
-                    data-mobile-nav-link
-                    data-section="${escapeHtml(item.id)}"
-                >
-                    <span>${escapeHtml(getNavigationLabel(item))}</span>
-                    <i class="ph ph-arrow-right"></i>
-                </a>
+                <div class="mobile-nav-group" role="group" aria-labelledby="mobile-group-${escapeHtml(item.id)}">
+                    <span
+                        id="mobile-group-${escapeHtml(item.id)}"
+                        class="mobile-nav-group-label"
+                        data-mobile-nav-link-group
+                        data-section="${escapeHtml(item.id)}"
+                    ><span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span></span>
+                    ${children.map(function (child) { return buildMobileLink(child, true); }).join('')}
+                </div>
             `;
         }).join('');
     }
@@ -103,8 +211,8 @@
         const header = document.querySelector(SELECTORS.header);
         if (!header) return;
 
-        const logo = BRAND.logo || 'assets/images/logo-jerco.png';
-        const logoDark = BRAND.logoDark || 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
+        const logo = BRAND.logo || '/assets/images/logo-jerco.png';
+        const logoDark = BRAND.logoDark || '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
         const brandName = BRAND.shortName || BRAND.legalName || 'Jerco Digital Solusi';
 
         header.className = 'site-header sticky top-0 z-50 bg-white/85 backdrop-blur-xl transition-all dark:bg-slate-950/85';
@@ -112,7 +220,7 @@
         header.innerHTML = `
             <div class="container-custom">
                 <div class="flex h-32 items-center justify-between gap-4">
-                    <a href="#hero" class="flex min-w-0 items-center gap-3" aria-label="${escapeHtml(brandName)} home">
+                    <a href="${escapeHtml(resolveHref('#hero'))}" class="flex min-w-0 items-center gap-3" aria-label="${escapeHtml(brandName)} home">
                         <div class="flex h-12 shrink-0 items-center justify-center">
                             <span class="logo-sweep block dark:hidden">
                                 <img
@@ -146,11 +254,11 @@
                         </div>
                     </a>
 
-                    <nav class="hidden items-center gap-3 lg:flex" aria-label="Main navigation">
+                    <nav class="hidden items-center gap-3 xl:flex" aria-label="Main navigation">
                         ${buildDesktopNav()}
                     </nav>
 
-                    <div class="hidden items-center gap-2 lg:flex">
+                    <div class="hidden items-center gap-2 xl:flex">
                         <button
                             type="button"
                             id="language-toggle"
@@ -177,7 +285,7 @@
                     <button
                         type="button"
                         id="mobile-menu-button"
-                        class="icon-button lg:hidden"
+                        class="icon-button xl:hidden"
                         aria-label="Open menu"
                         aria-controls="mobile-menu"
                         aria-expanded="false"
@@ -187,7 +295,7 @@
                 </div>
             </div>
 
-            <div id="mobile-menu" class="fixed inset-0 z-[60] hidden lg:hidden" aria-hidden="true">
+            <div id="mobile-menu" class="fixed inset-0 z-[60] hidden xl:hidden" aria-hidden="true">
                 <button
                     type="button"
                     id="mobile-menu-overlay"
@@ -269,6 +377,22 @@
                 </aside>
             </div>
         `;
+
+        hoistMobileMenu(header);
+    }
+
+    // The header uses backdrop-filter, which makes it the containing block for
+    // position:fixed descendants. Left inside, the full-screen drawer is clipped
+    // to the header height (128px). Move it to <body> so inset-0 = viewport.
+    function hoistMobileMenu(header) {
+        const menu = header.querySelector(SELECTORS.mobileMenu);
+        if (!menu) return;
+
+        document.querySelectorAll(`body > ${SELECTORS.mobileMenu}`).forEach(function (stale) {
+            stale.remove();
+        });
+
+        document.body.appendChild(menu);
     }
 
     function renderFloatingWhatsapp() {
@@ -297,8 +421,8 @@
         if (!footer) return;
 
         const brandName = BRAND.legalName || BRAND.shortName || 'CV Jerco Digital Solusi';
-        const logo = BRAND.logo || 'assets/images/logo-jerco.png';
-        const logoDark = BRAND.logoDark || 'assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
+        const logo = BRAND.logo || '/assets/images/logo-jerco.png';
+        const logoDark = BRAND.logoDark || '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
         const email = CONTACT.email || '';
         const phone = CONTACT.phone || '';
         const whatsappUrl = CONTACT.whatsappUrl || '#contact';
@@ -337,8 +461,13 @@
                     <div>
                         <h3 class="text-sm font-bold uppercase tracking-wider text-white">Navigation</h3>
                         <div class="mt-4 grid gap-2 text-sm">
-                            ${NAVIGATION.map(function (item) {
-                                return `<a href="${escapeHtml(item.href)}" class="footer-link">${escapeHtml(getNavigationLabel(item))}</a>`;
+                            ${NAVIGATION.reduce(function (all, item) {
+                                // Footer: parent link, then children except ones pointing at the same href.
+                                return all.concat([item], getChildren(item).filter(function (child) {
+                                    return child.href !== item.href;
+                                }));
+                            }, []).map(function (item) {
+                                return `<a href="${escapeHtml(resolveHref(item.href))}" class="footer-link" data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}><span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span></a>`;
                             }).join('')}
                         </div>
                     </div>
@@ -447,15 +576,110 @@
         });
     }
 
-    function setActiveNavLink(sectionId) {
+    function updateNavigationLabels() {
+        getAllNavItems().forEach(function (item) {
+            const label = getNavigationLabel(item);
+            const title = isExternal(item) ? getNavigationTitle(item) : '';
+
+            document.querySelectorAll(`[data-section="${item.id}"]`).forEach(function (link) {
+                const labelEl = link.querySelector('[data-nav-label]');
+                if (labelEl) labelEl.textContent = label;
+                if (title) link.setAttribute('title', title);
+            });
+        });
+    }
+
+    // Marks the current section (home scroll-spy) or the current sub-page and its parent.
+    function setActiveNavLink(sectionId, parentId) {
         if (!sectionId) return;
 
-        const allLinks = document.querySelectorAll(`${SELECTORS.navLink}, ${SELECTORS.mobileNavLink}`);
+        const selector = `${SELECTORS.navLink}, ${SELECTORS.mobileNavLink}, [data-mobile-nav-link-group], #site-footer [data-section]`;
 
-        allLinks.forEach(function (link) {
-            const isActive = link.getAttribute('data-section') === sectionId;
-            link.classList.toggle('is-active', isActive);
+        document.querySelectorAll(selector).forEach(function (link) {
+            const section = link.getAttribute('data-section');
+            const isCurrent = section === sectionId;
+            link.classList.toggle('is-active', isCurrent || (!!parentId && section === parentId));
+
+            if (link.tagName === 'A') {
+                if (isCurrent && parentId) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            }
         });
+    }
+
+    function setDropdownOpen(dropdown, open) {
+        if (!dropdown) return;
+        const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+        dropdown.classList.toggle('is-open', open);
+        toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function bindDropdownEvents() {
+        document.querySelectorAll(SELECTORS.dropdown).forEach(function (dropdown) {
+            if (dropdown.dataset.dropdownBound === 'true') return;
+            dropdown.dataset.dropdownBound = 'true';
+
+            const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+            let closeTimer = null;
+
+            // A mouse user who hovered (menu already open) and then clicks should
+            // not close it; the first click after a hover-open keeps it open.
+            toggle?.addEventListener('click', function () {
+                const isOpen = dropdown.classList.contains('is-open');
+                const keepOpen = isOpen && dropdown.dataset.hoverOpened === 'true';
+                dropdown.dataset.hoverOpened = 'false';
+                setDropdownOpen(dropdown, keepOpen ? true : !isOpen);
+            });
+
+            // Hover opens only for real pointers (not touch emulation).
+            dropdown.addEventListener('pointerenter', function (event) {
+                if (event.pointerType !== 'mouse') return;
+                window.clearTimeout(closeTimer);
+                if (!dropdown.classList.contains('is-open')) {
+                    dropdown.dataset.hoverOpened = 'true';
+                }
+                setDropdownOpen(dropdown, true);
+            });
+
+            dropdown.addEventListener('pointerleave', function (event) {
+                if (event.pointerType !== 'mouse') return;
+                closeTimer = window.setTimeout(function () {
+                    dropdown.dataset.hoverOpened = 'false';
+                    setDropdownOpen(dropdown, false);
+                }, 180);
+            });
+
+            dropdown.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && dropdown.classList.contains('is-open')) {
+                    setDropdownOpen(dropdown, false);
+                    toggle?.focus();
+                }
+            });
+
+            dropdown.addEventListener('focusout', function (event) {
+                if (!dropdown.contains(event.relatedTarget)) {
+                    setDropdownOpen(dropdown, false);
+                }
+            });
+
+            dropdown.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    setDropdownOpen(dropdown, false);
+                });
+            });
+        });
+
+        if (!state.dropdownOutsideBound) {
+            state.dropdownOutsideBound = true;
+            document.addEventListener('click', function (event) {
+                document.querySelectorAll(`${SELECTORS.dropdown}.is-open`).forEach(function (dropdown) {
+                    if (!dropdown.contains(event.target)) setDropdownOpen(dropdown, false);
+                });
+            });
+        }
     }
 
     function initActiveSectionObserver() {
@@ -513,12 +737,13 @@
     }
 
     function bindLanguageEvents() {
-        document.addEventListener('jerco:language-changed', function () {
+        // language.js dispatches on window (not document). Update labels in place:
+        // re-rendering the header would drop the click handlers that language.js
+        // and theme.js bind directly on the toggle buttons.
+        window.addEventListener('jerco:language-changed', function () {
             syncLanguageButtonLabels();
-            renderHeader();
-            renderFooter();
+            updateNavigationLabels();
             renderFloatingWhatsapp();
-            bindEventsAfterRender();
         });
     }
 
@@ -545,12 +770,20 @@
     }
 
     function bindEventsAfterRender() {
+        const page = getPageNavContext();
+
         bindMobileMenuEvents();
+        bindDropdownEvents();
         bindSmoothScrollOffset();
         bindThemeProxyEvents();
         bindLanguageProxyEvents();
-        initActiveSectionObserver();
-        setActiveNavLink('home');
+
+        if (page.active) {
+            setActiveNavLink(page.active, page.parent);
+        } else {
+            initActiveSectionObserver();
+            setActiveNavLink('home');
+        }
     }
 
     function initNavigation() {

@@ -348,7 +348,12 @@
     }
 
     function updateMeta(content) {
-        const meta = content.meta || {};
+        // Sub-pages set <body data-i18n-meta="permitsPage.meta"> so the homepage
+        // meta never overwrites their own title/description.
+        const scopedMetaPath = document.body ? document.body.dataset.i18nMeta : '';
+        const meta = scopedMetaPath
+            ? getValueByPath(content, scopedMetaPath, {}) || {}
+            : (content.meta || {});
 
         if (meta.title) {
             document.title = meta.title;

@@ -371,6 +371,22 @@
     color: var(--jerco-cyan);
 }
 
+/* External nav link (e.g. schedule.jerconetwork.com) */
+.nav-link-external {
+    gap: 4px;
+}
+
+.nav-link-icon {
+    font-size: 0.85em;
+    opacity: 0.7;
+    transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.nav-link-external:hover .nav-link-icon {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
 .nav-actions {
     display: flex;
     align-items: center;
@@ -769,4 +785,462 @@ select.form-input {
 .dark .glass-panel {
     border-color: rgba(30, 41, 59, 0.9);
     background: rgba(15, 23, 42, 0.58);
+}
+
+/* Hide floating WhatsApp while the mobile drawer is open (it covered the
+   language/theme buttons). body.overflow-hidden is set by openMobileMenu(). */
+body.overflow-hidden .floating-whatsapp {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ---------- Nav: active state ----------
+   navigation.js toggles .is-active (existing CSS only styled .active). */
+.nav-link.is-active {
+    background: rgba(27, 160, 215, 0.1);
+    color: var(--jerco-blue);
+}
+
+.dark .nav-link.is-active {
+    color: var(--jerco-cyan);
+}
+
+/* ---------- Nav: Services dropdown (disclosure pattern) ---------- */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-toggle {
+    gap: 6px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.nav-dropdown-caret {
+    font-size: 0.8em;
+    transition: transform var(--transition-base);
+}
+
+.nav-dropdown.is-open .nav-dropdown-caret {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 70;
+    display: grid;
+    gap: 2px;
+    min-width: 240px;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-medium);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+}
+
+/* Hover bridge so the pointer can travel from button to panel. */
+.nav-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    inset: -10px 0 auto 0;
+    height: 10px;
+}
+
+.nav-dropdown.is-open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-dropdown-link i {
+    color: var(--jerco-cyan);
+    font-size: 1.15rem;
+}
+
+.nav-dropdown-link:hover,
+.nav-dropdown-link:focus-visible,
+.nav-dropdown-link.is-active {
+    background: rgba(27, 160, 215, 0.1);
+    color: var(--jerco-blue);
+}
+
+.dark .nav-dropdown-link:hover,
+.dark .nav-dropdown-link:focus-visible,
+.dark .nav-dropdown-link.is-active {
+    color: var(--jerco-cyan);
+}
+
+/* ---------- Mobile drawer links ---------- */
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.mobile-nav-link > .ph-arrow-right,
+.mobile-nav-link > .ph-arrow-square-out {
+    margin-left: auto;
+    color: var(--color-muted);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus-visible,
+.mobile-nav-link.is-active {
+    background: rgba(27, 160, 215, 0.1);
+    color: var(--jerco-blue);
+}
+
+.dark .mobile-nav-link:hover,
+.dark .mobile-nav-link:focus-visible,
+.dark .mobile-nav-link.is-active {
+    color: var(--jerco-cyan);
+}
+
+.mobile-nav-group {
+    display: grid;
+    gap: 2px;
+}
+
+.mobile-nav-group-label {
+    padding: 10px 12px 4px;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.mobile-nav-group-label.is-active {
+    color: var(--color-accent-text);
+}
+
+.mobile-nav-sublink {
+    margin-left: 12px;
+    border-left: 2px solid var(--color-border);
+    border-radius: 0 12px 12px 0;
+}
+
+.mobile-nav-sublink > i:first-child {
+    color: var(--jerco-cyan);
+}
+
+.footer-link.is-active {
+    color: var(--jerco-cyan);
+}
+
+/* ---------- Page: /services/permits-licensing ----------
+   Reuses .card/.service-card/.service-icon/.process-number; only layout glue here. */
+.permit-breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    color: rgba(226, 232, 240, 0.85);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.permit-breadcrumb li + li::before {
+    content: '/';
+    margin-right: 6px;
+    color: rgba(148, 163, 184, 0.9);
+}
+
+.permit-breadcrumb a {
+    color: rgba(226, 232, 240, 0.85);
+    text-decoration: underline;
+    text-decoration-color: rgba(148, 163, 184, 0.5);
+    text-underline-offset: 3px;
+}
+
+.permit-breadcrumb a:hover,
+.permit-breadcrumb a:focus-visible {
+    color: #ffffff;
+}
+
+.permit-breadcrumb [aria-current="page"] {
+    color: #ffffff;
+}
+
+/* Eyebrow on the dark hero needs a lighter tone than --jerco-cyan for contrast. */
+.permit-hero-eyebrow {
+    color: #67e8f9;
+}
+
+.permit-hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.permit-hero-chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 1px solid rgba(34, 211, 238, 0.18);
+    border-radius: var(--radius-md);
+    background: rgba(2, 6, 23, 0.58);
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    backdrop-filter: blur(12px);
+}
+
+.permit-hero-chips i {
+    color: #67e8f9;
+    font-size: 1.2rem;
+}
+
+.permit-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.permit-card p {
+    flex: 1 1 auto;
+}
+
+.permit-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    width: fit-content;
+    color: var(--jerco-blue);
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-radius: 8px;
+}
+
+.dark .permit-card-link {
+    color: var(--jerco-cyan);
+}
+
+.permit-card-link i {
+    transition: transform var(--transition-base);
+}
+
+.permit-card-link:hover i,
+.permit-card-link:focus-visible i,
+.permit-card:hover .permit-card-link i {
+    transform: translateX(4px);
+}
+
+.permit-card-link:hover span:first-child {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.permit-notice {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--jerco-cyan);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-muted);
+    line-height: 1.75;
+}
+
+.permit-notice > i {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--jerco-cyan);
+    font-size: 1.5rem;
+}
+
+.permit-notice-title {
+    margin-bottom: 4px;
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.permit-step h3 {
+    color: var(--color-text);
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.permit-step p {
+    margin-top: 10px;
+    color: var(--color-muted);
+    line-height: 1.7;
+}
+
+.permit-step-icon {
+    color: var(--jerco-cyan);
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+}
+
+.permit-cta {
+    padding: clamp(28px, 5vw, 56px);
+}
+
+.permit-cta:hover {
+    transform: none;
+}
+
+#main-content:focus {
+    outline: none;
+}
+
+/* Deep links land below the 128px sticky header. */
+#permit-services,
+#how-we-assist,
+#permits-contact {
+    scroll-margin-top: 140px;
+}
+
+/* Permits page: sports public viewing section */
+.permit-card-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    width: fit-content;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.permit-card-more:hover,
+.permit-card-more:focus-visible {
+    color: var(--jerco-blue);
+}
+
+.dark .permit-card-more:hover,
+.dark .permit-card-more:focus-visible {
+    color: var(--jerco-cyan);
+}
+
+.pv-chips-label {
+    margin-top: 28px;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.pv-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.pv-chips li {
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.pv-chips .pv-chip-more {
+    border-style: dashed;
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.pv-availability {
+    margin-top: 14px;
+    color: var(--color-muted);
+    font-size: 0.925rem;
+    line-height: 1.7;
+}
+
+.pv-help h3 {
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.pv-help:hover {
+    transform: none;
+}
+
+.pv-steps {
+    display: grid;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.pv-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.pv-step > i {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(27, 160, 215, 0.12);
+    color: var(--color-accent-text);
+    font-size: 1.3rem;
+}
+
+.pv-step h4 {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.pv-step p {
+    margin-top: 4px;
+    color: var(--color-muted);
+    line-height: 1.65;
+}
+
+.pv-disclaimer {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    line-height: 1.65;
+}
+
+#sports-public-viewing {
+    scroll-margin-top: 140px;
 }

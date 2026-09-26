@@ -119,6 +119,9 @@
     }
 
     function initMetaFromConfig() {
+        // Page ships its own static SEO meta (see language.js updateMeta).
+        if (document.body && document.body.dataset.i18nMeta) return;
+
         const title = getConfig('seo.title', getConfig('brand.legalName', 'CV Jerco Digital Solusi'));
         const description = getConfig('seo.description', getConfig('brand.description', ''));
         const keywords = getConfig('seo.keywords', []);
