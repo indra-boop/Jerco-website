@@ -146,7 +146,7 @@
                         id: 'permits-licensing',
                         labelId: 'Perizinan & Lisensi',
                         labelEn: 'Permits & Licensing',
-                        href: '/services/permits-licensing',
+                        href: '/services/permits-licensing/',
                         icon: 'ph-stamp'
                     }
                 ]
