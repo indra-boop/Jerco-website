@@ -675,3 +675,24 @@
         font-size: 0.95rem;
     }
 }
+
+/* Roles comparison: keep horizontal scroll; tighten cells on small screens */
+@media (max-width: 768px) {
+    .roles-table {
+        min-width: 640px;
+    }
+
+    .roles-table th,
+    .roles-table td {
+        padding: 12px 12px;
+        font-size: 0.85rem;
+    }
+
+    .roles-reuse {
+        padding: 1rem 1.1rem;
+    }
+
+    .hero-service-card-cta {
+        font-size: 0.68rem;
+    }
+}
