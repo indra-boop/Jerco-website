@@ -529,6 +529,36 @@
     background: rgba(27, 160, 215, 0.18);
 }
 
+/* Linked service card (external tool, e.g. Sports Schedule) */
+.service-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.service-card-link:focus-visible {
+    outline: 2px solid var(--jerco-cyan);
+    outline-offset: 3px;
+}
+
+.service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    color: var(--jerco-blue);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.dark .service-link {
+    color: var(--jerco-cyan);
+}
+
+.service-card-link:hover .service-link {
+    text-decoration: underline;
+}
+
 /* ---------- Process Cards ---------- */
 #process .card h3 {
     margin: 0;

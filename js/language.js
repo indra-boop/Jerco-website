@@ -88,7 +88,10 @@
                 item5Title: 'Technical Documentation',
                 item5Text: 'Technical report, BOQ/RAB, as-plan/as-built support, dan project documentation.',
                 item6Title: 'KMZ/KML Route Analysis',
-                item6Text: 'Route mapping, distance calculation, point marking, dan route data untuk permit support.'
+                item6Text: 'Route mapping, distance calculation, point marking, dan route data untuk permit support.',
+                item7Title: 'Sports Schedule',
+                item7Text: 'Dashboard jadwal siaran olahraga live untuk bar, hotel, dan venue, update otomatis.',
+                item7Link: 'Buka schedule.jerconetwork.com'
             },
             portfolio: {
                 badge: 'Portfolio',
@@ -177,7 +180,10 @@
                 item5Title: 'Technical Documentation',
                 item5Text: 'Technical report, BOQ/RAB, as-plan/as-built support, and project documentation.',
                 item6Title: 'KMZ/KML Route Analysis',
-                item6Text: 'Route mapping, distance calculation, point marking, and permit-supporting route data.'
+                item6Text: 'Route mapping, distance calculation, point marking, and permit-supporting route data.',
+                item7Title: 'Sports Schedule',
+                item7Text: 'Live sports broadcast schedule dashboard for bars, hotels, and venues, updated automatically.',
+                item7Link: 'Open schedule.jerconetwork.com'
             },
             portfolio: {
                 badge: 'Portfolio',
