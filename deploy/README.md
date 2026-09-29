@@ -50,7 +50,7 @@ Canonical SoT snippet (copy when rebuilding the VPS): [`nginx-www-snippet.conf`]
 |---|---|
 | Branded 404 | `error_page 404 /404.html` + `try_files … @www404` → status **404**, body `404.html`. Direct `/404.html` stays **200**. |
 | Hide version | `server_tokens off;` → `Server: nginx` |
-| Security headers (HTTPS www) | `X-Frame-Options`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy` (geo/mic/cam off), `HSTS` `max-age=31536000; includeSubDomains`. **No blocking CSP** until WWW-08 (CDN Tailwind/Fonts). |
+| Security headers (HTTPS www) | `X-Frame-Options`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy` (geo/mic/cam off), `HSTS` `max-age=31536000; includeSubDomains`. **No blocking CSP** yet (Geist Google Fonts + Phosphor unpkg remain; Tailwind CDN removed in WWW-08). |
 | Apex → www | `https://jerconetwork.com/*` and `http://(www.)jerconetwork.com/*` → **301** `https://www.jerconetwork.com$request_uri` |
 
 ```bash
@@ -79,3 +79,16 @@ Hero + portfolio images ship as WebP (PNG kept on disk as `<picture>` fallback).
 | `assets/images/projects/project-dashboard.webp` | 800 KB |
 
 Encode with `cwebp -q 75..85` (prefer quality tweak before resize). Logo/favicons stay PNG.
+
+
+## Tailwind CSS (WWW-08 self-host)
+
+Production serves the **committed** purged build `css/tailwind.built.css` (zero-build on VPS).
+Rebuild locally after changing HTML/JS utility classes or `tailwind.config.js`:
+
+```bash
+npm install
+npm run build:css   # writes css/tailwind.built.css
+```
+
+Commit the updated `css/tailwind.built.css` with the source change. Sync excludes `node_modules/`, `package.json`, `package-lock.json`, `tailwind.config.js`, and `css/tailwind.input.css`.

@@ -1,0 +1,12 @@
+{
+  "name": "jerco-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CV Jerco Digital Solusi static website",
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.built.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

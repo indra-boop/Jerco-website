@@ -32,6 +32,8 @@ RSYNC_OPTS=(-rlpt --checksum --delete --delete-excluded
   "--chown=$WEB_OWNER" "--chmod=D755,F644"
   --exclude=.git/ --exclude=.github/ --exclude=deploy/
   --exclude=CLAUDE.md --exclude=README.md --exclude=.gitattributes --exclude=.gitignore
+  --exclude=node_modules/ --exclude=package.json --exclude=package-lock.json
+  --exclude=tailwind.config.js --exclude=css/tailwind.input.css
   "--filter=P .htaccess" "--filter=P index.nginx-debian.html" "--filter=P .well-known/")
 
 log() { echo "[jerco-website-sync] $*"; }
