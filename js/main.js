@@ -14,7 +14,7 @@
 | - Do not put API keys in this file.
 | - Keep feature-specific logic in its own file when possible.
 | - main.js should run after config.js, navigation.js, theme.js,
-|   language.js, and ai-assistant.js.
+|   language.js.
 */
 
 (function () {

@@ -282,21 +282,6 @@
             }
         ]
     },
-    "aiAssistant": {
-        "badge": "AI Assistant",
-        "title": "AI Assistant for Project & Business Workflow",
-        "subtitle": "Initial placeholder for Jerco’s digital assistant feature. Backend/API can be developed in the next phase.",
-        "description": "This feature is prepared to support task summaries, WhatsApp/email drafts, pending tracking, BOQ analysis, and project documentation. API keys must not be stored in the frontend.",
-        "inputPlaceholder": "Type your request, example: summarize today’s project pending list...",
-        "buttonText": "Send Question",
-        "disclaimer": "AI Assistant is still a placeholder. For production, use a secure backend/API endpoint.",
-        "quickPrompts": [
-            "Summarize today’s project pending list",
-            "Create a WhatsApp follow-up draft for vendor",
-            "Analyze fiber optic BOQ requirements",
-            "Create a technical documentation QC checklist"
-        ]
-    },
     "contact": {
         "badge": "Contact",
         "title": "Discuss Your Project Needs",
