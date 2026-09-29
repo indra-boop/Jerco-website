@@ -40,3 +40,18 @@ sudo bash install.sh uninstall                         # hapus timer/service/scr
 
 Commit yang rusak (JSON invalid / file inti hilang) ditolak: web root tidak diubah dan
 service berstatus failed (notifikasi email ikut `OnFailure` service `jerco-*` lain bila ada).
+
+## Nginx 404 (WWW-02 / optional WWW-03)
+
+Branded `404.html` lives at the web root. Direct `GET /404.html` should return **200**.
+
+Unknown paths still get nginx’s default 404 (and version leak) until this is wired.
+Code & PRs may apply it on this deploy **or** defer nginx wiring to WWW-03; the
+HTML file must exist either way.
+
+```nginx
+# Serve branded 404 body. Optional `=404` keeps the HTTP status 404
+# (without it, some nginx setups would 200 the error document).
+error_page 404 /404.html;
+# error_page 404 =404 /404.html;
+```
