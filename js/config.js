@@ -107,9 +107,9 @@
                 logoDark: '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg',
                 hero: 'assets/images/hero-bg.png',
                 profile: 'assets/images/profile.jpg',
-                projectIsp: 'assets/images/projects/project-isp.png',
-                projectCloud: 'assets/images/projects/project-cloud.png',
-                projectDashboard: 'assets/images/projects/project-dashboard.png'
+                projectIsp: 'assets/images/projects/project-isp.webp',
+                projectCloud: 'assets/images/projects/project-cloud.webp',
+                projectDashboard: 'assets/images/projects/project-dashboard.webp'
             },
             documents: {
                 companyProfile: 'assets/documents/company-profile.pdf',

@@ -204,7 +204,7 @@
                 "title": "Fiber Optic Route & OSP Documentation",
                 "category": "Fiber Optic / OSP",
                 "description": "Route survey, route analysis, BOQ, drawing support, and technical documentation for fiber optic network projects.",
-                "image": "assets/images/projects/project-isp.png",
+                "image": "assets/images/projects/project-isp.webp",
                 "tags": [
                     "Fiber Optic",
                     "OSP",
@@ -228,7 +228,7 @@
                 "title": "Cloud VPS & Website Deployment",
                 "category": "Cloud / DevOps",
                 "description": "VPS setup, domain, SSL, website deployment, backup, and basic monitoring for business needs.",
-                "image": "assets/images/projects/project-cloud.png",
+                "image": "assets/images/projects/project-cloud.webp",
                 "tags": [
                     "VPS",
                     "SSL",
@@ -240,7 +240,7 @@
                 "title": "Operational Dashboard & Tracking System",
                 "category": "Dashboard / Data",
                 "description": "Dashboards for progress monitoring, finance tracking, task lists, invoices, and operational data.",
-                "image": "assets/images/projects/project-dashboard.png",
+                "image": "assets/images/projects/project-dashboard.webp",
                 "tags": [
                     "Dashboard",
                     "Data",

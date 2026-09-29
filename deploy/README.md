@@ -66,3 +66,16 @@ curl -sI https://www.jerconetwork.com/          # 200, Server: nginx, headers + 
 curl -sI https://jerconetwork.com/              # 301 → https://www.jerconetwork.com/
 curl -sI https://www.jerconetwork.com/no-such   # 404 branded
 ```
+
+## Soft size gate (WWW-04 WebP)
+
+Hero + portfolio images ship as WebP (PNG kept on disk as `<picture>` fallback). Soft max bytes when regenerating:
+
+| Asset | Soft max |
+|---|---|
+| `assets/images/hero-network-background.webp` | 500 KB |
+| `assets/images/projects/project-isp.webp` | 500 KB |
+| `assets/images/projects/project-cloud.webp` | 500 KB |
+| `assets/images/projects/project-dashboard.webp` | 800 KB |
+
+Encode with `cwebp -q 75..85` (prefer quality tweak before resize). Logo/favicons stay PNG.
