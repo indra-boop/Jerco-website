@@ -41,17 +41,28 @@ sudo bash install.sh uninstall                         # hapus timer/service/scr
 Commit yang rusak (JSON invalid / file inti hilang) ditolak: web root tidak diubah dan
 service berstatus failed (notifikasi email ikut `OnFailure` service `jerco-*` lain bila ada).
 
-## Nginx 404 (WWW-02 / optional WWW-03)
+## Nginx (WWW-02 branded 404 + WWW-03 hardening)
 
-Branded `404.html` lives at the web root. Direct `GET /404.html` should return **200**.
+Live site conf: `/etc/nginx/sites-available/jerconetwork.com` on `jkt-jerconetwork`.
+Canonical SoT snippet (copy when rebuilding the VPS): [`nginx-www-snippet.conf`](./nginx-www-snippet.conf).
 
-Unknown paths still get nginx’s default 404 (and version leak) until this is wired.
-Code & PRs may apply it on this deploy **or** defer nginx wiring to WWW-03; the
-HTML file must exist either way.
+| Item | Behaviour |
+|---|---|
+| Branded 404 | `error_page 404 /404.html` + `try_files … @www404` → status **404**, body `404.html`. Direct `/404.html` stays **200**. |
+| Hide version | `server_tokens off;` → `Server: nginx` |
+| Security headers (HTTPS www) | `X-Frame-Options`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy` (geo/mic/cam off), `HSTS` `max-age=31536000; includeSubDomains`. **No blocking CSP** until WWW-08 (CDN Tailwind/Fonts). |
+| Apex → www | `https://jerconetwork.com/*` and `http://(www.)jerconetwork.com/*` → **301** `https://www.jerconetwork.com$request_uri` |
 
-```nginx
-# Serve branded 404 body. Optional `=404` keeps the HTTP status 404
-# (without it, some nginx setups would 200 the error document).
-error_page 404 /404.html;
-# error_page 404 =404 /404.html;
+```bash
+sudo cp /etc/nginx/sites-available/jerconetwork.com /var/backups/jerco-website/nginx-$(date -u +%Y%m%d%H%M%S).bak
+sudo cp deploy/nginx-www-snippet.conf /etc/nginx/sites-available/jerconetwork.com   # from a checkout, or paste
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Smoke:
+
+```bash
+curl -sI https://www.jerconetwork.com/          # 200, Server: nginx, headers + HSTS
+curl -sI https://jerconetwork.com/              # 301 → https://www.jerconetwork.com/
+curl -sI https://www.jerconetwork.com/no-such   # 404 branded
 ```
