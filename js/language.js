@@ -96,7 +96,7 @@
             portfolio: {
                 badge: 'Portfolio',
                 title: 'Kategori Project',
-                description: 'Kategori project dapat dikembangkan nanti dengan foto, case study, dokumen, atau link proposal.',
+                description: 'Beberapa kategori pekerjaan yang didukung Jerco Digital Solusi di bidang IT dan telekomunikasi.',
                 item1Title: 'ISP / Fiber Optic',
                 item1Text: 'OSP route, FO deployment, route analysis, dan technical support.',
                 item2Title: 'Cloud / Server',
@@ -115,13 +115,6 @@
                 step3Text: 'Koordinasi eksekusi lapangan, vendor, permit, dan progress instalasi.',
                 step4Title: 'Report',
                 step4Text: 'Deliver dokumentasi, progress report, dan handover support.'
-            },
-            ai: {
-                badge: 'AI Assistant',
-                title: 'Placeholder project assistant',
-                description: 'AI assistant dapat dihubungkan nanti melalui backend endpoint yang aman. API key tidak boleh diekspos di file frontend.',
-                placeholderTitle: 'AI Assistant Coming Soon',
-                placeholderText: 'Backend/API integration akan ditambahkan pada fase development berikutnya.'
             },
             contact: {
                 badge: 'Kontak',
@@ -188,7 +181,7 @@
             portfolio: {
                 badge: 'Portfolio',
                 title: 'Project Categories',
-                description: 'Selected project categories can be expanded later with photos, case studies, documents, or proposal links.',
+                description: 'Selected work categories supported by Jerco Digital Solusi across IT and telecommunication projects.',
                 item1Title: 'ISP / Fiber Optic',
                 item1Text: 'OSP route, FO deployment, route analysis, and technical support.',
                 item2Title: 'Cloud / Server',
@@ -207,13 +200,6 @@
                 step3Text: 'Coordinate field execution, vendor, permit, and installation progress.',
                 step4Title: 'Report',
                 step4Text: 'Deliver documentation, progress report, and handover support.'
-            },
-            ai: {
-                badge: 'AI Assistant',
-                title: 'Project assistant placeholder',
-                description: 'AI assistant can be connected later through a secure backend endpoint. API keys must not be exposed in frontend files.',
-                placeholderTitle: 'AI Assistant Coming Soon',
-                placeholderText: 'Backend/API integration will be added in the next development phase.'
             },
             contact: {
                 badge: 'Contact',

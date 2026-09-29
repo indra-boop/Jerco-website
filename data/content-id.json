@@ -282,21 +282,6 @@
             }
         ]
     },
-    "aiAssistant": {
-        "badge": "AI Assistant",
-        "title": "AI Assistant untuk Project & Business Workflow",
-        "subtitle": "Placeholder awal untuk fitur asisten digital Jerco. Backend/API dapat dikembangkan pada tahap berikutnya.",
-        "description": "Fitur ini disiapkan untuk membantu summary task, draft WhatsApp/email, tracking pending, analisa BOQ, dan dokumentasi project. API key tidak boleh disimpan di frontend.",
-        "inputPlaceholder": "Tulis kebutuhan Anda, contoh: buat summary pending project hari ini...",
-        "buttonText": "Kirim Pertanyaan",
-        "disclaimer": "AI Assistant masih tahap placeholder. Untuk production, gunakan backend/API endpoint yang aman.",
-        "quickPrompts": [
-            "Buat summary pending project hari ini",
-            "Buat draft WhatsApp follow-up vendor",
-            "Analisa kebutuhan BOQ fiber optic",
-            "Buat checklist QC dokumentasi teknis"
-        ]
-    },
     "contact": {
         "badge": "Kontak",
         "title": "Diskusikan Kebutuhan Project Anda",

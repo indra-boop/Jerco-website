@@ -482,9 +482,8 @@
                     </div>
                 </div>
 
-                <div class="mt-10 flex flex-col gap-3 border-t border-slate-800 pt-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+                <div class="mt-10 border-t border-slate-800 pt-6 text-sm text-slate-500">
                     <p>© ${year} ${escapeHtml(brandName)}. All rights reserved.</p>
-                    <p>Built for clean, modular, responsive company profile website.</p>
                 </div>
             </div>
         `;
