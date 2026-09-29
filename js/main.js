@@ -96,6 +96,31 @@
         return Array.from(parent.querySelectorAll(selector));
     }
 
+    const SITE_ORIGIN = 'https://www.jerconetwork.com';
+
+    function toAbsoluteHttpsWww(value) {
+        if (!value) return '';
+
+        const raw = String(value).trim();
+        if (!raw) return '';
+
+        try {
+            const url = new URL(raw, SITE_ORIGIN + '/');
+            if (
+                url.hostname === 'jerconetwork.com' ||
+                url.hostname === 'www.jerconetwork.com' ||
+                url.hostname === ''
+            ) {
+                url.protocol = 'https:';
+                url.hostname = 'www.jerconetwork.com';
+            }
+            return url.href;
+        } catch (error) {
+            if (raw.charAt(0) === '/') return SITE_ORIGIN + raw;
+            return SITE_ORIGIN + '/' + raw.replace(/^\/+/, '');
+        }
+    }
+
     function setMetaTag(selector, attributeName, value) {
         if (!value) return;
 
@@ -125,8 +150,8 @@
         const title = getConfig('seo.title', getConfig('brand.legalName', 'CV Jerco Digital Solusi'));
         const description = getConfig('seo.description', getConfig('brand.description', ''));
         const keywords = getConfig('seo.keywords', []);
-        const websiteUrl = getConfig('contact.websiteUrl', '');
-        const ogImage = getConfig('brand.logo', '');
+        const websiteUrl = getConfig('seo.canonical', getConfig('contact.websiteUrl', SITE_ORIGIN + '/'));
+        const ogImage = getConfig('seo.ogImage', getConfig('brand.logo', SITE_ORIGIN + '/assets/images/logo-jerco.png'));
         const themeColor = getConfig('theme.metaColor', '#0F3C5C');
 
         if (title) document.title = title;
@@ -136,8 +161,8 @@
         setMetaTag('meta[name="theme-color"]', 'content', themeColor);
         setMetaTag('meta[property="og:title"]', 'content', title);
         setMetaTag('meta[property="og:description"]', 'content', description);
-        setMetaTag('meta[property="og:url"]', 'content', websiteUrl);
-        setMetaTag('meta[property="og:image"]', 'content', ogImage);
+        setMetaTag('meta[property="og:url"]', 'content', toAbsoluteHttpsWww(websiteUrl));
+        setMetaTag('meta[property="og:image"]', 'content', toAbsoluteHttpsWww(ogImage));
     }
 
     function initExternalLinks() {

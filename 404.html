@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found — Halaman tidak ditemukan. CV Jerco Digital Solusi.">
+    <meta name="author" content="CV Jerco Digital Solusi">
+    <meta name="theme-color" content="#0F3C5C">
+    <meta name="robots" content="noindex">
+
+    <title>Page not found | CV Jerco Digital Solusi</title>
+
+    <script>
+        if (
+            localStorage.getItem('color-theme') === 'dark' ||
+            (!('color-theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/config.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="icon" href="/assets/icons/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100">
+    <main class="flex min-h-screen items-center justify-center px-6 py-16">
+        <div class="mx-auto w-full max-w-lg text-center">
+            <a href="/" class="inline-flex items-center justify-center">
+                <img
+                    src="/assets/images/logo-jerco.png"
+                    alt="Jerco Digital Solusi"
+                    class="h-16 w-auto dark:hidden"
+                >
+                <img
+                    src="/assets/images/logo-jerco-dark-white-text-soft-shadow.svg"
+                    alt="Jerco Digital Solusi"
+                    class="hidden h-16 w-auto dark:inline"
+                >
+            </a>
+
+            <p class="mt-10 font-mono text-sm font-semibold tracking-[0.2em] text-slate-400 dark:text-slate-500">404</p>
+            <h1 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                Page not found
+            </h1>
+            <p class="mt-2 text-lg font-medium text-slate-600 dark:text-slate-300">
+                Halaman tidak ditemukan
+            </p>
+            <p class="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                The page you requested is not available.<br>
+                Halaman yang Anda cari tidak tersedia.
+            </p>
+
+            <div class="mt-8">
+                <a href="/" class="btn-primary">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back to home · Kembali ke beranda</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

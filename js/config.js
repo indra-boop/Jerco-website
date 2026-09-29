@@ -246,6 +246,8 @@
         seo: {
             title: 'CV Jerco Digital Solusi | IT & Telecommunication Infrastructure Partner',
             description: 'IT Consulting, Network Infrastructure, Fiber Optic / OSP, CCTV, Cloud, DevOps, Technical Documentation, BOQ/RAB, KMZ/KML Route Analysis, Permit Support, and Project Coordination.',
+            canonical: 'https://www.jerconetwork.com/',
+            ogImage: 'https://www.jerconetwork.com/assets/images/logo-jerco.png',
             keywords: [
                 'Jerco Digital Solusi',
                 'IT Consultant',
