@@ -137,6 +137,14 @@
                 href: '#process'
             },
             {
+                id: 'kantor',
+                labelId: 'Kantor',
+                labelEn: 'Office',
+                titleId: 'Kantor virtual agent',
+                titleEn: 'Virtual agent office',
+                href: '/kantor/'
+            },
+            {
                 id: 'schedule',
                 labelId: 'Jadwal',
                 labelEn: 'Schedule',
