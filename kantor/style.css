@@ -18,11 +18,55 @@ body{margin:0}
 .desk:hover .slab,.desk:focus-visible .slab{border-color:var(--action-primary)}
 .desk:hover .plate{color:var(--foreground)}
 .kj .desk:disabled{opacity:1}
+.kj .desk.empty:disabled{cursor:default}
 a{color:var(--action-primary)}a:hover{color:var(--action-primary-hover)}
 @keyframes kjpulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes kjstep{0%{transform:translateY(0) rotate(-2.5deg)}50%{transform:translateY(-0.45cqw) rotate(0deg)}100%{transform:translateY(0) rotate(2.5deg)}}
 @keyframes kjidle{0%,100%{transform:translateY(0)}50%{transform:translateY(-0.12cqw)}}
 .rig img{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.rig.has-sheet img{display:none}
+.sheet{position:absolute;left:0;top:0;width:100%;height:100%;display:block;background-repeat:no-repeat;background-size:400% 600%;background-position:0% 0%}
+.sh-do{background-image:url(/kantor/img/sheet/do.png)}
+.sh-ai{background-image:url(/kantor/img/sheet/ai.png)}
+.sh-base{background-image:url(/kantor/img/sheet/base.png)}
+.sh-au{background-image:url(/kantor/img/sheet/au.png)}
+.sh-gv{background-image:url(/kantor/img/sheet/gv.png)}
+.sh-sl{background-image:url(/kantor/img/sheet/sl.png)}
+.sh-hk{background-image:url(/kantor/img/sheet/hk.png)}
+.sh-se{background-image:url(/kantor/img/sheet/se.png)}
+.sh-bd{background-image:url(/kantor/img/sheet/bd.png)}
+.sh-rt{background-image:url(/kantor/img/sheet/rt.png)}
+.sh-fn{background-image:url(/kantor/img/sheet/fn.png)}
+.sh-ui{background-image:url(/kantor/img/sheet/ui.png)}
+.sheet.r0{background-position-y:0%}.sheet.r1{background-position-y:20%}.sheet.r2{background-position-y:40%}.sheet.r3{background-position-y:60%}.sheet.r4{background-position-y:80%}.sheet.r5{background-position-y:100%}
+.sheet.walk{animation:kjframes 0.64s steps(4) infinite}
+.sheet.type{animation:kjframes 1.8s steps(4) infinite}
+.sheet.still{background-position-x:33.333%}
+.sheet.r4,.sheet.r5{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 97%);mask-image:linear-gradient(to bottom,#000 80%,transparent 97%)}
+.rig.seated .legL,.rig.seated .legR{display:none}
+.rig.has-seat img,.rig.has-seat .sheet{display:none}
+.seat4{position:absolute;left:0;top:0;width:100%;height:100%;display:block;background-repeat:no-repeat;background-size:400% 100%}
+.seat4.c0{background-position:0% 0}.seat4.c1{background-position:33.333% 0}.seat4.c2{background-position:66.667% 0}.seat4.c3{background-position:100% 0}
+.st-do{background-image:url(/kantor/img/seat/do.png)}
+.st-ai{background-image:url(/kantor/img/seat/ai.png)}
+.st-base{background-image:url(/kantor/img/seat/base.png)}
+.st-au{background-image:url(/kantor/img/seat/au.png)}
+.st-gv{background-image:url(/kantor/img/seat/gv.png)}
+.st-sl{background-image:url(/kantor/img/seat/sl.png)}
+.st-hk{background-image:url(/kantor/img/seat/hk.png)}
+.st-se{background-image:url(/kantor/img/seat/se.png)}
+.st-bd{background-image:url(/kantor/img/seat/bd.png)}
+.st-rt{background-image:url(/kantor/img/seat/rt.png)}
+.st-fn{background-image:url(/kantor/img/seat/fn.png)}
+.st-ui{background-image:url(/kantor/img/seat/ui.png)}
+.st-ux{background-image:url(/kantor/img/seat/ux.png)}
+.st-sv{background-image:url(/kantor/img/seat/sv.png)}
+.st-pr{background-image:url(/kantor/img/seat/pr.png)}
+.st-rv{background-image:url(/kantor/img/seat/rv.png)}
+.sheet.seatside{clip-path:inset(0 0 45% 0);-webkit-mask-image:linear-gradient(to bottom,#000 41%,transparent 55%);mask-image:linear-gradient(to bottom,#000 41%,transparent 55%)}
+.zz{animation:kjzz 2.6s ease-in-out infinite}
+@keyframes kjzz{0%,100%{opacity:0.25}50%{opacity:1}}
+@keyframes kjframes{from{background-position-x:0%}to{background-position-x:133.333%}}
 .rig.walking .legL{animation:kjlegA 0.52s ease-in-out infinite}
 .rig.walking .legR{animation:kjlegB 0.52s ease-in-out infinite}
 .rig.walking .torso{animation:kjbob 0.52s linear infinite}
@@ -40,7 +84,7 @@ a{color:var(--action-primary)}a:hover{color:var(--action-primary-hover)}
 @keyframes kjglow{0%,100%{filter:brightness(1)}40%{filter:brightness(1.25)}70%{filter:brightness(0.9)}}
 .orbit,.orbit .desk{cursor:grab}
 .orbit.grabbing,.orbit.grabbing .desk{cursor:grabbing}
-@media (prefers-reduced-motion:reduce){.rig img,.dot,.screen-on,.typer,.pulse{animation:none !important}.agent{transition:opacity 300ms ease !important}}
+@media (prefers-reduced-motion:reduce){.rig img,.sheet,.zz,.dot,.screen-on,.typer,.pulse{animation:none !important}.agent{transition:opacity 300ms ease !important}}
 html,body{background:#131c2b}
 .kj a.navlink,.kj header a{text-decoration:none}
 @media (max-width:760px){
