@@ -5,7 +5,8 @@
   "description": "CV Jerco Digital Solusi static website",
   "scripts": {
     "build:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.built.css --minify",
-    "build:kantor": "esbuild kantor/src/app.js --bundle --minify --format=iife --target=es2018 --outfile=kantor/app.js"
+    "build:kantor": "esbuild kantor/src/app.js --bundle --minify --format=iife --target=es2018 --outfile=kantor/app.js",
+    "test:kantor-feed": "node --test tools/kantor-feed/"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17",
