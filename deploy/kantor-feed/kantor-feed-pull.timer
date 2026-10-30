@@ -1,0 +1,11 @@
+[Unit]
+Description=Pull /kantor/feed.json every 2 minutes
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+AccuracySec=15s
+Unit=kantor-feed-pull.service
+
+[Install]
+WantedBy=timers.target

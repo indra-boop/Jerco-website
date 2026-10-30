@@ -1,0 +1,14 @@
+[Unit]
+Description=Pull /kantor/feed.json from branch kantor-feed (indra-boop/Jerco-website)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/kantor-feed-pull
+Nice=10
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectHome=read-only
+ProtectSystem=strict
+ReadWritePaths=/opt/jerco-website /var/www/html/kantor /run
