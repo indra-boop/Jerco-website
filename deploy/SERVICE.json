@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "profile": "production",
+  "classification_basis": "README and deployment source; owner review pending",
+  "services": [
+    {
+      "id": "corporate-website",
+      "runtime": "Static HTML/CSS/JS served by nginx",
+      "entrypoint": "Committed static files; no server build",
+      "config_authority": "This repository deploy/; installed sync script must be reconciled separately",
+      "health_check": "HTTPS canonical homepage 200; unknown page 404; compare published file/artifact version",
+      "release_evidence": "Full source SHA, CI result and approval reference, artifact/config digests, runtime health and rollback point; missing evidence blocks release clearance",
+      "operational_owner": null,
+      "required_checks": [
+        "static-checks"
+      ],
+      "documentation": {
+        "architecture": "deploy/README.md",
+        "deployment": "deploy/README.md",
+        "runbook": "deploy/README.md",
+        "rollback": "deploy/README.md"
+      }
+    }
+  ]
+}
