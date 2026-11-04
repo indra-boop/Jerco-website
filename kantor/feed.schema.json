@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.jerconetwork.com/kantor/feed.schema.json",
+  "title": "Kantor Jerco live feed",
+  "description": "Public, sanitized summary shown on /kantor/. Summaries only: no phone numbers, emails, passwords, tokens, IPs, private repo names or financial amounts. Built by tools/kantor-feed/publish.mjs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["updated_at", "agents"],
+  "properties": {
+    "updated_at": { "type": "string", "format": "date-time", "description": "UTC. The page ignores the feed when this is more than 30 minutes old." },
+    "agents": {
+      "type": "array", "maxItems": 40,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Z]{2,3}$", "description": "Existing roster code in kantor/src/app.js (GK, PM, UX, UI, FN, AI, SL, ...). Unknown codes are ignored." },
+          "name": { "type": "string", "maxLength": 40 },
+          "role": { "type": "string", "maxLength": 40 },
+          "zone": { "type": "string", "enum": ["command", "studio", "commercial", "knowledge", "engineering", "trust", "field"], "description": "Informational; the floor plan keeps each code in its fixed zone." },
+          "status": { "type": "string", "enum": ["idle", "working", "waiting_decision", "alert"] },
+          "task_summary": { "type": "string", "maxLength": 120 },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "work": {
+      "type": "array", "maxItems": 20,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["title", "status"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 120 },
+          "owner_agent": { "type": "string", "pattern": "^[A-Z]{2,3}$" },
+          "status": { "type": "string", "maxLength": 24 },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "alerts": {
+      "type": "array", "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["level", "text"],
+        "properties": {
+          "level": { "type": "string", "enum": ["info", "warning", "critical"] },
+          "text": { "type": "string", "maxLength": 160 },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array", "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["title"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 120 },
+          "agent": { "type": "string", "pattern": "^[A-Z]{2,3}$" },
+          "since": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "servers": {
+      "type": "array", "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["name", "online"],
+        "properties": {
+          "name": { "type": "string", "maxLength": 40 },
+          "online": { "type": "boolean" },
+          "mem_pct": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+          "disk_pct": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+          "runners_total": { "type": "integer", "minimum": 0 },
+          "runners_busy": { "type": "integer", "minimum": 0 },
+          "runners_paused": { "type": "integer", "minimum": 0 },
+          "ai_up": { "type": ["boolean", "null"] }
+        }
+      }
+    }
+  }
+}

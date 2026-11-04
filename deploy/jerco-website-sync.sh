@@ -34,7 +34,9 @@ RSYNC_OPTS=(-rlpt --checksum --delete --delete-excluded
   --exclude=CLAUDE.md --exclude=README.md --exclude=.gitattributes --exclude=.gitignore
   --exclude=node_modules/ --exclude=package.json --exclude=package-lock.json
   --exclude=tailwind.config.js --exclude=css/tailwind.input.css
-  "--filter=P .htaccess" "--filter=P index.nginx-debian.html" "--filter=P .well-known/")
+  --exclude=tools/
+  "--filter=P .htaccess" "--filter=P index.nginx-debian.html" "--filter=P .well-known/"
+  "--filter=P kantor/feed.json")
 
 log() { echo "[jerco-website-sync] $*"; }
 die() { log "ERROR: $*"; exit 1; }

@@ -1,0 +1,28 @@
+{
+  "updated_at": "2026-10-30T07:30:00Z",
+  "agents": [
+    { "id": "GK", "name": "Grok", "role": "Koordinator", "zone": "command", "status": "working", "task_summary": "Merapikan server redundansi dan menyiapkan feed kantor.", "updated_at": "2026-10-30T07:30:00Z" },
+    { "id": "PM", "name": "Jerco Manager", "role": "Manajer proyek", "zone": "command", "status": "waiting_decision", "task_summary": "Menunggu keputusan pembagian kerja antar bot.", "updated_at": "2026-10-30T07:20:00Z" },
+    { "id": "UX", "name": "Jerco UX Designer", "role": "UX", "zone": "studio", "status": "idle", "updated_at": "2026-10-30T06:00:00Z" },
+    { "id": "UI", "name": "Jerco UI Designer", "role": "UI", "zone": "studio", "status": "working", "task_summary": "Revisi tampilan halaman harga partneraiku.", "updated_at": "2026-10-30T07:10:00Z" },
+    { "id": "AI", "name": "Jerco AI Engineer", "role": "AI", "zone": "engineering", "status": "working", "task_summary": "Uji model lokal untuk tugas ringan.", "updated_at": "2026-10-30T07:05:00Z" },
+    { "id": "DO", "name": "DevOps & Cloud", "role": "Server", "zone": "engineering", "status": "working", "task_summary": "Memantau 3 server runner.", "updated_at": "2026-10-30T07:15:00Z" },
+    { "id": "SL", "name": "Jerco Sales & Commercial", "role": "Sales", "zone": "commercial", "status": "idle", "updated_at": "2026-10-30T05:00:00Z" },
+    { "id": "FN", "name": "Finance", "role": "Admin & Finance", "zone": "commercial", "status": "alert", "task_summary": "Penyesuaian asumsi pajak di struktur harga.", "updated_at": "2026-10-30T06:40:00Z" }
+  ],
+  "work": [
+    { "title": "Pengatur beban runner di 3 server", "owner_agent": "DO", "status": "berjalan", "updated_at": "2026-10-30T07:15:00Z" },
+    { "title": "Struktur harga partneraiku", "owner_agent": "SL", "status": "review", "updated_at": "2026-10-30T06:30:00Z" }
+  ],
+  "alerts": [
+    { "level": "warning", "text": "Batas pemakaian mingguan hampir habis.", "updated_at": "2026-10-30T07:00:00Z" }
+  ],
+  "decisions": [
+    { "title": "Helper apa saja yang masuk paket Mulai", "agent": "SL", "since": "2026-10-30T06:30:00Z" }
+  ],
+  "servers": [
+    { "name": "Server CI & AI", "online": true, "mem_pct": 12, "disk_pct": 26, "runners_total": 23, "runners_busy": 0, "runners_paused": 0, "ai_up": true },
+    { "name": "Server Backup", "online": true, "mem_pct": 30, "disk_pct": 40, "runners_total": 10, "runners_busy": 1, "runners_paused": 0, "ai_up": null },
+    { "name": "Server Cadangan", "online": true, "mem_pct": 20, "disk_pct": 60, "runners_total": 12, "runners_busy": 0, "runners_paused": 0, "ai_up": null }
+  ]
+}
