@@ -1,0 +1,48 @@
+name: Apply Kantor UI patch
+
+on:
+  push:
+    branches:
+      - cursor/kantor-ui-audit-c85c
+    paths:
+      - .github/workflows/apply-kantor-patch.yml
+      - kantor/.patch-parts/**
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Apply patch and rebuild bundle
+        run: |
+          set -euo pipefail
+          if [ ! -d kantor/.patch-parts ]; then
+            echo "Patch parts already applied."
+            exit 0
+          fi
+          cat kantor/.patch-parts/??.b64 | tr -d '\n' | base64 -d > /tmp/kantor-ui.patch
+          echo "995add9a300456184db06fe4b035ae4482341eb323197c05000c1be57e82cd0a  /tmp/kantor-ui.patch" | sha256sum -c -
+          git apply --check /tmp/kantor-ui.patch
+          git apply /tmp/kantor-ui.patch
+          npm ci
+          npm run build:kantor
+          grep -q "Lantai hidup" kantor/app.js
+          grep -q "Putar otomatis" kantor/app.js
+          rm -rf kantor/.patch-parts
+          rm -f .github/workflows/apply-kantor-patch.yml
+          git config user.name "Indra Harmoyo"
+          git config user.email "indra@jerconetwork.com"
+          git add -A
+          git status --short
+          git commit -m "Fix Kantor floor labels, false controls, and mobile nav."
+          git push origin HEAD:cursor/kantor-ui-audit-c85c
