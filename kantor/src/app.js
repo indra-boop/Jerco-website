@@ -17,6 +17,8 @@ class Kantor extends Component {
     this.P = {};
     this.timers = [];
     this.liftUntil = {};
+    // live feed (/kantor/feed.json). null = no fresh feed, the hardcoded roster below is used.
+    this.feed = null; this.feedNames = {}; this.feedSummary = {}; this.feedSeen = {};
     var L = this.liftInner(0), door = L[L.length - 1];
     this.agents().forEach(function (a) {
       self.P[a[0]] = { floor: 7, x: door.x, y: door.y, dur: 0, walk: false, face: 1, fx: 0, fy: 1, vx: 0, vy: 0, show: false, place: 'out', busy: false, inner: L, spot: -1, rs: -1, hs: -1, trip: false, seated: false, seatOff: 0, ease: 'linear', bubbleUntil: 0 };
@@ -46,12 +48,20 @@ class Kantor extends Component {
     this.simT = setInterval(function () { self.tick(); }, 4200);
     this.bubT = setInterval(function () { self.chatter(); }, 2600);
     this.autoT = setInterval(function () { if (self.state.auto) self.setState({ spin: Math.round((self.state.spin + 0.9) * 10) / 10 }); }, 40);
+    this.loadFeed();
+    this.feedT = setInterval(function () { self.loadFeed(); }, 60000);
   }
   componentWillUnmount() {
-    clearInterval(this.clockT); clearInterval(this.simT); clearInterval(this.bubT); clearInterval(this.autoT);
+    clearInterval(this.clockT); clearInterval(this.simT); clearInterval(this.bubT); clearInterval(this.autoT); clearInterval(this.feedT); clearTimeout(this.syncT);
     this.timers.forEach(function (t) { clearTimeout(t); });
   }
+  // Roster: codes, zones and sprites are fixed by the floor plan. A fresh feed only overrides the display name
+  // and the work status of known codes (see kantor/feed.schema.json); unknown ids in the feed are ignored.
   agents() {
+    var names = this.feedNames || {};
+    return this.defaultAgents().map(function (a) { return names[a[0]] ? [a[0], names[a[0]], a[2], a[3]] : a; });
+  }
+  defaultAgents() {
     return [
       ['GK', 'Grok', 'command', 'kerja'], ['PM', 'Project Manager', 'command', 'kerja'], ['SA', 'Solution Architect', 'command', 'luar'],
       ['UX', 'UX Designer', 'studio', 'kerja'], ['UI', 'UI Designer', 'studio', 'luar'], ['SV', 'Social & Visual', 'studio', 'luar'],
@@ -205,13 +215,81 @@ class Kantor extends Component {
     this.forceUpdate();
     this.timers.push(setTimeout(function () { self.forceUpdate(); }, 2850));
   }
+  // ---- live feed ----
+  loadFeed() {
+    var self = this;
+    if (typeof fetch !== 'function') return;
+    fetch('/kantor/feed.json', { cache: 'no-store', credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { self.applyFeed(j); })
+      .catch(function () { self.applyFeed(null); });
+  }
+  // a feed is used only when it parses, has agents[] and updated_at is at most 30 minutes old
+  freshFeed(j) {
+    if (!j || typeof j !== 'object' || !Array.isArray(j.agents)) return null;
+    var t = Date.parse(j.updated_at);
+    if (!isFinite(t) || Date.now() - t > 30 * 60000 || t - Date.now() > 5 * 60000) return null;
+    return j;
+  }
+  clip(s, n) { s = typeof s === 'string' ? s.trim() : ''; return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+  applyFeed(raw) {
+    var self = this, j = this.freshFeed(raw), known = {}, names = {}, sum = {}, want = {};
+    this.defaultAgents().forEach(function (a) { known[a[0]] = a; want[a[0]] = a[3]; });
+    if (j) {
+      // live: agents not listed in the feed are idle (Lantai 8)
+      Object.keys(want).forEach(function (c) { want[c] = 'luar'; });
+      j.agents.forEach(function (a) {
+        if (!a || !known[a.id]) return;
+        var nm = self.clip(a.name, 40);
+        if (nm) names[a.id] = nm;
+        var ts = self.clip(a.task_summary, 120);
+        if (ts) sum[a.id] = ts;
+        want[a.id] = (a.status === 'working' || a.status === 'waiting_decision' || a.status === 'alert') ? 'kerja' : 'luar';
+      });
+    }
+    this.feed = j; this.feedNames = names; this.feedSummary = sum; this.want = want;
+    if (j && Array.isArray(j.work)) {
+      // new or changed work items go to the existing "Jejak langsung" log
+      var log = (this._log || this.state.log).slice(), seen = {};
+      j.work.slice(0, 20).forEach(function (w) {
+        if (!w) return;
+        var title = self.clip(w.title, 120), st = self.clip(w.status, 24), who = known[w.owner_agent] ? (names[w.owner_agent] || known[w.owner_agent][1]) : '';
+        if (!title) return;
+        var key = title + '|' + st + '|' + (w.owner_agent || '');
+        seen[key] = true;
+        if (self.feedSeen[key]) return;
+        var t = Date.parse(w.updated_at), hh = isFinite(t) ? new Date(t).toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hour12: false }) : self.hhmm();
+        log.unshift({ t: hh, text: (who ? who + ' · ' : '') + title + (st ? ' · ' + st : '') });
+      });
+      this.feedSeen = seen;
+      this._log = log.slice(0, 8);
+      this.setState({ log: this._log });
+    } else {
+      this.feedSeen = {};
+      this.forceUpdate();
+    }
+    this.syncStatus();
+  }
+  // walk agents to/from their desks until the floor matches the wanted status; busy agents are retried
+  syncStatus() {
+    var self = this, want = this.want || {}, pending = false;
+    clearTimeout(this.syncT);
+    Object.keys(want).forEach(function (c) {
+      if ((self._status || self.state.status)[c] === want[c]) return;
+      if (self.P[c].busy) { pending = true; return; }
+      self.toggle(c);
+    });
+    if (pending) this.syncT = setTimeout(function () { self.syncStatus(); }, 3000);
+  }
   agent(code) { return this.agents().filter(function (x) { return x[0] === code; })[0]; }
   zoneName(id) { return this.zones().filter(function (z) { return z.id === id; })[0].name; }
   hhmm() {
     return new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hour12: false });
   }
   addLog(text) {
-    this.setState({ log: [{ t: this.hhmm(), text: text }].concat(this.state.log).slice(0, 8) });
+    var log = [{ t: this.hhmm(), text: text }].concat(this._log || this.state.log).slice(0, 8);
+    this._log = log;
+    this.setState({ log: log });
   }
   walk(code, pts, done) {
     var self = this, p = this.P[code], i = 0;
@@ -296,7 +374,7 @@ class Kantor extends Component {
     var self = this, p = this.P[code];
     if (p.busy) return;
     var a = this.agent(code), zn = this.zoneName(a[2]);
-    var status = Object.assign({}, this.state.status), text;
+    var status = Object.assign({}, this._status || this.state.status), text;
     if (status[code] === 'kerja') {
       status[code] = 'luar';
       text = a[1] + ' selesai, naik lift ke Lantai 8 · ' + zn;
@@ -313,8 +391,12 @@ class Kantor extends Component {
       if (p.floor === 8) this.travel(code, 7, function () { self.go(code, self.D[code].inner, 'desk'); });
       else this.go(code, this.D[code].inner, 'desk');
     }
-    this.setState({ status: status, log: [{ t: this.hhmm(), text: text }].concat(this.state.log).slice(0, 8) });
+    // several toggles can run in one tick (feed sync): build on the not-yet-rendered state
+    var log = [{ t: this.hhmm(), text: text }].concat(this._log || this.state.log).slice(0, 8);
+    this._status = status; this._log = log;
+    this.setState({ status: status, log: log });
   }
+  componentDidUpdate() { this._status = null; this._log = null; }
   tick() {
     var sim = this.props.simulate ?? true;
     if (!sim) return;
@@ -562,7 +644,7 @@ class Kantor extends Component {
         click: function () { if (!p || self.state.mode === 'orbit') return; self.toggle(code); },
         btnClass: p ? 'desk' : 'desk empty',
         aria: p ? (on ? 'Selesaikan tugas ' : 'Tugaskan ') + p.name + ', meja ' + p.zoneName : 'Slot ekspansi ' + zoneName[sl.zone] + ', belum ada agent',
-        title: p ? p.name + (on ? ' · klik untuk selesaikan' : ' · klik untuk tugaskan') : 'Slot ekspansi · belum ada agent',
+        title: p ? p.name + (self.feedSummary[code] ? ' · ' + self.feedSummary[code] : (on ? ' · klik untuk selesaikan' : ' · klik untuk tugaskan')) : 'Slot ekspansi · belum ada agent',
         style: 'position: absolute; left: ' + sl.x.toFixed(2) + '%; top: ' + sl.y.toFixed(2) + '%; z-index: ' + Math.round((sl.y - 5) * 10) + '; width: 5cqw; height: 5cqw; transform: translate(-50%, -50%) translateZ(1px); transform-style: preserve-3d; padding: 0; border: 0; background: transparent; display: block;',
         unitStyle: 'position: absolute; inset: 0; transform-style: preserve-3d; transform: rotate(' + Rr + 'deg);',
         seatWrap: 'position: absolute; left: 50%; top: ' + seatTop + 'cqw; width: 0; height: 0; transform-style: preserve-3d; transform: translateZ(' + sZ + 'cqw);',
@@ -700,8 +782,12 @@ class Kantor extends Component {
       };
     });
     var clock = new Date(st.now).toLocaleTimeString('en-GB', MOB ? { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hour12: false } : { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    var FD = this.feed, gkSum = FD ? (this.feedSummary.GK || this.feedSummary.PM || '') : '';
+    var fdT = FD ? Date.parse(FD.updated_at) : NaN;
     return {
       theme: theme, clock: clock,
+      summaryText: gkSum || '[Ringkasan terbaru dari Grok tampil di sini]',
+      summaryUpdated: isFinite(fdT) ? 'Diperbarui ' + new Date(fdT).toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hour12: false }) : 'Diperbarui —',
       stats: { kerja: count('kerja'), rapat: nRapat + nHud, bergerak: count('bergerak') + count('lift'), l8: onL8, total: total, kosong: SLOTS - total },
       occupancyPct: pct, occupancyStyle: 'width: ' + pct + '%;', occupancyText: assignedN + ' dari ' + SLOTS + ' meja · ' + (SLOTS - total) + ' slot ekspansi',
       areas: areas, props: props, sleepers: sleepers, texts: texts, desks: desks, walkers: walkers, modes: modes, floors: floors, legend: legend, modeHint: modeHint,
@@ -838,8 +924,8 @@ class Kantor extends Component {
         <div style="flex: none; width: 52px; height: 52px; border-radius: 7px; background: var(--background); border: 1px solid var(--border); overflow: hidden;"><img src="/kantor/img/head/gk.png" alt="" width="50" height="50" style="display: block; width: 50px; height: 50px;" /></div>
         <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
           <h2 style="margin: 0; font-size: 14px; font-weight: 600;">Grok · ringkasan keputusan lantai</h2>
-          <p style="margin: 0; color: var(--foreground-muted);">[Ringkasan terbaru dari Grok tampil di sini]</p>
-          <span style="font-size: 12px; color: var(--foreground-subtle); font-family: 'Geist Mono', ui-monospace, monospace;">Diperbarui —</span>
+          <p style="margin: 0; color: var(--foreground-muted);">${v.summaryText}</p>
+          <span style="font-size: 12px; color: var(--foreground-subtle); font-family: 'Geist Mono', ui-monospace, monospace;">${v.summaryUpdated}</span>
         </div>
       </div>
     </section>

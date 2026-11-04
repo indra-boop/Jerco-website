@@ -1,0 +1,15 @@
+{
+  "server_names": { "host-a": "Server CI & AI", "host-b": "Server Backup", "host-c": "Server Cadangan" },
+  "agents": [
+    { "id": "GK", "name": "Grok", "role": "Koordinator", "zone": "command", "status": "working", "task_summary": "Merapikan server redundansi dan menyiapkan feed kantor." },
+    { "id": "PM", "name": "Jerco Manager", "role": "Manajer proyek", "zone": "command", "status": "waiting_decision", "task_summary": "Menunggu keputusan pembagian kerja antar bot." },
+    { "id": "UX", "name": "Jerco UX Designer", "zone": "studio", "status": "idle" },
+    { "id": "UI", "name": "Jerco UI Designer", "zone": "studio", "status": "working", "task_summary": "Revisi tampilan halaman harga." },
+    { "id": "AI", "name": "Jerco AI Engineer", "zone": "engineering", "status": "working", "task_summary": "Uji model lokal untuk tugas ringan." },
+    { "id": "SL", "name": "Jerco Sales & Commercial", "zone": "commercial", "status": "idle" },
+    { "id": "FN", "name": "Finance", "zone": "commercial", "status": "alert", "task_summary": "Penyesuaian asumsi pajak di struktur harga." }
+  ],
+  "work": [ { "title": "Pengatur beban runner di 3 server", "owner_agent": "DO", "status": "berjalan" } ],
+  "alerts": [ { "level": "warning", "text": "Batas pemakaian mingguan hampir habis." } ],
+  "decisions": [ { "title": "Helper apa saja yang masuk paket Mulai", "agent": "SL" } ]
+}

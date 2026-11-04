@@ -25,6 +25,7 @@ assets/                  logo, ikon, gambar hero dan portofolio
 services/, layanan/      halaman layanan
 kantor/                  Kantor Jerco (halaman statis + bundle Preact)
 deploy/                  skrip auto-deploy ke VPS (tidak dipublikasikan)
+tools/kantor-feed/       publisher feed /kantor/ (dijalankan dari box, tidak dipublikasikan)
 sitemap.xml, robots.txt  SEO
 ```
 
