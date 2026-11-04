@@ -34,15 +34,16 @@ jobs:
           echo "995add9a300456184db06fe4b035ae4482341eb323197c05000c1be57e82cd0a  /tmp/kantor-ui.patch" | sha256sum -c -
           git apply --check /tmp/kantor-ui.patch
           git apply /tmp/kantor-ui.patch
-          npm ci
+          npm install --no-audit --no-fund
           npm run build:kantor
           grep -q "Lantai hidup" kantor/app.js
           grep -q "Putar otomatis" kantor/app.js
           rm -rf kantor/.patch-parts
           rm -f .github/workflows/apply-kantor-patch.yml
+          git checkout -- package-lock.json
           git config user.name "Indra Harmoyo"
           git config user.email "indra@jerconetwork.com"
-          git add -A
+          git add -A -- kantor .github/workflows/apply-kantor-patch.yml
           git status --short
           git commit -m "Fix Kantor floor labels, false controls, and mobile nav."
           git push origin HEAD:cursor/kantor-ui-audit-c85c
