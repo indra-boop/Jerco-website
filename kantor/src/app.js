@@ -17,6 +17,7 @@ class Kantor extends Component {
     this.P = {};
     this.timers = [];
     this.liftUntil = {};
+    this.held = {};
     var L = this.liftInner(0), door = L[L.length - 1];
     this.agents().forEach(function (a) {
       self.P[a[0]] = { floor: 7, x: door.x, y: door.y, dur: 0, walk: false, face: 1, fx: 0, fy: 1, vx: 0, vy: 0, show: false, place: 'out', busy: false, inner: L, spot: -1, rs: -1, hs: -1, trip: false, seated: false, seatOff: 0, ease: 'linear', bubbleUntil: 0 };
@@ -29,11 +30,17 @@ class Kantor extends Component {
       if (k >= 0) self.placeIdle(a[0], k);
     });
     this.state = {
-      status: s, filter: 'lantai', query: '', shift: 'Pagi', floor: 7, mode: 'pick', spin: -20, tilt: 56, dragging: false, auto: false, now: Date.now(),
+      status: s, filter: 'lantai', query: '', floor: 7, mode: 'pick', spin: -20, tilt: 56, dragging: false, auto: false, now: Date.now(),
+      theme: props.theme || 'jerco-dark',
       log: [{ t: 'sekarang', text: 'Shift pagi turun dari Lantai 8 dan menuju meja masing-masing.' }]
     };
   }
-  mobile() { return false; }
+  mobile() {
+    return typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+  }
+  reduceMotion() {
+    return typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
   componentDidMount() {
     var self = this, i = 0;
     this.clockT = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
@@ -45,11 +52,22 @@ class Kantor extends Component {
     });
     this.simT = setInterval(function () { self.tick(); }, 4200);
     this.bubT = setInterval(function () { self.chatter(); }, 2600);
-    this.autoT = setInterval(function () { if (self.state.auto) self.setState({ spin: Math.round((self.state.spin + 0.9) * 10) / 10 }); }, 40);
+    this.autoT = setInterval(function () {
+      if (!self.state.auto || self.reduceMotion()) return;
+      self.setState({ spin: Math.round((self.state.spin + 0.9) * 10) / 10 });
+    }, 40);
+    this.mq = window.matchMedia('(max-width: 760px)');
+    this.onMq = function () { self.forceUpdate(); };
+    if (this.mq.addEventListener) this.mq.addEventListener('change', this.onMq);
+    else if (this.mq.addListener) this.mq.addListener(this.onMq);
   }
   componentWillUnmount() {
     clearInterval(this.clockT); clearInterval(this.simT); clearInterval(this.bubT); clearInterval(this.autoT);
     this.timers.forEach(function (t) { clearTimeout(t); });
+    if (this.mq && this.onMq) {
+      if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.onMq);
+      else if (this.mq.removeListener) this.mq.removeListener(this.onMq);
+    }
   }
   agents() {
     return [
@@ -299,6 +317,7 @@ class Kantor extends Component {
     var status = Object.assign({}, this.state.status), text;
     if (status[code] === 'kerja') {
       status[code] = 'luar';
+      delete self.held[code];
       text = a[1] + ' selesai, naik lift ke Lantai 8 · ' + zn;
       if (p.place === 'out') {
         // not on the floor yet (shift still arriving): stay upstairs
@@ -309,6 +328,7 @@ class Kantor extends Component {
       }
     } else {
       status[code] = 'kerja';
+      self.held[code] = true;
       text = a[1] + ' ditugaskan, turun ke Lantai 7 · ' + zn;
       if (p.floor === 8) this.travel(code, 7, function () { self.go(code, self.D[code].inner, 'desk'); });
       else this.go(code, this.D[code].inner, 'desk');
@@ -339,7 +359,7 @@ class Kantor extends Component {
     // Lantai 7: working agents step out to the war room or a stand-up at the huddle point
     var away = codes.filter(function (c) { return st[c] === 'kerja' && (P[c].trip || P[c].place === 'rapat' || P[c].place === 'huddle'); }).length;
     if (away >= 3) return;
-    var ready = codes.filter(function (c) { return st[c] === 'kerja' && !P[c].busy && P[c].place === 'desk'; });
+    var ready = codes.filter(function (c) { return st[c] === 'kerja' && !self.held[c] && !P[c].busy && P[c].place === 'desk'; });
     if (!ready.length) return;
     var c = ready[Math.floor(Math.random() * ready.length)], p = P[c], a = this.agent(c), free, k;
     if (Math.random() < 0.55) {
@@ -364,12 +384,10 @@ class Kantor extends Component {
   }
   renderVals() {
     var self = this, st = this.state, P = this.P, MOB = this.mobile(), F = st.floor;
-    var theme = this.props.theme ?? 'jerco-dark';
+    var theme = st.theme || (this.props.theme ?? 'jerco-dark');
     var HD = this.heads(), FG = this.figures(), M = this.metrics(), BK = this.backs(), SH = this.sheets(), TP = this.tops(), NOW = Date.now();
     var SEG_ON = 'background: var(--surface-raised); color: var(--foreground); box-shadow: 0 0 0 1px var(--border-strong);';
     var SEG_OFF = 'background: transparent; color: var(--foreground-muted); box-shadow: none;';
-    var CHIP_ON = 'background: var(--action-primary); color: var(--action-primary-foreground); border: 1px solid var(--action-primary);';
-    var CHIP_OFF = 'background: var(--surface); color: var(--foreground-muted); border: 1px solid var(--border);';
     var KIND = { pantry: 'pantry', sofa: 'lounge', pod: 'standby', booth: 'phone booth' };
     var zones = this.zones(), zoneName = {}, zoneIdx = {};
     zones.forEach(function (z, i) { zoneName[z.id] = z.name; zoneIdx[z.id] = i; });
@@ -396,7 +414,7 @@ class Kantor extends Component {
     var total = people.length, SLOTS = this.SL.length;
     var count = function (k) { return people.filter(function (p) { return p.ds === k; }).length; };
     var assignedN = people.filter(function (p) { return p.assigned; }).length;
-    var pct = Math.round(assignedN / SLOTS * 100);
+    var pct = total ? Math.round(assignedN / total * 100) : 0;
     var nRapat = count('rapat'), nHud = count('huddle');
     var onL8 = people.filter(function (p) { return P[p.code].floor === 8; }).length;
     var occKind = function (kind) {
@@ -558,11 +576,11 @@ class Kantor extends Component {
       if (SK) { sW = 5.49; sH = 6.8; sZ = dside ? 0.2 : (away ? 1.0 : 2.4); seatTop = away ? 4.6 : 4.0; seatTilt = 90 - 0.15 * (90 - st.tilt); }
       var dl = ((idx * 0.37) % 2.6).toFixed(2);
       return {
-        label: p ? p.name : 'Slot ekspansi', busy: !p || p.busy,
+        label: p ? p.name : 'Slot ekspansi', busy: !p || p.busy || st.mode === 'orbit',
         click: function () { if (!p || self.state.mode === 'orbit') return; self.toggle(code); },
         btnClass: p ? 'desk' : 'desk empty',
         aria: p ? (on ? 'Selesaikan tugas ' : 'Tugaskan ') + p.name + ', meja ' + p.zoneName : 'Slot ekspansi ' + zoneName[sl.zone] + ', belum ada agent',
-        title: p ? p.name + (on ? ' · klik untuk selesaikan' : ' · klik untuk tugaskan') : 'Slot ekspansi · belum ada agent',
+        title: !p ? 'Slot ekspansi · belum ada agent' : (st.mode === 'orbit' ? 'Mode putar. Kembali ke Tugaskan untuk mengklik meja.' : p.name + (on ? ' · klik untuk selesaikan' : ' · klik untuk tugaskan')),
         style: 'position: absolute; left: ' + sl.x.toFixed(2) + '%; top: ' + sl.y.toFixed(2) + '%; z-index: ' + Math.round((sl.y - 5) * 10) + '; width: 5cqw; height: 5cqw; transform: translate(-50%, -50%) translateZ(1px); transform-style: preserve-3d; padding: 0; border: 0; background: transparent; display: block;',
         unitStyle: 'position: absolute; inset: 0; transform-style: preserve-3d; transform: rotate(' + Rr + 'deg);',
         seatWrap: 'position: absolute; left: 50%; top: ' + seatTop + 'cqw; width: 0; height: 0; transform-style: preserve-3d; transform: translateZ(' + sZ + 'cqw);',
@@ -576,7 +594,7 @@ class Kantor extends Component {
         top: code ? TP[code] : TP.GK, topClass: atDesk ? 'typer' : '',
         topStyle: 'position: absolute; left: 50%; top: 1.6cqw; width: 2.6cqw; height: 2.6cqw; margin-left: -1.3cqw; display: block; image-rendering: pixelated; transform-origin: 50% 60%; transform: translateZ(2.6cqw); transition: opacity 300ms ease; opacity: ' + (atDesk && !is3d ? 1 : 0) + '; animation-delay: -' + dl + 's;',
         bubbleStyle: 'position: absolute; right: -0.5cqw; top: -0.9cqw; z-index: 3; padding: 0.3cqw 0.45cqw; gap: 0.22cqw; align-items: center; border-radius: 0.7cqw 0.7cqw 0.12cqw 0.7cqw; background: var(--surface-raised); border: 1px solid var(--border); display: ' + ((atDesk && !is3d && NOW < pp.bubbleUntil) ? 'flex' : 'none') + ';',
-        plateStyle: 'position: absolute; left: 50%; top: calc(100% + 0.1cqw); transform: translateX(-50%); display: ' + (is3d ? 'none' : 'block') + '; max-width: 5.4cqw; padding: 0.05cqw 0.35cqw; border-radius: 0.25cqw; font-size: ' + (MOB ? '10px' : 'max(10px, 0.72cqw)') + '; line-height: 1.3; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ' + (on ? 'color: var(--foreground); background: var(--surface);' : 'color: var(--foreground-muted); background: transparent;')
+        plateStyle: 'position: absolute; left: 50%; top: calc(100% + 0.35cqw); transform-origin: 50% 0; transform: translateX(-50%) rotateZ(' + (-st.spin) + 'deg) rotateX(' + (-st.tilt) + 'deg); transition: ' + smooth + '; display: ' + ((p || !is3d) ? 'block' : 'none') + '; max-width: 9cqw; padding: 0.12cqw 0.4cqw; border-radius: 0.25cqw; font-size: ' + (MOB ? '11px' : 'max(11px, 0.8cqw)') + '; line-height: 1.3; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ' + (p ? 'color: var(--foreground); background: var(--surface); border: 1px solid var(--border);' : 'color: var(--foreground-muted); background: transparent;')
       };
     });
 
@@ -658,7 +676,7 @@ class Kantor extends Component {
       return { label: f[1], sub: f[2] + ' · ' + n, pressed: on ? 'true' : 'false', style: on ? SEG_ON : SEG_OFF, pick: function () { self.setState({ floor: f[0] }); } };
     });
     var legend = (F === 7 ? [
-      ['Bekerja · layar menyala', 'border: 2px solid var(--status-success);'],
+      ['Di meja · layar menyala', 'border: 2px solid var(--status-success);'],
       ['Kursi kosong · agent di Lantai 8', 'border: 2px solid var(--border-strong);'],
       ['Slot ekspansi · belum ada agent', 'border: 2px dashed var(--border-strong);']
     ] : [
@@ -681,34 +699,22 @@ class Kantor extends Component {
       if (q && (p.name + ' ' + p.zoneName + ' ' + p.code).toLowerCase().indexOf(q) === -1) return false;
       return true;
     }).sort(function (a, b) { return (b.assigned - a.assigned) || (zoneIdx[a.zone] - zoneIdx[b.zone]); });
-    var filters = [['lantai', 'Lantai 7', assignedN], ['luar', 'Lantai 8', total - assignedN], ['semua', 'Semua', total]].map(function (f) {
+    var filters = [['lantai', 'Kerja', assignedN], ['luar', 'Istirahat', total - assignedN], ['semua', 'Semua', total]].map(function (f) {
       var on = st.filter === f[0];
       return { label: f[1], count: f[2], pressed: on ? 'true' : 'false', style: on ? SEG_ON : SEG_OFF, pick: function () { self.setState({ filter: f[0] }); } };
     });
-    var shifts = ['Pagi', 'Rilis', 'Lapangan', 'Trust'].map(function (n) {
-      var on = st.shift === n;
-      return { label: n, pressed: on ? 'true' : 'false', style: on ? (MOB ? CHIP_ON : SEG_ON) : (MOB ? CHIP_OFF : SEG_OFF), pick: function () { self.setState({ shift: n }); } };
-    });
-    var tabs = [['lantai', 'Lantai'], ['roster', 'Roster'], ['jejak', 'Jejak']].map(function (t) {
-      var on = st.tab === t[0];
-      return {
-        label: t[1], current: on ? 'page' : 'false',
-        isLantai: t[0] === 'lantai', isRoster: t[0] === 'roster', isJejak: t[0] === 'jejak',
-        labelStyle: on ? 'color: var(--foreground);' : 'color: var(--foreground-muted);',
-        pillStyle: on ? 'background: var(--action-primary); color: var(--action-primary-foreground);' : 'background: transparent; color: var(--foreground-muted);',
-        pick: function () { self.setState({ tab: t[0] }); }
-      };
-    });
     var clock = new Date(st.now).toLocaleTimeString('en-GB', MOB ? { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hour12: false } : { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    var grokClock = new Date(st.now).toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', hour12: false });
     return {
       theme: theme, clock: clock,
       stats: { kerja: count('kerja'), rapat: nRapat + nHud, bergerak: count('bergerak') + count('lift'), l8: onL8, total: total, kosong: SLOTS - total },
-      occupancyPct: pct, occupancyStyle: 'width: ' + pct + '%;', occupancyText: assignedN + ' dari ' + SLOTS + ' meja · ' + (SLOTS - total) + ' slot ekspansi',
+      occupancyPct: pct, occupancyStyle: 'width: ' + pct + '%;', occupancyColor: pct >= 50 ? 'var(--status-success)' : 'var(--status-warning)', occupancyText: assignedN + ' dari ' + total + ' peran · ' + (SLOTS - total) + ' slot ekspansi',
       areas: areas, props: props, sleepers: sleepers, texts: texts, desks: desks, walkers: walkers, modes: modes, floors: floors, legend: legend, modeHint: modeHint,
       floorTitle: F === 7 ? 'Jerco HQ · Lantai 7 · Command floor' : 'Jerco HQ · Lantai 8 · Pantry & rest',
-      floorDesc: F === 7 ? 'Agent duduk di meja hanya saat bekerja. Selesai task, naik lift ke Lantai 8.' : 'Agent idle menunggu di pantry. Idle lama pindah ke rest pod. Task masuk, turun ke Lantai 7.',
+      floorDesc: F === 7 ? 'Tujuh zona di command floor. Nama agent tetap terbaca saat denah diputar.' : 'Agent idle menunggu di pantry. Idle lama pindah ke rest pod. Task masuk, turun ke Lantai 7.',
       floorAria: F === 7 ? 'Denah Lantai 7, command floor' : 'Denah Lantai 8, pantry dan rest',
       floorStyle: floorStyle,
+      scrollClass: OR ? 'is-orbit' : '',
       viewClass: OR ? (st.dragging ? 'orbit grabbing' : 'orbit') : '',
       viewStyle: OR ? 'touch-action: none;' : '',
       onDown: function (e) {
@@ -728,12 +734,20 @@ class Kantor extends Component {
       orbitRight: function () { setView(st.spin + 45, st.tilt < 1 ? 50 : st.tilt); },
       viewTop: function () { setView(Math.round(st.spin / 360) * 360, 0); },
       view3d: function () { setView(Math.round(st.spin / 360) * 360 - 20, 56); },
-      toggleAuto: function () { self.setState({ auto: !st.auto, tilt: st.tilt < 1 ? 50 : st.tilt }); },
+      toggleAuto: function () { if (!st.auto && self.reduceMotion()) return; self.setState({ auto: !st.auto, tilt: st.tilt < 1 ? 50 : st.tilt }); },
       topPressed: isTop ? 'true' : 'false', topStyle: isTop ? SEG_ON : SEG_OFF,
       isoPressed: (!isTop && !st.auto) ? 'true' : 'false', isoStyle: (!isTop && !st.auto) ? SEG_ON : SEG_OFF,
       autoPressed: st.auto ? 'true' : 'false', autoStyle: st.auto ? SEG_ON : SEG_OFF,
-      roster: roster, noResults: roster.length === 0, filters: filters, shifts: shifts, tabs: tabs,
-      tabLantai: st.tab === 'lantai', tabRoster: st.tab === 'roster', tabJejak: st.tab === 'jejak',
+      roster: roster, noResults: roster.length === 0, filters: filters,
+      grokText: count('kerja') + ' di meja, ' + (nRapat + nHud) + ' di rapat, ' + (count('bergerak') + count('lift')) + ' bergerak, ' + onL8 + ' di Lantai 8.',
+      grokTime: 'Diperbarui ' + grokClock,
+      themeToggle: function () {
+        var next = self.state.theme === 'jerco-light' ? 'jerco-dark' : 'jerco-light';
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', next === 'jerco-light' ? '#f7f9fb' : '#131c2b');
+        self.setState({ theme: next });
+      },
+      autoDisabled: self.reduceMotion(),
       query: st.query, onSearch: function (e) { self.setState({ query: e.target.value }); },
       log: st.log
     };
@@ -761,7 +775,8 @@ class Kantor extends Component {
         <a class="navlink" href="#roster" style="padding: 8px 12px; border-radius: 5px; color: var(--foreground-muted); text-decoration: none; font-weight: 500;">Roster</a>
         <a class="navlink" href="#jejak" style="padding: 8px 12px; border-radius: 5px; color: var(--foreground-muted); text-decoration: none; font-weight: 500;">Jejak</a>
       </nav>
-      <div role="timer" aria-label="Waktu kantor" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--background);">
+      <button type="button" class="btn-line" aria-label=${v.theme === 'jerco-light' ? 'Ganti ke tema gelap' : 'Ganti ke tema terang'} onClick=${v.themeToggle} style="height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border-strong); background: transparent; color: var(--foreground); font-size: 13px; font-weight: 600;">${v.theme === 'jerco-light' ? 'Gelap' : 'Terang'}</button>
+      <div role="group" aria-label="Waktu kantor" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--background);">
         <span class="pulse" aria-hidden="true" style="width: 8px; height: 8px; border-radius: 999px; background: var(--status-success); animation: kjpulse 2s infinite;"></span>
         <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; font-weight: 600; letter-spacing: 0.02em;">${v.clock}</span>
         <span style="font-size: 12px; font-weight: 600; color: var(--foreground-muted);">WIB</span>
@@ -778,12 +793,12 @@ class Kantor extends Component {
         <p style="margin: 0; color: var(--foreground-muted); max-width: 560px;">Agent duduk di meja hanya saat bekerja. Selesai task, naik lift ke Lantai 8 untuk pantry dan rest pod.</p>
       </div>
       <div style="flex: 1 1 360px; max-width: 460px; display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; font-size: 13px;">
           <span style="font-weight: 500;">Okupansi meja</span>
           <span style="font-family: 'Geist Mono', ui-monospace, monospace; color: var(--foreground-muted);">${v.occupancyText}</span>
         </div>
         <div role="progressbar" aria-label="Okupansi meja" aria-valuemin="0" aria-valuemax="100" aria-valuenow=${v.occupancyPct} style="height: 8px; border-radius: 999px; background: var(--border); overflow: hidden;">
-          <div style="height: 100%; border-radius: 999px; background: var(--status-success); transition: width 400ms ease; ${v.occupancyStyle}"></div>
+          <div style="height: 100%; border-radius: 999px; background: ${v.occupancyColor}; transition: width 400ms ease; ${v.occupancyStyle}"></div>
         </div>
       </div>
     </section>
@@ -819,27 +834,20 @@ class Kantor extends Component {
       </div>
     </section>
 
-    <section aria-label="Shift dan ringkasan" style="display: flex; flex-wrap: wrap; gap: 16px;">
-      <div style="flex: 999 1 520px; min-width: 0; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); display: flex; flex-direction: column; gap: 14px;">
-        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="pulse" aria-hidden="true" style="width: 8px; height: 8px; border-radius: 999px; background: var(--status-success); animation: kjpulse 2s infinite;"></span>
-            <h2 style="margin: 0; font-size: 16px; font-weight: 700;">Shift langsung</h2>
-          </div>
-          <div role="group" aria-label="Pilih shift" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 7px; background: var(--background); border: 1px solid var(--border);">
-            ${v.shifts.map((s) => html`
-              <button class="seg" aria-pressed=${s.pressed} onClick=${s.pick} style="height: 36px; padding: 0 16px; border: 0; border-radius: 5px; font-size: 14px; font-weight: 600; ${s.style}">${s.label}</button>
-            `)}
-          </div>
+    <section aria-label="Ringkasan lantai" style="display: flex; flex-wrap: wrap; gap: 16px;">
+      <div style="flex: 999 1 520px; min-width: 0; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="pulse" aria-hidden="true" style="width: 8px; height: 8px; border-radius: 999px; background: var(--status-success); animation: kjpulse 2s infinite;"></span>
+          <h2 style="margin: 0; font-size: 16px; font-weight: 700;">Lantai hidup</h2>
         </div>
-        <p style="margin: 0; color: var(--foreground-muted);">Shift berjalan sendiri. Agent Active lebih sering naik. Yang kamu tugaskan tetap duduk sampai diselesaikan.</p>
+        <p style="margin: 0; color: var(--foreground-muted);">Simulasi menggerakkan agent yang belum kamu pegang. Mereka bisa ikut rapat atau stand-up, lalu kembali ke meja. Yang kamu tugaskan tetap duduk sampai diselesaikan.</p>
       </div>
       <div style="flex: 1 1 340px; min-width: 0; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); display: flex; gap: 14px;">
         <div style="flex: none; width: 52px; height: 52px; border-radius: 7px; background: var(--background); border: 1px solid var(--border); overflow: hidden;"><img src="/kantor/img/head/gk.png" alt="" width="50" height="50" style="display: block; width: 50px; height: 50px;" /></div>
         <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
-          <h2 style="margin: 0; font-size: 14px; font-weight: 600;">Grok · ringkasan keputusan lantai</h2>
-          <p style="margin: 0; color: var(--foreground-muted);">[Ringkasan terbaru dari Grok tampil di sini]</p>
-          <span style="font-size: 12px; color: var(--foreground-subtle); font-family: 'Geist Mono', ui-monospace, monospace;">Diperbarui —</span>
+          <h2 style="margin: 0; font-size: 14px; font-weight: 600;">Grok · ringkasan lantai</h2>
+          <p style="margin: 0; color: var(--foreground-muted);">${v.grokText}</p>
+          <span style="font-size: 12px; color: var(--foreground-subtle); font-family: 'Geist Mono', ui-monospace, monospace;">${v.grokTime} WIB</span>
         </div>
       </div>
     </section>
@@ -865,7 +873,7 @@ class Kantor extends Component {
         </div>
         <div role="group" aria-label="Mode lantai" style="display: flex; gap: 4px; padding: 4px; border-radius: 7px; background: var(--surface); border: 1px solid var(--border);">
           ${v.modes.map((m) => html`
-            <button class="seg" aria-pressed=${m.pressed} onClick=${m.pick} style="height: 36px; padding: 0 14px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; ${m.style}">
+            <button class="seg" aria-pressed=${m.pressed} onClick=${m.pick} style="height: 44px; padding: 0 14px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; ${m.style}">
               ${m.isPick ? html`<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"></path></svg>` : null}
               ${m.isHand ? html`<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"></path><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg>` : null}
               ${m.label}
@@ -873,16 +881,16 @@ class Kantor extends Component {
           `)}
         </div>
         <div role="group" aria-label="Kontrol tampilan 3D" style="display: flex; gap: 4px; padding: 4px; border-radius: 7px; background: var(--surface); border: 1px solid var(--border);">
-          <button class="seg" aria-label="Putar tampilan ke kiri 45 derajat" title="Putar kiri 45°" onClick=${v.orbitLeft} style="width: 36px; height: 36px; border: 0; border-radius: 5px; background: transparent; color: var(--foreground-muted); display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></button>
-          <button class="seg" aria-label="Putar tampilan ke kanan 45 derajat" title="Putar kanan 45°" onClick=${v.orbitRight} style="width: 36px; height: 36px; border: 0; border-radius: 5px; background: transparent; color: var(--foreground-muted); display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg></button>
-          <button class="seg" aria-pressed=${v.topPressed} onClick=${v.viewTop} style="height: 36px; padding: 0 12px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; ${v.topStyle}">Atas</button>
-          <button class="seg" aria-pressed=${v.isoPressed} onClick=${v.view3d} style="height: 36px; padding: 0 12px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; ${v.isoStyle}">3D</button>
-          <button class="seg" aria-pressed=${v.autoPressed} onClick=${v.toggleAuto} style="height: 36px; padding: 0 12px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; ${v.autoStyle}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>360°</button>
+          <button class="seg" aria-label="Putar tampilan ke kiri 45 derajat" title="Putar kiri 45°" onClick=${v.orbitLeft} style="width: 44px; height: 44px; border: 0; border-radius: 5px; background: transparent; color: var(--foreground-muted); display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></button>
+          <button class="seg" aria-label="Putar tampilan ke kanan 45 derajat" title="Putar kanan 45°" onClick=${v.orbitRight} style="width: 44px; height: 44px; border: 0; border-radius: 5px; background: transparent; color: var(--foreground-muted); display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg></button>
+          <button class="seg" aria-pressed=${v.topPressed} onClick=${v.viewTop} style="height: 44px; padding: 0 12px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; ${v.topStyle}">Denah</button>
+          <button class="seg" aria-pressed=${v.isoPressed} onClick=${v.view3d} style="height: 44px; padding: 0 12px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; ${v.isoStyle}">3D</button>
+          <button class="seg" aria-label="Putar otomatis" title="Putar otomatis" aria-pressed=${v.autoPressed} disabled=${v.autoDisabled} onClick=${v.toggleAuto} style="height: 44px; padding: 0 12px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; ${v.autoStyle}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>360°</button>
         </div>
         <span style="font-size: 13px; color: var(--foreground-muted);">${v.modeHint}</span>
       </div>
 
-      <div class="scene-scroll"><div class="${v.viewClass} scene" onPointerDown=${v.onDown} onPointerMove=${v.onMove} onPointerUp=${v.onUp} onPointerCancel=${v.onUp} style="position: relative; width: 100%; aspect-ratio: 16 / 10; perspective: 2200px; perspective-origin: 50% 30%; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: var(--background); ${v.viewStyle}">
+      <div class="scene-scroll ${v.scrollClass}"><div class="${v.viewClass} scene" onPointerDown=${v.onDown} onPointerMove=${v.onMove} onPointerUp=${v.onUp} onPointerCancel=${v.onUp} style="position: relative; width: 100%; aspect-ratio: 16 / 10; perspective: 2200px; perspective-origin: 50% 30%; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: var(--background); ${v.viewStyle}">
       <div role="group" aria-label=${v.floorAria} style="position: absolute; left: 0; top: 10%; width: 100%; aspect-ratio: 2 / 1; container-type: inline-size; background-color: var(--surface); background-image: linear-gradient(var(--tile) 1px, transparent 1px), linear-gradient(90deg, var(--tile) 1px, transparent 1px); background-size: 2.5cqw 2.5cqw; transform-style: preserve-3d; ${v.floorStyle}">
         <span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 100%; height: 1.4cqw; transform-origin: 50% 0; transform: rotateX(-90deg); background: var(--slab-edge);"></span>
         <span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 1.4cqw; transform-origin: 50% 0; transform: rotateX(-90deg); background: var(--slab-edge);"></span>
@@ -980,7 +988,7 @@ class Kantor extends Component {
             </div>
             <div role="group" aria-label="Filter agent" style="flex: 1 1 260px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 7px; background: var(--background); border: 1px solid var(--border);">
               ${v.filters.map((f) => html`
-                <button class="seg" aria-pressed=${f.pressed} onClick=${f.pick} style="height: 30px; padding: 0 8px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; ${f.style}">${f.label}<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-weight: 500; opacity: 0.85;">${f.count}</span></button>
+                <button class="seg" aria-pressed=${f.pressed} onClick=${f.pick} style="height: 40px; padding: 0 8px; border: 0; border-radius: 5px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; ${f.style}">${f.label}<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-weight: 500; opacity: 0.85;">${f.count}</span></button>
               `)}
             </div>
           </div>
@@ -993,7 +1001,7 @@ class Kantor extends Component {
                 <span style="font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${r.name}</span>
                 <span style="font-size: 12px; color: var(--foreground-muted);">${r.zoneName} · ${r.statusLabel}</span>
               </div>
-              <button class=${r.btnClass} aria-label=${r.aria} disabled=${r.busy} onClick=${r.toggle} style="flex: none; height: 32px; padding: 0 12px; border-radius: 7px; font-size: 13px; font-weight: 600; line-height: 1; ${r.btnStyle}">${r.action}</button>
+              <button class=${r.btnClass} aria-label=${r.aria} disabled=${r.busy} onClick=${r.toggle} style="flex: none; height: 40px; padding: 0 12px; border-radius: 7px; font-size: 13px; font-weight: 600; line-height: 1; ${r.btnStyle}">${r.action}</button>
             </li>
           `)}
           ${v.noResults ? html`
