@@ -379,15 +379,6 @@
     .floating-whatsapp {
         right: 16px;
         bottom: 16px;
-        min-width: 164px;
-        min-height: 68px;
-        padding: 0 20px;
-        border-width: 3px;
-        font-size: 0.9rem;
-    }
-
-    .floating-whatsapp i {
-        font-size: 2.35rem;
     }
 }
 
@@ -577,13 +568,13 @@
     }
 
     .floating-whatsapp {
-        min-width: 58px;
-        min-height: 58px;
+        width: 52px;
+        height: 52px;
         padding: 0;
     }
 
     .floating-whatsapp i {
-        font-size: 1.8rem;
+        font-size: 1.55rem;
     }
 
     .floating-whatsapp span {
@@ -663,7 +654,14 @@
     }
 }
 
-/* Compact desktop nav (1280–1439px) so 7 items fit beside the oversized logo.
+/* The menu button also has .icon-button, which sets display later than Tailwind's xl:hidden. */
+@media (min-width: 1280px) {
+    #mobile-menu-button {
+        display: none;
+    }
+}
+
+/* Compact desktop nav (1280–1439px) so 7 items fit beside the logo.
    Below 1280px the header switches to the mobile menu (xl breakpoint in navigation.js). */
 @media (min-width: 1280px) and (max-width: 1439px) {
     .site-header nav[aria-label="Main navigation"] {
