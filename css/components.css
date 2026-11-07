@@ -1628,7 +1628,7 @@ body.overflow-hidden .floating-whatsapp {
 }
 
 .roles-faq-item[open] summary::after {
-    content: "\u2212";
+    content: "−";
 }
 
 .roles-faq-item p {
