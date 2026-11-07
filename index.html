@@ -52,6 +52,7 @@
 </head>
 
 <body class="bg-slate-50 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100">
+    <a class="skip-link" href="#main-content">Loncat ke isi</a>
 
     <!-- Header rendered by js/navigation.js -->
     <header id="site-header" class="sticky top-0 z-50"></header>
@@ -80,17 +81,20 @@
                         Jerco Digital Solusi adalah mitra terpercaya bagi perusahaan, ISP, dan project owner dalam mewujudkan infrastruktur jaringan yang andal. Kami menghadirkan layanan menyeluruh&mdash;mulai dari perizinan &amp; akuisisi lahan (SITAC), perencanaan teknis, instalasi fisik, sistem integrasi, hingga managed service untuk performa jangka panjang.
                     </p>
 
-                    <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                         <a href="#contact" class="btn-primary">
                             <i class="ph ph-map-pin-line"></i>
-                            <span data-i18n="hero.ctaPrimary">Request Survey</span>
+                            <span data-i18n="hero.ctaPrimary">Minta Survey</span>
+                        </a>
+                        <a href="https://wa.me/6282237650909" class="btn-secondary hero-cta-secondary" target="_blank" rel="noopener">
+                            <i class="ph ph-whatsapp-logo"></i>
+                            <span data-i18n="hero.ctaSecondary">Hubungi via WhatsApp</span>
                         </a>
                     </div>
 
                 </div>
 
                 <div class="relative">
-                    <div class="card p-5">
                         <div class="hero-console rounded-2xl bg-slate-950 p-5 text-slate-100 shadow-2xl dark:bg-slate-900">
                             <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                                 <div class="flex items-center gap-2">
@@ -108,31 +112,31 @@
                                 <p><span class="text-cyan-400">mode</span>: survey → design → deploy → report</p>
                             </div>
                         </div>
-                    </div>
                 </div>
 
                 <div class="hero-service-strip text-sm lg:col-span-2">
-                    <div class="hero-service-card rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
-                        <p class="text-2xl font-black text-white">SITAC</p>
-                        <p class="mt-1 text-slate-300">Land Acquisition, Permits &amp; Licenses</p>
-                    </div>
-                    <div class="hero-service-card rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
-                        <p class="text-2xl font-black text-white">DOCS</p>
-                        <p class="mt-1 text-slate-300">Planning, Design, &amp; Documentation</p>
-                    </div>
-                    <div class="hero-service-card rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
-                        <p class="text-2xl font-black text-white">INFRA</p>
-                        <p class="mt-1 text-slate-300">FO &amp; Network Build</p>
-                    </div>
-                    <a href="/layanan/peran-si-var-aggregator-msp/" class="hero-service-card hero-service-card-link rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md" aria-label="System Integration — baca bedanya SI, VAR, Aggregator &amp; MSP">
-                        <p class="text-2xl font-black text-white">SI</p>
-                        <p class="mt-1 text-slate-300">System Integration</p>
-                        <span class="hero-service-card-cta">Peran SI vs lainnya <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+                    <a href="/services/permits-licensing/" class="hero-service-card hero-service-card-link rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                        <p class="text-2xl font-black text-white" data-i18n="hero.chipSitac">SITAC</p>
+                        <p class="mt-1 text-slate-300" data-i18n="hero.chipSitacText">Akuisisi lahan, izin, dan lisensi</p>
+                        <span class="hero-service-card-cta"><span data-i18n="hero.chipSitacCta">Lihat layanan izin</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
                     </a>
-                    <a href="/layanan/peran-si-var-aggregator-msp/" class="hero-service-card hero-service-card-link rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md" aria-label="Managed Service — baca bedanya SI, VAR, Aggregator &amp; MSP">
-                        <p class="text-2xl font-black text-white">MS</p>
-                        <p class="mt-1 text-slate-300">Managed Service</p>
-                        <span class="hero-service-card-cta">Peran MS vs lainnya <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+                    <div class="hero-service-card rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                        <p class="text-2xl font-black text-white" data-i18n="hero.chipDocs">DOCS</p>
+                        <p class="mt-1 text-slate-300" data-i18n="hero.chipDocsText">Perencanaan, desain, dan dokumentasi</p>
+                    </div>
+                    <div class="hero-service-card rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                        <p class="text-2xl font-black text-white" data-i18n="hero.chipInfra">INFRA</p>
+                        <p class="mt-1 text-slate-300" data-i18n="hero.chipInfraText">Pembangunan FO dan jaringan</p>
+                    </div>
+                    <a href="/layanan/peran-si-var-aggregator-msp/" class="hero-service-card hero-service-card-link rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                        <p class="text-2xl font-black text-white" data-i18n="hero.chipSi">SI</p>
+                        <p class="mt-1 text-slate-300" data-i18n="hero.chipSiText">System Integration</p>
+                        <span class="hero-service-card-cta"><span data-i18n="hero.chipRolesCta">Bandingkan peran</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                    <a href="/layanan/peran-si-var-aggregator-msp/" class="hero-service-card hero-service-card-link rounded-2xl border border-cyan-400/18 bg-slate-950/58 p-4 shadow-[0_16px_45px_rgba(0,0,0,0.24)] backdrop-blur-md">
+                        <p class="text-2xl font-black text-white" data-i18n="hero.chipMs">MS</p>
+                        <p class="mt-1 text-slate-300" data-i18n="hero.chipMsText">Managed Service</p>
+                        <span class="hero-service-card-cta"><span data-i18n="hero.chipRolesCta">Bandingkan peran</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
                     </a>
                 </div>
             </div>
@@ -170,7 +174,7 @@
                 <div class="mx-auto max-w-3xl text-center">
                     <p class="section-eyebrow" data-i18n="services.badge">Services</p>
                     <h2 class="section-title" data-i18n="services.title">Core Services</h2>
-                    <p class="section-description" data-i18n="services.description">End-to-end support for IT, network, fiber optic, documentation, and project coordination.</p>
+                    <p class="section-description mx-auto" data-i18n="services.description">End-to-end support for IT, network, fiber optic, documentation, and project coordination.</p>
                 </div>
 
                 <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -291,7 +295,7 @@
                     <h2 class="section-title" data-i18n="process.title">Simple Project Flow</h2>
                 </div>
 
-                <div class="mt-12 grid gap-6 md:grid-cols-4">
+                <div class="process-steps mt-12 grid gap-6 md:grid-cols-4">
                     <div class="card">
                         <span class="process-number">01</span>
                         <h3 data-i18n="process.step1Title">Survey</h3>
@@ -335,28 +339,28 @@
                             <i class="ph ph-whatsapp-logo"></i>
                             <span>+62 822-3765-0909</span>
                         </a>
-                        <a href="https://www.jerconetwork.com" target="_blank" rel="noopener" class="contact-item">
-                            <i class="ph ph-globe"></i>
-                            <span>www.jerconetwork.com</span>
-                        </a>
+                        <p class="contact-item is-static">
+                            <i class="ph ph-map-pin" aria-hidden="true"></i>
+                            <span data-i18n="contact.location">Bali, Indonesia</span>
+                        </p>
                     </div>
                 </div>
 
-                <form id="contact-form" class="card space-y-5" action="mailto:indra@jerconetwork.com" method="post" enctype="text/plain">
+                <form id="contact-form" class="card card-flat space-y-5" data-submit-mode="whatsapp" action="https://wa.me/6282237650909" method="get">
                     <div class="grid gap-5 md:grid-cols-2">
                         <label class="block">
-                            <span class="form-label" data-i18n="contact.nameLabel">Name</span>
-                            <input type="text" name="name" class="form-input" placeholder="Nama / Company" required>
+                            <span class="form-label" data-i18n="contact.nameLabel">Nama</span>
+                            <input type="text" name="name" class="form-input" placeholder="Nama / Company" autocomplete="name" required>
                         </label>
                         <label class="block">
-                            <span class="form-label" data-i18n="contact.phoneLabel">Phone / WhatsApp</span>
-                            <input type="text" name="phone" class="form-input" placeholder="08xx / +62" required>
+                            <span class="form-label" data-i18n="contact.phoneLabel">Telepon / WhatsApp</span>
+                            <input type="tel" name="phone" class="form-input" placeholder="08xx / +62" autocomplete="tel" required>
                         </label>
                     </div>
 
                     <label class="block">
                         <span class="form-label" data-i18n="contact.emailLabel">Email</span>
-                        <input type="email" name="email" class="form-input" placeholder="name@company.com">
+                        <input type="email" name="email" class="form-input" placeholder="name@company.com" autocomplete="email">
                     </label>
 
                     <label class="block">
@@ -379,9 +383,10 @@
                     </label>
 
                     <button type="submit" class="btn-primary w-full">
-                        <i class="ph ph-paper-plane-tilt"></i>
-                        <span data-i18n="contact.submitButton">Send Inquiry</span>
+                        <i class="ph ph-whatsapp-logo"></i>
+                        <span data-i18n="contact.submitButton">Kirim via WhatsApp</span>
                     </button>
+                    <p class="form-hint" data-i18n="contact.submitHint">Membuka WhatsApp dengan pesan yang sudah terisi. Belum ada yang terkirim sampai Anda menekan kirim di WhatsApp.</p>
                 </form>
             </div>
         </section>
