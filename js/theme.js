@@ -71,9 +71,12 @@
             button.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
             button.setAttribute('data-theme-current', theme);
 
-            const icon = button.querySelector(SELECTORS.icon);
-            if (icon) {
-                icon.className = isDark ? 'ph ph-sun text-lg' : 'ph ph-moon text-lg';
+            const iconSlot = button.querySelector(SELECTORS.icon);
+            const iconName = isDark ? 'sun' : 'moon';
+            const currentIcon = iconSlot && iconSlot.querySelector('[data-lucide]');
+            if (iconSlot && (!currentIcon || currentIcon.getAttribute('data-lucide') !== iconName)) {
+                iconSlot.innerHTML = '<i data-lucide="' + iconName + '" class="jerco-icon jerco-icon-20" aria-hidden="true"></i>';
+                if (window.JercoIcons) window.JercoIcons.mount(iconSlot);
             }
 
             const label = button.querySelector(SELECTORS.label);
