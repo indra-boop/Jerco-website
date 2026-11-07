@@ -548,7 +548,8 @@ a.hero-service-card:hover {
     opacity: 1;
 }
 
-.service-card h3 {
+.service-card h3,
+.permit-card h4 {
     margin-top: 18px;
     color: var(--color-text);
     font-size: 1.15rem;
@@ -1242,6 +1243,17 @@ body.overflow-hidden .floating-whatsapp {
     color: var(--color-text);
     font-size: 1rem;
     font-weight: 800;
+}
+
+.permit-group {
+    margin-top: 40px;
+}
+
+.permit-group-title {
+    color: var(--color-text);
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
 }
 
 .permit-step h3 {
