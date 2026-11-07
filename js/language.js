@@ -61,8 +61,20 @@
                 badge: 'IT & TELECOMMUNICATION INFRASTRUCTURE PARTNER',
                 title: 'Solusi End-to-End Infrastruktur IT & Telekomunikasi',
                 subtitle: 'Jerco Digital Solusi adalah mitra terpercaya bagi perusahaan, ISP, dan project owner dalam mewujudkan infrastruktur jaringan yang andal. Kami menghadirkan layanan menyeluruh\u2014mulai dari perizinan & akuisisi lahan (SITAC), perencanaan teknis, instalasi fisik, sistem integrasi, hingga managed service untuk performa jangka panjang.',
-                ctaPrimary: 'Request Survey',
-                ctaSecondary: 'Contact via WhatsApp'
+                ctaPrimary: 'Minta Survey',
+                ctaSecondary: 'Hubungi via WhatsApp',
+                chipSitac: 'SITAC',
+                chipSitacText: 'Akuisisi lahan, izin, dan lisensi',
+                chipSitacCta: 'Lihat layanan izin',
+                chipDocs: 'DOCS',
+                chipDocsText: 'Perencanaan, desain, dan dokumentasi',
+                chipInfra: 'INFRA',
+                chipInfraText: 'Pembangunan FO dan jaringan',
+                chipSi: 'SI',
+                chipSiText: 'System Integration',
+                chipMs: 'MS',
+                chipMsText: 'Managed Service',
+                chipRolesCta: 'Bandingkan peran'
             },
             about: {
                 badge: 'Tentang Jerco',
@@ -125,7 +137,9 @@
                 emailLabel: 'Email',
                 serviceLabel: 'Layanan Dibutuhkan',
                 messageLabel: 'Pesan',
-                submitButton: 'Kirim Inquiry'
+                submitButton: 'Kirim via WhatsApp',
+                submitHint: 'Membuka WhatsApp dengan pesan yang sudah terisi. Belum ada yang terkirim sampai Anda menekan kirim di WhatsApp.',
+                location: 'Bali, Indonesia'
             }
         },
 
@@ -147,7 +161,19 @@
                 title: 'IT, Network, Fiber Optic, and Technical Documentation Solutions',
                 subtitle: 'Fiber Optic, Network Infrastructure, CCTV, Technical Documentation, and Permit Support Services for business, hotel, office, ISP, contractor, and government-related project coordination.',
                 ctaPrimary: 'Request Survey',
-                ctaSecondary: 'Contact via WhatsApp'
+                ctaSecondary: 'Contact via WhatsApp',
+                chipSitac: 'SITAC',
+                chipSitacText: 'Land acquisition, permits, and licenses',
+                chipSitacCta: 'View permit services',
+                chipDocs: 'DOCS',
+                chipDocsText: 'Planning, design, and documentation',
+                chipInfra: 'INFRA',
+                chipInfraText: 'Fiber and network build',
+                chipSi: 'SI',
+                chipSiText: 'System Integration',
+                chipMs: 'MS',
+                chipMsText: 'Managed Service',
+                chipRolesCta: 'Compare roles'
             },
             about: {
                 badge: 'About Jerco',
@@ -210,7 +236,9 @@
                 emailLabel: 'Email',
                 serviceLabel: 'Service Needed',
                 messageLabel: 'Message',
-                submitButton: 'Send Inquiry'
+                submitButton: 'Send via WhatsApp',
+                submitHint: 'Opens WhatsApp with the message filled in. Nothing is sent until you press send in WhatsApp.',
+                location: 'Bali, Indonesia'
             }
         }
     };
