@@ -279,8 +279,25 @@
 
             if (submitMode === 'whatsapp' && whatsappUrl) {
                 const url = whatsappUrl + '?text=' + encodeURIComponent(message);
-                window.open(url, '_blank', 'noopener,noreferrer');
-                showFormNotice(form, 'Inquiry dibuka via WhatsApp. Silakan kirim pesan dari tab baru.', 'success');
+                const opened = window.open(url, '_blank', 'noopener,noreferrer');
+                const english = document.documentElement.lang === 'en';
+                if (!opened) {
+                    showFormNotice(
+                        form,
+                        english
+                            ? 'The browser blocked the new tab. Allow pop-ups, or use the WhatsApp button on this page.'
+                            : 'Browser memblokir tab baru. Izinkan popup, atau gunakan tombol WhatsApp di halaman ini.',
+                        'warning'
+                    );
+                    return;
+                }
+                showFormNotice(
+                    form,
+                    english
+                        ? 'WhatsApp is open in a new tab. Nothing is sent until you press send there.'
+                        : 'WhatsApp terbuka di tab baru. Pesan belum terkirim sampai Anda menekan kirim di sana.',
+                    'success'
+                );
                 return;
             }
 

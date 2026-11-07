@@ -38,7 +38,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://unpkg.com/lucide@1.70.0/dist/umd/lucide.min.js"></script>
+    <script src="/js/icons.js"></script>
 
     <!-- Favicon -->
     <link rel="icon" href="/assets/icons/favicon.png" type="image/png">
@@ -185,11 +186,11 @@
 
                     <div class="mt-8 flex flex-col gap-4 sm:flex-row">
                         <a href="/#contact" class="btn-primary">
-                            <i class="ph ph-map-pin-line" aria-hidden="true"></i>
+                            <i data-lucide="map-pin" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                             <span data-i18n="rolesPage.ctaPrimary">Request Survey</span>
                         </a>
                         <a href="#roles-comparison" class="btn-secondary">
-                            <i class="ph ph-table" aria-hidden="true"></i>
+                            <i data-lucide="table-properties" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                             <span data-i18n="rolesPage.ctaSecondary">Lihat perbandingan</span>
                         </a>
                     </div>
@@ -197,10 +198,10 @@
                 </div>
 
                 <ul class="permit-hero-chips mt-12" aria-label="Peran">
-                    <li><i class="ph ph-package" aria-hidden="true"></i><span>VAR</span></li>
-                    <li><i class="ph ph-git-merge" aria-hidden="true"></i><span>Aggregator</span></li>
-                    <li><i class="ph ph-puzzle-piece" aria-hidden="true"></i><span>SI</span></li>
-                    <li><i class="ph ph-heartbeat" aria-hidden="true"></i><span>MSP</span></li>
+                    <li><i data-lucide="package" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i><span>VAR</span></li>
+                    <li><i data-lucide="git-merge" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i><span>Aggregator</span></li>
+                    <li><i data-lucide="puzzle" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i><span>SI</span></li>
+                    <li><i data-lucide="heart-pulse" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i><span>MSP</span></li>
                 </ul>
             </div>
         </section>
@@ -216,22 +217,22 @@
 
                 <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
                     <article class="card service-card roles-def-card">
-                        <i class="ph ph-package service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="package" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3>VAR</h3>
                         <p data-i18n="rolesPage.defVar">Produk vendor + nilai tambah (setup, bundle, training, support produk).</p>
                     </article>
                     <article class="card service-card roles-def-card">
-                        <i class="ph ph-git-merge service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="git-merge" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3>Aggregator</h3>
                         <p data-i18n="rolesPage.defAggregator">Banyak sumber/kanal digabung ke satu pintu akses.</p>
                     </article>
                     <article class="card service-card roles-def-card">
-                        <i class="ph ph-puzzle-piece service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="puzzle" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3>SI</h3>
                         <p data-i18n="rolesPage.defSi">Rancang, pasang, uji, dan serahkan sistem multi-vendor sebagai satu kesatuan.</p>
                     </article>
                     <article class="card service-card roles-def-card">
-                        <i class="ph ph-heartbeat service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="heart-pulse" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3>MSP</h3>
                         <p data-i18n="rolesPage.defMsp">Operasikan sistem yang sudah accepted, berkelanjutan, sesuai SLA.</p>
                     </article>
@@ -399,17 +400,17 @@
 
                 <div class="mt-12 grid gap-6 md:grid-cols-3">
                     <article class="card">
-                        <i class="ph ph-buildings service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="building" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3 data-i18n="rolesPage.ex1Title">Hotel Wi-Fi + CCTV + PMS</h3>
                         <p data-i18n="rolesPage.ex1Text">Box nyala belum cukup: Wi-Fi, CCTV, dan PMS harus saling bicara — itu pekerjaan SI sebelum MSP menjaga uptime.</p>
                     </article>
                     <article class="card">
-                        <i class="ph ph-desktop-tower service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="pc-case" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3 data-i18n="rolesPage.ex2Title">Office LAN</h3>
                         <p data-i18n="rolesPage.ex2Text">Supply switch/AP (VAR jika ada) → SI rancang &amp; uji → acceptance → MSP operasi jika dibutuhkan.</p>
                     </article>
                     <article class="card">
-                        <i class="ph ph-git-branch service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="git-branch" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3 data-i18n="rolesPage.ex3Title">FO / OSP handover</h3>
                         <p data-i18n="rolesPage.ex3Text">Build &amp; dokumentasi sampai accepted; operasi setelah handover bukan pekerjaan supply saja.</p>
                     </article>
@@ -457,19 +458,19 @@
 
                 <div class="mt-12 grid gap-6 lg:grid-cols-2">
                     <article class="card roles-jerco-card">
-                        <i class="ph ph-puzzle-piece service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="puzzle" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3 data-i18n="rolesPage.jercoSiTitle">System Integration (SI)</h3>
                         <p data-i18n="rolesPage.jercoSiText">Survey/design, install, integrate as specified, test, document, handover.</p>
                     </article>
                     <article class="card roles-jerco-card">
-                        <i class="ph ph-heartbeat service-icon" aria-hidden="true"></i>
+                        <span class="service-icon"><i data-lucide="heart-pulse" class="jerco-icon jerco-icon-32"  aria-hidden="true"></i></span>
                         <h3 data-i18n="rolesPage.jercoMsTitle">Managed Service (MS)</h3>
                         <p data-i18n="rolesPage.jercoMsText">Operate after acceptance per agreed scope.</p>
                     </article>
                 </div>
 
                 <aside class="permit-notice mt-10" aria-labelledby="roles-jerco-notice-title">
-                    <i class="ph ph-info" aria-hidden="true"></i>
+                    <i data-lucide="info" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                     <div>
                         <h2 id="roles-jerco-notice-title" class="permit-notice-title" data-i18n="rolesPage.jercoNoticeTitle">Bukan marketplace &amp; bukan pure reseller</h2>
                         <p data-i18n="rolesPage.jercoNoticeText">Halaman ini tidak memposisikan Jerco sebagai marketplace aggregator atau pure product reseller. Product supply di dalam proyek SI bukan bisnis katalog VAR. Tidak ada kartu layanan baru bernama Aggregator.</p>
@@ -534,23 +535,21 @@
 
                             <div class="mt-8 flex flex-col gap-4 sm:flex-row">
                                 <a href="/#contact" class="btn-primary">
-                                    <i class="ph ph-map-pin-line" aria-hidden="true"></i>
+                                    <i data-lucide="map-pin" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                                     <span data-i18n="rolesPage.ctaPrimary">Request Survey</span>
                                 </a>
                                 <a href="/#contact" class="btn-secondary">
-                                    <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+                                    <i data-lucide="send" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                                     <span data-i18n="rolesPage.ctaInquiry">Send Inquiry</span>
                                 </a>
                             </div>
                         </div>
 
                         <div class="space-y-4">
-                            <a href="mailto:indra@jerconetwork.com" class="contact-item">
-                                <i class="ph ph-envelope-simple" aria-hidden="true"></i>
+                            <a href="mailto:indra@jerconetwork.com" class="contact-item"><span class="contact-glyph"><i data-lucide="mail" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i></span>
                                 <span>indra@jerconetwork.com</span>
                             </a>
-                            <a href="https://wa.me/6282237650909" target="_blank" rel="noopener noreferrer" class="contact-item">
-                                <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+                            <a href="https://wa.me/6282237650909" target="_blank" rel="noopener noreferrer" class="contact-item"><span class="contact-glyph"><svg class="brand-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
                                 <span>+62 822-3765-0909</span>
                             </a>
                         </div>

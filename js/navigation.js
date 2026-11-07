@@ -109,6 +109,46 @@
         return ` target="_blank" rel="noopener noreferrer"${title ? ` title="${escapeHtml(title)}"` : ''}`;
     }
 
+    function buildLogoMarkup(src, brandName, decorative) {
+        const alt = decorative ? '' : escapeHtml(brandName) + ' logo';
+        const hidden = decorative ? ' aria-hidden="true"' : '';
+        return `
+                                <img
+                                    src="${escapeHtml(src)}"
+                                    alt="${alt}"${hidden}
+                                    class="jerco-logo"
+                                >`;
+    }
+
+    function buildLogo(variant) {
+        const logo = BRAND.logo || '/assets/images/logo-jerco.png';
+        const logoDark = BRAND.logoDark || '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
+        const brandName = BRAND.shortName || BRAND.legalName || 'Jerco Digital Solusi';
+        const frame = variant === 'footer'
+            ? 'brand-logo-frame brand-logo-frame--footer'
+            : variant === 'menu'
+                ? 'brand-logo-frame brand-logo-frame--menu'
+                : 'brand-logo-frame';
+
+        if (variant === 'footer') {
+            return `
+                        <span class="${frame} logo-sweep">
+                            ${buildLogoMarkup(logoDark, brandName, false)}
+                            ${buildLogoMarkup(logoDark, brandName, true).replace('class="jerco-logo"', 'class="jerco-logo logo-sweep-glint"')}
+                        </span>`;
+        }
+
+        return `
+                            <span class="${frame} logo-sweep block dark:hidden">
+                                ${buildLogoMarkup(logo, brandName, false)}
+                                ${buildLogoMarkup(logo, brandName, true).replace('class="jerco-logo"', 'class="jerco-logo logo-sweep-glint"')}
+                            </span>
+                            <span class="${frame} logo-sweep hidden dark:block">
+                                ${buildLogoMarkup(logoDark, brandName, false)}
+                                ${buildLogoMarkup(logoDark, brandName, true).replace('class="jerco-logo"', 'class="jerco-logo logo-sweep-glint"')}
+                            </span>`;
+    }
+
     function escapeHtml(value) {
         return String(value || '')
             .replace(/&/g, '&amp;')
@@ -126,7 +166,7 @@
                     data-nav-link
                     data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}
                 >
-                    <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>${isExternal(item) ? `<i class="ph ${escapeHtml(item.icon || 'ph-arrow-up-right')} nav-link-icon" aria-hidden="true"></i>` : ''}
+                    <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>${isExternal(item) ? `<i data-lucide="${escapeHtml(item.icon || 'external-link')}" class="jerco-icon jerco-icon-16 nav-link-icon" aria-hidden="true"></i>` : ''}
                 </a>
             `;
     }
@@ -142,7 +182,7 @@
                             data-nav-link
                             data-section="${escapeHtml(child.id)}"${buildLinkAttrs(child)}
                         >
-                            ${child.icon ? `<i class="ph ${escapeHtml(child.icon)}" aria-hidden="true"></i>` : ''}
+                            ${child.icon ? `<i data-lucide="${escapeHtml(child.icon)}" class="jerco-icon jerco-icon-20" aria-hidden="true"></i>` : ''}
                             <span data-nav-label>${escapeHtml(getNavigationLabel(child))}</span>
                         </a>`;
         }).join('');
@@ -158,7 +198,7 @@
                         aria-controls="${menuId}"
                     >
                         <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>
-                        <i class="ph ph-caret-down nav-dropdown-caret" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="jerco-icon jerco-icon-16 nav-dropdown-caret"  aria-hidden="true"></i>
                     </button>
                     <div id="${menuId}" class="nav-dropdown-menu">${children}
                     </div>
@@ -180,9 +220,9 @@
                     data-mobile-nav-link
                     data-section="${escapeHtml(item.id)}"${buildLinkAttrs(item)}
                 >
-                    ${isChild && item.icon ? `<i class="ph ${escapeHtml(item.icon)}" aria-hidden="true"></i>` : ''}
+                    ${isChild && item.icon ? `<i data-lucide="${escapeHtml(item.icon)}" class="jerco-icon jerco-icon-20" aria-hidden="true"></i>` : ''}
                     <span data-nav-label>${escapeHtml(getNavigationLabel(item))}</span>
-                    <i class="ph ${isExternal(item) ? 'ph-arrow-square-out' : 'ph-arrow-right'}" aria-hidden="true"></i>
+                    <i data-lucide="${isExternal(item) ? 'external-link' : 'arrow-right'}" class="jerco-icon jerco-icon-16 nav-trailing-icon" aria-hidden="true"></i>
                 </a>
             `;
     }
@@ -211,47 +251,15 @@
         const header = document.querySelector(SELECTORS.header);
         if (!header) return;
 
-        const logo = BRAND.logo || '/assets/images/logo-jerco.png';
-        const logoDark = BRAND.logoDark || '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
         const brandName = BRAND.shortName || BRAND.legalName || 'Jerco Digital Solusi';
 
         header.className = 'site-header sticky top-0 z-50 bg-white/85 backdrop-blur-xl transition-all dark:bg-slate-950/85';
 
         header.innerHTML = `
             <div class="container-custom">
-                <div class="flex h-32 items-center justify-between gap-4">
-                    <a href="${escapeHtml(resolveHref('#hero'))}" class="flex min-w-0 items-center gap-3" aria-label="${escapeHtml(brandName)} home">
-                        <div class="flex h-12 shrink-0 items-center justify-center">
-                            <span class="logo-sweep block dark:hidden">
-                                <img
-                                    src="${escapeHtml(logo)}"
-                                    alt="${escapeHtml(brandName)} logo"
-                                    class="jerco-logo h-48 w-auto max-w-[540px] object-contain"
-                                    onerror="this.style.display='none';"
-                                >
-                                <img
-                                    src="${escapeHtml(logo)}"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="logo-sweep-glint h-48 w-auto max-w-[540px] object-contain"
-                                >
-                            </span>
-                            <span class="logo-sweep hidden dark:block">
-                                <img
-                                    src="${escapeHtml(logoDark)}"
-                                    alt="${escapeHtml(brandName)} logo"
-                                    class="jerco-logo h-48 w-auto max-w-[540px] object-contain"
-                                    onerror="this.style.display='none';"
-                                >
-                                <img
-                                    src="${escapeHtml(logoDark)}"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="logo-sweep-glint h-48 w-auto max-w-[540px] object-contain"
-                                >
-                            </span>
-                            <span class="hidden h-10 w-10 items-center justify-center rounded-xl bg-cyan-600 text-sm font-black text-white">J</span>
-                        </div>
+                <div class="site-header-bar flex items-center justify-between gap-4">
+                    <a href="${escapeHtml(resolveHref('#hero'))}" class="flex min-w-0 items-center" aria-label="${escapeHtml(brandName)} home">
+                        ${buildLogo('header')}
                     </a>
 
                     <nav class="hidden items-center gap-3 xl:flex" aria-label="Main navigation">
@@ -275,9 +283,7 @@
                             class="icon-button"
                             aria-label="Toggle dark mode"
                         >
-                            <i id="theme-toggle-dark-icon" class="ph ph-moon text-lg hidden"></i>
-                            <i id="theme-toggle-light-icon" class="ph ph-sun text-lg hidden"></i>
-                            <i class="ph ph-circle-half text-lg theme-toggle-fallback"></i>
+                            <span data-theme-icon class="inline-flex"><i data-lucide="moon" class="jerco-icon jerco-icon-20" aria-hidden="true"></i></span>
                         </button>
 
                     </div>
@@ -290,7 +296,7 @@
                         aria-controls="mobile-menu"
                         aria-expanded="false"
                     >
-                        <i class="ph ph-list text-2xl"></i>
+                        <i data-lucide="menu" class="jerco-icon jerco-icon-24"  aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -308,41 +314,12 @@
                     class="absolute right-0 top-0 flex h-full w-[86%] max-w-sm translate-x-full flex-col border-l border-slate-200 bg-white p-5 shadow-2xl transition-transform duration-300 dark:border-slate-800 dark:bg-slate-950"
                 >
                     <div class="flex items-center justify-between gap-4">
-                        <div class="flex min-w-0 items-center gap-3">
-                            <div class="flex h-12 shrink-0 items-center justify-center">
-                                <span class="logo-sweep block dark:hidden">
-                                    <img
-                                        src="${escapeHtml(logo)}"
-                                        alt="${escapeHtml(brandName)} logo"
-                                        class="jerco-logo h-[7.5rem] w-auto max-w-[360px] object-contain"
-                                        onerror="this.style.display='none';"
-                                    >
-                                    <img
-                                        src="${escapeHtml(logo)}"
-                                        alt=""
-                                        aria-hidden="true"
-                                        class="logo-sweep-glint h-[7.5rem] w-auto max-w-[360px] object-contain"
-                                    >
-                                </span>
-                                <span class="logo-sweep hidden dark:block">
-                                    <img
-                                        src="${escapeHtml(logoDark)}"
-                                        alt="${escapeHtml(brandName)} logo"
-                                        class="jerco-logo h-[7.5rem] w-auto max-w-[360px] object-contain"
-                                        onerror="this.style.display='none';"
-                                    >
-                                    <img
-                                        src="${escapeHtml(logoDark)}"
-                                        alt=""
-                                        aria-hidden="true"
-                                        class="logo-sweep-glint h-[7.5rem] w-auto max-w-[360px] object-contain"
-                                    >
-                                </span>
-                            </div>
+                        <div class="flex min-w-0 items-center">
+                            ${buildLogo('menu')}
                         </div>
 
                         <button type="button" id="mobile-menu-close" class="icon-button" aria-label="Close menu">
-                            <i class="ph ph-x text-xl"></i>
+                            <i data-lucide="x" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                         </button>
                     </div>
 
@@ -359,7 +336,7 @@
                                 aria-label="Switch language mobile"
                                 data-current-lang="${escapeHtml(state.currentLanguage)}"
                             >
-                                <i class="ph ph-translate"></i>
+                                <i data-lucide="languages" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i>
                                 <span>${state.currentLanguage === 'en' ? 'English' : 'Indonesia'}</span>
                             </button>
 
@@ -369,7 +346,7 @@
                                 class="btn-secondary text-sm"
                                 aria-label="Toggle dark mode mobile"
                             >
-                                <i class="ph ph-circle-half"></i>
+                                <span data-theme-icon class="inline-flex"><i data-lucide="moon" class="jerco-icon jerco-icon-20" aria-hidden="true"></i></span>
                                 <span>Theme</span>
                             </button>
                         </div>
@@ -410,7 +387,7 @@
                 class="floating-whatsapp"
                 aria-label="Contact Jerco via WhatsApp"
             >
-                <i class="ph ph-whatsapp-logo"></i>
+                <svg class="brand-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 <span>WhatsApp</span>
             </a>
         `);
@@ -421,13 +398,10 @@
         if (!footer) return;
 
         const brandName = BRAND.legalName || BRAND.shortName || 'CV Jerco Digital Solusi';
-        const logo = BRAND.logo || '/assets/images/logo-jerco.png';
-        const logoDark = BRAND.logoDark || '/assets/images/logo-jerco-dark-white-text-soft-shadow.svg';
         const email = CONTACT.email || '';
         const phone = CONTACT.phone || '';
         const whatsappUrl = CONTACT.whatsappUrl || '#contact';
-        const websiteUrl = CONTACT.websiteUrl || '#';
-        const website = CONTACT.website || '';
+        const location = CONTACT.location || '';
         const year = new Date().getFullYear();
 
         footer.className = 'border-t border-slate-200 bg-slate-950 text-slate-300 dark:border-slate-800';
@@ -437,20 +411,7 @@
                 <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
                     <div>
                         <div class="flex items-center">
-                            <span class="logo-sweep">
-                                <img
-                                    src="${escapeHtml(logoDark)}"
-                                    alt="${escapeHtml(brandName)} logo"
-                                    class="jerco-logo h-[7.5rem] w-auto max-w-[360px] object-contain"
-                                    onerror="this.src='${escapeHtml(logo)}';"
-                                >
-                                <img
-                                    src="${escapeHtml(logoDark)}"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="logo-sweep-glint h-[7.5rem] w-auto max-w-[360px] object-contain"
-                                >
-                            </span>
+                            ${buildLogo('footer')}
                         </div>
 
                         <p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">
@@ -475,9 +436,9 @@
                     <div>
                         <h3 class="text-sm font-bold uppercase tracking-wider text-white">Contact</h3>
                         <div class="mt-4 space-y-3 text-sm">
-                            ${email ? `<a href="mailto:${escapeHtml(email)}" class="footer-contact"><i class="ph ph-envelope-simple"></i><span>${escapeHtml(email)}</span></a>` : ''}
-                            ${phone ? `<a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener" class="footer-contact"><i class="ph ph-whatsapp-logo"></i><span>${escapeHtml(phone)}</span></a>` : ''}
-                            ${website ? `<a href="${escapeHtml(websiteUrl)}" target="_blank" rel="noopener" class="footer-contact"><i class="ph ph-globe"></i><span>${escapeHtml(website)}</span></a>` : ''}
+                            ${email ? `<a href="mailto:${escapeHtml(email)}" class="footer-contact"><i data-lucide="mail" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i><span>${escapeHtml(email)}</span></a>` : ''}
+                            ${phone ? `<a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener" class="footer-contact"><svg class="brand-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>${escapeHtml(phone)}</span></a>` : ''}
+                            ${location ? `<p class="footer-contact"><i data-lucide="map-pin" class="jerco-icon jerco-icon-20"  aria-hidden="true"></i><span>${escapeHtml(location)}</span></p>` : ''}
                         </div>
                     </div>
                 </div>
@@ -792,6 +753,7 @@
         bindEventsAfterRender();
         bindLanguageEvents();
 
+        if (window.JercoIcons) window.JercoIcons.mount(document);
         console.info('[Jerco] navigation.js loaded');
     }
 

@@ -15,6 +15,17 @@
        --jerco-link, Color System v1.2 PROVISIONAL. >=5.4:1 on white, slate-50
        and cyan-tinted chips; #1BA0D7 was 2.5-3.0:1 (fails WCAG AA). */
     --color-accent-text: #0F62A0;
+    /* Icon treatment aliases. Color System v1.2 PROVISIONAL.
+       Components use these aliases; glyphs stay outline and currentColor. */
+    --jerco-azure-50: #EBF7FD;
+    --jerco-azure-100: #D2EEFB;
+    --jerco-azure-300: #6FC9F1;
+    --jerco-azure-400: #3FB7EB;
+    --jerco-azure-700: #0F62A0;
+    --jerco-azure-800: #0B498B;
+    --jerco-icon: var(--jerco-azure-700);
+    --jerco-highlight-bg: var(--jerco-azure-100);
+    --jerco-highlight-fg: var(--jerco-azure-700);
 
     --color-bg: #f8fafc;
     --color-surface: #ffffff;
@@ -41,6 +52,9 @@
     --jerco-cyan: #38bdf8;
     --jerco-orange: #f59e0b;
     --color-accent-text: #67e8f9;
+    --jerco-icon: var(--jerco-azure-400);
+    --jerco-highlight-bg: var(--jerco-azure-800);
+    --jerco-highlight-fg: var(--jerco-azure-400);
 
     --color-bg: #07111f;
     --color-surface: #0e1b2f;
@@ -60,6 +74,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -156,6 +171,75 @@ button {
 
 #hero.section-padding {
     padding-top: 62px;
+}
+
+#about,
+#services,
+#portfolio,
+#process,
+#contact {
+    scroll-margin-top: 6.5rem;
+}
+
+/* Square logo files include a large transparent margin. Crop to the mark
+   so the sticky header stays short and the wordmark does not cover the hero. */
+.brand-logo-frame.hidden {
+    display: none;
+}
+
+html.dark .brand-logo-frame.hidden {
+    display: block;
+}
+
+html.dark .brand-logo-frame.dark\:hidden {
+    display: none;
+}
+
+.brand-logo-frame {
+    --mark-h: 64px;
+    --crop-x: 63;
+    --crop-y: 151;
+    --crop-w: 373;
+    --crop-h: 225;
+    --src: 500;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    flex: none;
+    height: var(--mark-h);
+    width: calc(var(--mark-h) * var(--crop-w) / var(--crop-h));
+    line-height: 0;
+}
+
+.brand-logo-frame--menu {
+    --mark-h: 56px;
+}
+
+.brand-logo-frame--footer {
+    --mark-h: 88px;
+}
+
+.site-header-bar {
+    min-height: 4.75rem;
+}
+
+@media (min-width: 768px) {
+    .brand-logo-frame {
+        --mark-h: 76px;
+    }
+
+    .site-header-bar {
+        min-height: 5.75rem;
+    }
+}
+
+.brand-logo-frame img {
+    position: absolute;
+    max-width: none;
+    height: calc(var(--mark-h) * var(--src) / var(--crop-h));
+    width: calc(var(--mark-h) * var(--src) / var(--crop-h));
+    left: calc(var(--mark-h) * var(--crop-x) / var(--crop-h) * -1);
+    top: calc(var(--mark-h) * var(--crop-y) / var(--crop-h) * -1);
 }
 
 /* ---------- Section Typography ---------- */
@@ -372,6 +456,19 @@ html.dark .btn-secondary:hover {
     border-color: rgba(56, 189, 248, 0.28) !important;
 }
 
+html.dark .hero-cta-secondary,
+html.dark .hero-cta-secondary:hover {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.55) !important;
+    box-shadow: none !important;
+}
+
+html.dark .hero-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: #ffffff !important;
+}
+
 html.dark .hero-console,
 html.dark .project-console,
 html.dark .console-card {
@@ -484,7 +581,7 @@ html.dark .jerco-logo {
     mask-size: 320% 100%;
     -webkit-mask-position: 185% 0;
     mask-position: 185% 0;
-    animation: logo-light-sweep 2.8s ease-in-out 0.35s infinite;
+    animation: logo-light-sweep 2.6s ease-in-out 0.45s 1 both;
 }
 
 @keyframes logo-light-sweep {
