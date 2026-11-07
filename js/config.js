@@ -247,7 +247,7 @@
                 enabled: true,
                 duration: 250
             },
-            scrollOffset: 88
+            scrollOffset: 104
         }
     };
 
