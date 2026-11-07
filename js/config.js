@@ -106,21 +106,21 @@
                         labelId: 'Semua Layanan',
                         labelEn: 'All Services',
                         href: '#services',
-                        icon: 'ph-squares-four'
+                        icon: 'layout-grid'
                     },
                     {
                         id: 'permits-licensing',
                         labelId: 'Perizinan & Lisensi',
                         labelEn: 'Permits & Licensing',
                         href: '/services/permits-licensing/',
-                        icon: 'ph-stamp'
+                        icon: 'stamp'
                     },
                     {
                         id: 'roles-si-var-aggregator-msp',
                         labelId: 'Peran SI, VAR, Aggregator & MSP',
                         labelEn: 'SI, VAR, Aggregator & MSP Roles',
                         href: '/layanan/peran-si-var-aggregator-msp/',
-                        icon: 'ph-tree-structure'
+                        icon: 'workflow'
                     }
                 ]
             },
@@ -152,7 +152,7 @@
                 titleEn: 'Sports broadcast schedule (opens in new tab)',
                 href: 'https://schedule.jerconetwork.com',
                 external: true,
-                icon: 'ph-arrow-up-right'
+                icon: 'external-link'
             },
             {
                 id: 'contact',
@@ -165,43 +165,43 @@
         services: [
             {
                 id: 'network-infrastructure',
-                icon: 'ph-wifi-high',
+                icon: 'wifi',
                 titleId: 'Network Infrastructure',
                 titleEn: 'Network Infrastructure'
             },
             {
                 id: 'fiber-optic-osp',
-                icon: 'ph-git-branch',
+                icon: 'git-branch',
                 titleId: 'Fiber Optic / OSP',
                 titleEn: 'Fiber Optic / OSP'
             },
             {
                 id: 'cctv-security',
-                icon: 'ph-video-camera',
+                icon: 'video',
                 titleId: 'CCTV & Security System',
                 titleEn: 'CCTV & Security System'
             },
             {
                 id: 'cloud-devops',
-                icon: 'ph-cloud',
+                icon: 'cloud',
                 titleId: 'Cloud / VPS / DevOps',
                 titleEn: 'Cloud / VPS / DevOps'
             },
             {
                 id: 'technical-documentation',
-                icon: 'ph-file-text',
+                icon: 'file-text',
                 titleId: 'Technical Documentation',
                 titleEn: 'Technical Documentation'
             },
             {
                 id: 'kmz-kml-route-analysis',
-                icon: 'ph-map-trifold',
+                icon: 'map',
                 titleId: 'KMZ/KML Route Analysis',
                 titleEn: 'KMZ/KML Route Analysis'
             },
             {
                 id: 'sports-schedule',
-                icon: 'ph-calendar-check',
+                icon: 'calendar-check',
                 titleId: 'Sports Schedule',
                 titleEn: 'Sports Schedule',
                 href: 'https://schedule.jerconetwork.com'
