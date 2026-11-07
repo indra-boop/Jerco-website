@@ -15,6 +15,17 @@
        --jerco-link, Color System v1.2 PROVISIONAL. >=5.4:1 on white, slate-50
        and cyan-tinted chips; #1BA0D7 was 2.5-3.0:1 (fails WCAG AA). */
     --color-accent-text: #0F62A0;
+    /* Icon treatment aliases. Color System v1.2 PROVISIONAL.
+       Components use these aliases; glyphs stay outline and currentColor. */
+    --jerco-azure-50: #EBF7FD;
+    --jerco-azure-100: #D2EEFB;
+    --jerco-azure-300: #6FC9F1;
+    --jerco-azure-400: #3FB7EB;
+    --jerco-azure-700: #0F62A0;
+    --jerco-azure-800: #0B498B;
+    --jerco-icon: var(--jerco-azure-700);
+    --jerco-highlight-bg: var(--jerco-azure-100);
+    --jerco-highlight-fg: var(--jerco-azure-700);
 
     --color-bg: #f8fafc;
     --color-surface: #ffffff;
@@ -41,6 +52,9 @@
     --jerco-cyan: #38bdf8;
     --jerco-orange: #f59e0b;
     --color-accent-text: #67e8f9;
+    --jerco-icon: var(--jerco-azure-400);
+    --jerco-highlight-bg: var(--jerco-azure-800);
+    --jerco-highlight-fg: var(--jerco-azure-400);
 
     --color-bg: #07111f;
     --color-surface: #0e1b2f;
